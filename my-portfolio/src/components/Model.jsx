@@ -18,6 +18,16 @@ export function Model({position = [ 0, 0, 0 ], frontSideURL, backSideURL}) {
     nodes.Front.material.map = frontSideTexture
     nodes.Back.material.map = backSideTexture
 
+    const click = (event) =>
+    {
+        // Depending on the card that was clicked a different page will reveal itself
+        console.log("clicked")
+
+        // Don't trigger click on back side of card
+        event.stopPropagation()
+        
+    }
+
     return <>
         <Float
             // autoInvalidate
@@ -26,19 +36,27 @@ export function Model({position = [ 0, 0, 0 ], frontSideURL, backSideURL}) {
             floatIntensity={1.5} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
             floatingRange={[-0.1, 0.1]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
         >
-            <group dispose={null} position={ position } scale={ 0.4 }>
+            <group 
+                dispose={null} 
+                position={ position } 
+                scale={ 0.4 } 
+                onClick={ (event) => click(event) }
+                onPointerEnter={ () => { document.body.style.cursor = 'pointer' } }
+                onPointerLeave={ () => { document.body.style.cursor = 'default' } }
+            >
                 <mesh
-                geometry={nodes.Back.geometry}
-                material={materials.back}
-                rotation={[Math.PI / 2, -Math.PI / 2, 0]}
-                scale={[3.5, 1, 2.5]}
+                    className="card"
+                    geometry={nodes.Front.geometry}
+                    material={materials.front}
+                    position={[0, 0, 0.01]}
+                    rotation={[-Math.PI / 2, Math.PI / 2, 0]}
+                    scale={[3.5, 1, 2.5]}
                 />
                 <mesh
-                geometry={nodes.Front.geometry}
-                material={materials.front}
-                position={[0, 0, 0.01]}
-                rotation={[-Math.PI / 2, Math.PI / 2, 0]}
-                scale={[3.5, 1, 2.5]}
+                    geometry={nodes.Back.geometry}
+                    material={materials.back}
+                    rotation={[Math.PI / 2, -Math.PI / 2, 0]}
+                    scale={[3.5, 1, 2.5]}
                 />
             </group>
         </Float>
