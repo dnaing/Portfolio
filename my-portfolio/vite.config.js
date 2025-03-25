@@ -5,7 +5,8 @@ import restart from 'vite-plugin-restart'
 
 export default {
     root: '',
-    publicDir: '../public/',
+    publicDir: './public/',
+    base: './',
     plugins:
     [
         // Restart server on static/public file change
