@@ -21,8 +21,8 @@ export default function Fog()
                 volume={ 10 }
                 speed={ 0.25 }
                 growth={ 1 }
-                fade={ 25 }
-                opacity={ 0.25 }
+                fade={ 40 }
+                opacity={ 0.1 }
             />
         </Clouds>
 

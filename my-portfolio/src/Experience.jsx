@@ -2,15 +2,18 @@ import { OrbitControls, Center, Float, Clouds, Cloud, Sparkles, Text3D } from '@
 import { useControls } from 'leva'
 import { Perf } from 'r3f-perf'
 import * as THREE from 'three'
+import { EffectComposer, Vignette, Glitch, Bloom, ToneMapping } from '@react-three/postprocessing'
+import { ToneMappingMode } from 'postprocessing'
 import { Model } from './components/Model'
 import Parallax from './components/Parallax'
 import Fog from './components/Fog'
 import Particles from './components/Particles'
+import CustomSparkles from './components/CustomParticles'
 
 export default function Experience()
 {
 
-    const { backgroundColor } = useControls({ backgroundColor: '#050a0e' })
+    const { backgroundColor } = useControls({ backgroundColor: '#1d1c28' })
 
     const cardNames = [ 'ABOUT', 'SKiLLS', 'PROJECTS', 'EXPERIENCE', 'RESUME' ]
 
@@ -39,7 +42,18 @@ export default function Experience()
         <Fog />
 
         {/* Particles */}
-        <Particles />
+        <CustomSparkles />
+
+        {/* Postprocess */}
+        <EffectComposer>
+            <Bloom
+                mipmapBlur 
+                intensity={ 0.1 }
+                luminanceThreshold={ 0 }
+            />
+            <ToneMapping mode={ ToneMappingMode.ACES_FILMIC } />
+        </EffectComposer>
+
 
         {/* Background Color */}
         <color args={ [ backgroundColor ] } attach="background" />
@@ -55,6 +69,8 @@ export default function Experience()
                 </group>
             ))}
         </Center>
+
+        
  
     </>
 }
