@@ -1,15 +1,16 @@
-import { OrbitControls, Center, Float, Clouds, Cloud } from '@react-three/drei'
+import { OrbitControls, Center, Float, Clouds, Cloud, Sparkles } from '@react-three/drei'
 import { useControls } from 'leva'
 import { Perf } from 'r3f-perf'
 import * as THREE from 'three'
 import { Model } from './components/Model'
 import Parallax from './components/Parallax'
 import Fog from './components/Fog'
+import Particles from './components/Particles'
 
 export default function Experience()
 {
 
-    const { backgroundColor } = useControls({ backgroundColor: '#02131f' })
+    const { backgroundColor } = useControls({ backgroundColor: '#050a0e' })
 
     const cardsArray = []
     for (let i = 0; i < 5; i++)
@@ -31,8 +32,11 @@ export default function Experience()
         {/* Parallax */}
         <Parallax />
 
-        {/* Clouds */}
+        {/* Fog */}
         <Fog />
+
+        {/* Particles */}
+        <Particles />
 
         {/* Background Color */}
         <color args={ [ backgroundColor ] } attach="background" />

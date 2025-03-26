@@ -1,5 +1,4 @@
-import { useFrame } from "@react-three/fiber"
-import { useThree } from "@react-three/fiber"
+import { useFrame } from '@react-three/fiber'
 
 export default function Parallax()
 {

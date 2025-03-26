@@ -1,6 +1,6 @@
-import { Cloud, Clouds } from "@react-three/drei"
+import { Cloud, Clouds } from '@react-three/drei'
 import * as THREE from 'three'
-import { useControls } from "leva"
+import { useControls } from 'leva'
 
 
 export default function Fog()
