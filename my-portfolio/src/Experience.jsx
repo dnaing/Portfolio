@@ -1,9 +1,10 @@
-import { OrbitControls, Center, Float } from '@react-three/drei'
+import { OrbitControls, Center, Float, Clouds, Cloud } from '@react-three/drei'
 import { useControls } from 'leva'
 import { Perf } from 'r3f-perf'
+import * as THREE from 'three'
 import { Model } from './components/Model'
 import Parallax from './components/Parallax'
-
+import Fog from './components/Fog'
 
 export default function Experience()
 {
@@ -30,6 +31,9 @@ export default function Experience()
         {/* Parallax */}
         <Parallax />
 
+        {/* Clouds */}
+        <Fog />
+
         {/* Background Color */}
         <color args={ [ backgroundColor ] } attach="background" />
 
@@ -44,6 +48,8 @@ export default function Experience()
                 </group>
             ))}
         </Center>
+
+        {/* <axesHelper /> */}
 
     
     </>
