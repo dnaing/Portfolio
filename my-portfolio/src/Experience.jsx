@@ -1,4 +1,4 @@
-import { OrbitControls, Center, Float, Clouds, Cloud, Sparkles } from '@react-three/drei'
+import { OrbitControls, Center, Float, Clouds, Cloud, Sparkles, Text3D } from '@react-three/drei'
 import { useControls } from 'leva'
 import { Perf } from 'r3f-perf'
 import * as THREE from 'three'
@@ -12,13 +12,16 @@ export default function Experience()
 
     const { backgroundColor } = useControls({ backgroundColor: '#050a0e' })
 
+    const cardNames = [ 'ABOUT', 'SKiLLS', 'PROJECTS', 'EXPERIENCE', 'RESUME' ]
+
     const cardsArray = []
     for (let i = 0; i < 5; i++)
     {
         cardsArray.push({
             position: [ i * 3, 0, 0 ],
-            frontSideURL: "./images/Spades_K.png",
-            backSideURL: "./images/Back_2.png"
+            frontSideURL: './images/Spades_K.png',
+            backSideURL: './images/Back_2.png',
+            cardName: cardNames[i]
         })
     }
 
@@ -48,13 +51,10 @@ export default function Experience()
         <Center>
             {cardsArray.map((value, index) => (
                 <group key={ index } position={ value.position }  >
-                    <Model frontSideURL={ value.frontSideURL } backSideURL={ value.backSideURL } />
+                    <Model frontSideURL={ value.frontSideURL } backSideURL={ value.backSideURL } cardName={ value.cardName } />
                 </group>
             ))}
         </Center>
-
-        {/* <axesHelper /> */}
-
-    
+ 
     </>
 }

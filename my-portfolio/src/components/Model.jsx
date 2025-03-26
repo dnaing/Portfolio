@@ -1,11 +1,16 @@
 import * as THREE from 'three'
 import React from 'react'
-import { useGLTF, useTexture, Float } from '@react-three/drei'
+import { useGLTF, useTexture, Float, Text3D, Center, Billboard } from '@react-three/drei'
+import { useThree } from '@react-three/fiber'
+import { useRef, useEffect } from 'react'
+import { useFrame } from '@react-three/fiber'
 
 
-export function Model({position = [ 0, 0, 0 ], frontSideURL, backSideURL}) {
+export function Model({position = [ 0, 0, 0 ], frontSideURL, backSideURL, cardName}) {
     
     const { nodes, materials } = useGLTF('./models/card.glb')
+
+    const textRef = useRef()
 
     const frontSideTexture = useTexture(frontSideURL)
     frontSideTexture.flipY = false
@@ -28,6 +33,26 @@ export function Model({position = [ 0, 0, 0 ], frontSideURL, backSideURL}) {
         
     }
 
+    useFrame((state) =>
+    {
+        textRef.current.lookAt(state.camera.position)
+    })
+
+    useEffect(() =>
+    {
+        if (textRef.current)
+        {
+
+            textRef.current.geometry.computeBoundingBox()
+            const boundingBox = textRef.current.geometry.boundingBox
+
+            const textWidthX = boundingBox.max.x * 0.3
+            const textWidthY = boundingBox.max.y * 0.3
+
+            textRef.current.geometry.translate(-textWidthX, -textWidthY, 0)
+        }
+    }, [])
+
     return <>
         <Float
             // autoInvalidate
@@ -44,6 +69,16 @@ export function Model({position = [ 0, 0, 0 ], frontSideURL, backSideURL}) {
                 onPointerEnter={ () => { document.body.style.cursor = 'pointer' } }
                 onPointerLeave={ () => { document.body.style.cursor = 'default' } }
             >
+
+                <Text3D
+                    ref={ textRef }  
+                    font="./fonts/berry_rotunda.json" 
+                    size={ 0.45 } 
+                    position-y={ 4.6 }
+                >
+                    { cardName }
+                </Text3D>
+
                 <mesh
                     className="card"
                     geometry={nodes.Front.geometry}
@@ -60,6 +95,7 @@ export function Model({position = [ 0, 0, 0 ], frontSideURL, backSideURL}) {
                 />
             </group>
         </Float>
+        
     </>
 }
 
