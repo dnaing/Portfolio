@@ -4,13 +4,14 @@ import { useGLTF, useTexture, Float, Text3D, Center, Billboard } from '@react-th
 import { useThree } from '@react-three/fiber'
 import { useRef, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
-
+import { gsap } from 'gsap'
 
 export function Model({position = [ 0, 0, 0 ], cardName, frontSideURL, backSideURL, }) {
     
     const { nodes, materials } = useGLTF('./models/card.glb')
 
-    const textRef = useRef()
+    const title = useRef()
+    const card = useRef()
 
     const frontSideTexture = useTexture(frontSideURL)
     frontSideTexture.flipY = false
@@ -33,23 +34,54 @@ export function Model({position = [ 0, 0, 0 ], cardName, frontSideURL, backSideU
         
     }
 
+    const pointerEnter = () =>
+    {
+        document.body.style.cursor = 'pointer'
+
+        gsap.to(
+            card.current.scale,
+            {
+                duration: 0.4,
+                ease: 'power2.inOut',
+                x: '3.85',
+                z: '2.75'
+
+            }
+        )
+    }
+
+    const pointerLeave = () =>
+    {
+        document.body.style.cursor = 'default'
+
+        gsap.to(
+            card.current.scale,
+            {
+                duration: 0.4,
+                ease: 'power2.inOut',
+                x: '3.5',
+                z: '2.5'
+            }
+        )
+    }
+
     useFrame((state) =>
     {
-        textRef.current.lookAt(state.camera.position)
+        title.current.lookAt(state.camera.position)
     })
 
     useEffect(() =>
     {
-        if (textRef.current)
+        if (title.current)
         {
 
-            textRef.current.geometry.computeBoundingBox()
-            const boundingBox = textRef.current.geometry.boundingBox
+            title.current.geometry.computeBoundingBox()
+            const boundingBox = title.current.geometry.boundingBox
 
             const textWidthX = boundingBox.max.x * 0.3
             const textWidthY = boundingBox.max.y * 0.3
 
-            textRef.current.geometry.translate(-textWidthX, -textWidthY, 0)
+            title.current.geometry.translate(-textWidthX, -textWidthY, 0)
         }
     }, [])
 
@@ -68,20 +100,20 @@ export function Model({position = [ 0, 0, 0 ], cardName, frontSideURL, backSideU
             >
 
                 <Text3D
-                    ref={ textRef }  
+                    ref={ title }  
                     font="./fonts/berry_rotunda.json" 
                     size={ 0.45 } 
-                    position-y={ 4.6 }
+                    position-y={ 4.85 }
                 >
                     { cardName }
                     <meshBasicMaterial color={ [ 15, 15, 15 ] } toneMapped={ false } />
                 </Text3D>
 
                 <mesh
-                    className="card"
+                    ref={ card }
                     onClick={ (event) => click(event) }
-                    onPointerEnter={ () => { document.body.style.cursor = 'pointer' } }
-                    onPointerLeave={ () => { document.body.style.cursor = 'default' } }
+                    onPointerEnter={ () => { pointerEnter() } }
+                    onPointerLeave={ () => { pointerLeave() } }
                     geometry={nodes.Front.geometry}
                     material={materials.front.clone()}
                     position={[0, 0, 0.01]}
