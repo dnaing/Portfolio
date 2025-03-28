@@ -3,14 +3,16 @@ import './App.css'
 import { Canvas } from '@react-three/fiber'
 
 import Experience from './Experience'
+import Interface from './components/Interface'
 
 export default function App() {
-    return (
+    return <>
         <Canvas 
             // frameloop="demand"
             // gl={{ logarithmicDepthBuffer: true }}
         >
             <Experience />
         </Canvas>
-    )
+        <Interface />
+    </>
 }
