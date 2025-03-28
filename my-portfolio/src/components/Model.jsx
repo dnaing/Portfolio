@@ -6,7 +6,7 @@ import { useRef, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 
 
-export function Model({position = [ 0, 0, 0 ], frontSideURL, backSideURL, cardName}) {
+export function Model({position = [ 0, 0, 0 ], cardName, frontSideURL, backSideURL, }) {
     
     const { nodes, materials } = useGLTF('./models/card.glb')
 
@@ -26,7 +26,7 @@ export function Model({position = [ 0, 0, 0 ], frontSideURL, backSideURL, cardNa
     const click = (event) =>
     {
         // Depending on the card that was clicked a different page will reveal itself
-        console.log("clicked")
+        console.log('Clicked!')
 
         // Don't trigger click on back side of card
         event.stopPropagation()
@@ -65,9 +65,6 @@ export function Model({position = [ 0, 0, 0 ], frontSideURL, backSideURL, cardNa
                 dispose={null} 
                 position={ position } 
                 scale={ 0.4 } 
-                onClick={ (event) => click(event) }
-                onPointerEnter={ () => { document.body.style.cursor = 'pointer' } }
-                onPointerLeave={ () => { document.body.style.cursor = 'default' } }
             >
 
                 <Text3D
@@ -77,12 +74,16 @@ export function Model({position = [ 0, 0, 0 ], frontSideURL, backSideURL, cardNa
                     position-y={ 4.6 }
                 >
                     { cardName }
+                    <meshBasicMaterial color={ [ 15, 15, 15 ] } toneMapped={ false } />
                 </Text3D>
 
                 <mesh
                     className="card"
+                    onClick={ (event) => click(event) }
+                    onPointerEnter={ () => { document.body.style.cursor = 'pointer' } }
+                    onPointerLeave={ () => { document.body.style.cursor = 'default' } }
                     geometry={nodes.Front.geometry}
-                    material={materials.front}
+                    material={materials.front.clone()}
                     position={[0, 0, 0.01]}
                     rotation={[-Math.PI / 2, Math.PI / 2, 0]}
                     scale={[3.5, 1, 2.5]}

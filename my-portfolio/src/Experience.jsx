@@ -14,16 +14,38 @@ export default function Experience()
 
     const { backgroundColor } = useControls({ backgroundColor: '#1d1c28' })
 
-    const cardNames = [ 'ABOUT', 'SKiLLS', 'PROJECTS', 'EXPERIENCE', 'RESUME' ]
+    const cardsInfo = 
+    [
+        {
+            cardName: 'About',
+            frontSideURL: './images/Spades_K.png'
+        },
+        {
+            cardName: 'Skills',
+            frontSideURL: './images/Diamonds_K.png'
+        },
+        {
+            cardName: 'Projects',
+            frontSideURL: './images/Joker_2.png'
+        },
+        {
+            cardName: 'Experience',
+            frontSideURL: './images/Hearts_K.png'
+        },
+        {
+            cardName: 'Resume',
+            frontSideURL: './images/Clubs_K.png'
+        }
+    ]
 
     const cardsArray = []
     for (let i = 0; i < 5; i++)
     {
         cardsArray.push({
             position: [ i * 3, 0, 0 ],
-            frontSideURL: './images/Spades_K.png',
+            cardName: cardsInfo[i].cardName,
+            frontSideURL: cardsInfo[i].frontSideURL,
             backSideURL: './images/Back_2.png',
-            cardName: cardNames[i]
         })
     }
 
@@ -69,7 +91,7 @@ export default function Experience()
         <Center>
             {cardsArray.map((value, index) => (
                 <group key={ index } position={ value.position }  >
-                    <Model frontSideURL={ value.frontSideURL } backSideURL={ value.backSideURL } cardName={ value.cardName } />
+                    <Model cardName={ value.cardName } frontSideURL={ value.frontSideURL } backSideURL={ value.backSideURL } />
                 </group>
             ))}
         </Center>
