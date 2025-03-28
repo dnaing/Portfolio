@@ -8,6 +8,7 @@ export default function App() {
     return (
         <Canvas 
             // frameloop="demand"
+            // gl={{ logarithmicDepthBuffer: true }}
         >
             <Experience />
         </Canvas>

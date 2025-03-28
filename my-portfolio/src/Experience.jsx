@@ -7,7 +7,6 @@ import { ToneMappingMode } from 'postprocessing'
 import { Model } from './components/Model'
 import Parallax from './components/Parallax'
 import Fog from './components/Fog'
-import Particles from './components/Particles'
 import CustomSparkles from './components/CustomParticles'
 
 export default function Experience()
@@ -38,12 +37,6 @@ export default function Experience()
         {/* Parallax */}
         <Parallax />
 
-        {/* Fog */}
-        <Fog />
-
-        {/* Particles */}
-        <CustomSparkles />
-
         {/* Postprocess */}
         <EffectComposer>
             <Bloom
@@ -54,12 +47,23 @@ export default function Experience()
             <ToneMapping mode={ ToneMappingMode.ACES_FILMIC } />
         </EffectComposer>
 
-
         {/* Background Color */}
         <color args={ [ backgroundColor ] } attach="background" />
 
         {/* Lighting */}
         <ambientLight intensity={ 4 } />
+
+        {/* Fog */}
+        <Fog />
+
+        {/* Particles */}
+        <CustomSparkles
+            count={ 150 }
+            size={ 400 } 
+            opacity={ 1 }
+            emissiveIntensity={ 3 }
+            speed={ 0.5 }
+        />
 
         {/* Main Cards */}
         <Center>
@@ -69,8 +73,5 @@ export default function Experience()
                 </group>
             ))}
         </Center>
-
-        
- 
     </>
 }

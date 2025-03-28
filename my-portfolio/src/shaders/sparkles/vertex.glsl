@@ -15,10 +15,9 @@ void main() {
     modelPosition.x += cos(uTime * uSpeed + modelPosition.x * uNoise.z * 100.0) * 0.2;
 
     vec4 viewPosition = viewMatrix * modelPosition;
-    vec4 projectionPostion = projectionMatrix * viewPosition;
-    gl_Position = projectionPostion;
+    vec4 projectionPosition = projectionMatrix * viewPosition;
+    gl_Position = projectionPosition;
     gl_PointSize = uSize * aScale * uPixelRatio;
-    // gl_PointSize = size * 25. * pixelRatio;
     gl_PointSize *= (1.0 / - viewPosition.z);
     vColor = aColor;
     // vOpacity = opacity;
