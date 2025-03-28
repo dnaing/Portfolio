@@ -35,7 +35,6 @@ body,
     background: #00000035;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    /* pointer-events: none; */
     user-select: none;
 }
 
@@ -59,6 +58,7 @@ body,
     text-decoration: none; 
     transition-duration: 0.25s;
     transition-timing-function: ease-in-out;
+    font-family: "sans-serif, serif, Times New Roman";
     
 }
 

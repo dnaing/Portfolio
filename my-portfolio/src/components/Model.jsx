@@ -15,6 +15,8 @@ export function Model({position = [ 0, 0, 0 ], cardName, frontSideURL, backSideU
 
     const frontSideTexture = useTexture(frontSideURL)
     frontSideTexture.flipY = false
+    frontSideTexture.wrapS = THREE.RepeatWrapping;
+    frontSideTexture.repeat.x = - 1
     frontSideTexture.colorSpace = THREE.SRGBColorSpace
 
     const backSideTexture = useTexture(backSideURL)
@@ -41,7 +43,7 @@ export function Model({position = [ 0, 0, 0 ], cardName, frontSideURL, backSideU
         gsap.to(
             card.current.scale,
             {
-                duration: 0.4,
+                duration: 0.3,
                 ease: 'power2.inOut',
                 x: '3.85',
                 z: '2.75'
@@ -57,7 +59,7 @@ export function Model({position = [ 0, 0, 0 ], cardName, frontSideURL, backSideU
         gsap.to(
             card.current.scale,
             {
-                duration: 0.4,
+                duration: 0.3,
                 ease: 'power2.inOut',
                 x: '3.5',
                 z: '2.5'
