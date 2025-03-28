@@ -1,3 +1,7 @@
+import { FaLinkedin } from "react-icons/fa"
+import { FaSquareGithub } from "react-icons/fa6";
+import { FaSquareEnvelope } from "react-icons/fa6";
+
 export default function Interface()
 {
     return <div className="interface">
@@ -7,16 +11,14 @@ export default function Interface()
            
             {/* Contacts */}
             <div className="contact">
-                LinkedIn
+                <a className="text" href="https://www.linkedin.com/in/dereknaing/" target="_blank"> LINKEDIN </a>
+                <FaLinkedin className="icon" />
             </div>
             <div className="contact">
-                Github
+                <a className="text" href="https://github.com/dnaing" target="_blank">GITHUB</a> <FaSquareGithub className="icon" />
             </div>
             <div className="contact">
-                Instagram
-            </div>
-            <div className="contact">
-                Email
+                <a className="text" href="mailto:dereknaing01@gmail.com" target="_blank">EMAIL</a> <FaSquareEnvelope className="icon" />
             </div>
 
         </div>

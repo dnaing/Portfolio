@@ -35,14 +35,53 @@ body,
     background: #00000035;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    pointer-events: none;
+    /* pointer-events: none; */
     user-select: none;
 }
 
 .contact
 {
+    display: flex;
+    align-items: center;
     padding: 10px;
 }
 
+.contact .icon
+{
+    font-size: 20px;
+    padding-left: 5px;
+}
 
+.contact .text
+{
+    position: relative;
+    color: #ffffff;
+    text-decoration: none; 
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
+    
+}
 
+.contact .text:after
+{
+    content: '';
+    position: absolute;
+    width: 0; height: 3px;
+    display: block;
+    right: 0;
+    background: #ffffff;
+    transition: width .2s ease;
+    -webkit-transition: width .2s ease;
+}
+
+.contact .text:hover
+{
+    font-size: 17px;
+}
+
+.contact .text:hover:after
+{
+    width: 100%;
+    left: 0;
+    background: #ffffff;
+}
