@@ -1,6 +1,6 @@
-import Header from './Header'
-import Contacts from './Contacts'
-import About from './About'
+import Header from './components/ui/Header'
+import Contacts from './components/ui/Contacts'
+import About from './components/ui/About'
 
 export default function Interface()
 {

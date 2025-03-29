@@ -3,7 +3,7 @@ import './App.css'
 import { Canvas } from '@react-three/fiber'
 
 import Experience from './Experience'
-import Interface from './components/Interface'
+import Interface from './Interface'
 
 export default function App() {
     return <>

@@ -4,8 +4,10 @@ import * as THREE from 'three'
 import { useFrame, extend } from '@react-three/fiber'
 import { shaderMaterial } from '@react-three/drei'
 
-import sparklesVertexShader from '../shaders/sparkles/vertex.glsl'
-import sparklesFragmentShader from '../shaders/sparkles/fragment.glsl'
+import sparklesVertexShader from '../../shaders/sparkles/vertex.glsl'
+import sparklesFragmentShader from '../../shaders/sparkles/fragment.glsl'
+
+
 
 const CustomSparklesMaterial = shaderMaterial(
     {

@@ -1,7 +1,6 @@
 import * as THREE from 'three'
 import React from 'react'
-import { useGLTF, useTexture, Float, Text3D, Center, Billboard } from '@react-three/drei'
-import { useThree } from '@react-three/fiber'
+import { useGLTF, useTexture, Float, Text3D } from '@react-three/drei'
 import { useRef, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { gsap } from 'gsap'

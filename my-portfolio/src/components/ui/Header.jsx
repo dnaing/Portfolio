@@ -18,7 +18,7 @@ export default function Header()
             }
         )
 
-        // Fade out the content
+        // Fade out the appropriate content section
         const contentSection = document.querySelector('.about')
         gsap.to(
             contentSection,
@@ -38,8 +38,8 @@ export default function Header()
                 <div className="title"/>
             </div>
 
-            <button className="exit-button">
-                <div className="text" onClick={ exit }>EXIT</div>
+            <button className="exit-button" onClick={ exit }>
+                <div className="text" >EXIT</div>
             </button>
 
         </div>

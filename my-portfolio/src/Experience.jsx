@@ -4,10 +4,10 @@ import { OrbitControls, Center } from '@react-three/drei'
 import { EffectComposer, Bloom, ToneMapping } from '@react-three/postprocessing'
 import { ToneMappingMode } from 'postprocessing'
 
-import Parallax from './components/Parallax'
-import Fog from './components/Fog'
-import CustomSparkles from './components/CustomSparkles'
-import { Card } from './components/Card'
+import Parallax from './components/threejs/Parallax'
+import Fog from './components/threejs/Fog'
+import CustomSparkles from './components/threejs/CustomSparkles'
+import { Card } from './components/threejs/Card'
 
 export default function Experience()
 {
