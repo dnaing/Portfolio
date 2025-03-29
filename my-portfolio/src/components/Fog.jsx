@@ -1,7 +1,6 @@
-import { Cloud, Clouds } from '@react-three/drei'
-import * as THREE from 'three'
 import { useControls } from 'leva'
-
+import * as THREE from 'three'
+import { Cloud, Clouds } from '@react-three/drei'
 
 export default function Fog()
 {
@@ -25,8 +24,5 @@ export default function Fog()
                 opacity={ 0.1 }
             />
         </Clouds>
-
-
-    
     </>
 }

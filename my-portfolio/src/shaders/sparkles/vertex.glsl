@@ -6,6 +6,7 @@ uniform float uTime;
 attribute float aScale; 
 attribute vec3 aColor;
 varying vec3 vColor;
+varying float vOffset;
 
 
 void main() {
@@ -20,6 +21,7 @@ void main() {
     gl_PointSize = uSize * aScale * uPixelRatio;
     gl_PointSize *= (1.0 / - viewPosition.z);
     vColor = aColor;
+    vOffset = aScale;
     // vOpacity = opacity;
     // vColor = uColor;
 }

@@ -1,18 +1,18 @@
-import { OrbitControls, Center, Float, Clouds, Cloud, Sparkles, Text3D } from '@react-three/drei'
-import { useControls } from 'leva'
 import { Perf } from 'r3f-perf'
-import * as THREE from 'three'
-import { EffectComposer, Vignette, Glitch, Bloom, ToneMapping } from '@react-three/postprocessing'
+import { useControls } from 'leva'
+import { OrbitControls, Center } from '@react-three/drei'
+import { EffectComposer, Bloom, ToneMapping } from '@react-three/postprocessing'
 import { ToneMappingMode } from 'postprocessing'
-import { Model } from './components/Model'
+
 import Parallax from './components/Parallax'
 import Fog from './components/Fog'
-import CustomSparkles from './components/CustomParticles'
+import CustomSparkles from './components/CustomSparkles'
+import { Card } from './components/Card'
 
 export default function Experience()
 {
 
-    const { backgroundColor } = useControls({ backgroundColor: '#1d1c28' })
+    const { backgroundColor } = useControls({ backgroundColor: '#0d0425' })
 
     const cardsInfo = 
     [
@@ -80,7 +80,7 @@ export default function Experience()
 
         {/* Particles */}
         <CustomSparkles
-            count={ 150 }
+            count={ 200 }
             size={ 400 } 
             opacity={ 1 }
             emissiveIntensity={ 3 }
@@ -91,7 +91,7 @@ export default function Experience()
         <Center>
             {cardsArray.map((value, index) => (
                 <group key={ index } position={ value.position }  >
-                    <Model cardName={ value.cardName } frontSideURL={ value.frontSideURL } backSideURL={ value.backSideURL } />
+                    <Card cardName={ value.cardName } frontSideURL={ value.frontSideURL } backSideURL={ value.backSideURL } />
                 </group>
             ))}
         </Center>

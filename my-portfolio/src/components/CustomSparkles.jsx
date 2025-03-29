@@ -1,8 +1,9 @@
-import { useFrame, extend } from '@react-three/fiber'
+import { useControls } from 'leva'
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
-import { useControls } from 'leva'
+import { useFrame, extend } from '@react-three/fiber'
 import { shaderMaterial } from '@react-three/drei'
+
 import sparklesVertexShader from '../shaders/sparkles/vertex.glsl'
 import sparklesFragmentShader from '../shaders/sparkles/fragment.glsl'
 
