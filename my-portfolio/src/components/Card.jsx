@@ -30,20 +30,32 @@ export function Card({position = [ 0, 0, 0 ], cardName, frontSideURL, backSideUR
     {
     
         // Display the appropriate section title in the header
-        const headerTitleSection = document.querySelector('.title-section')
+        const header = document.querySelector('.header')
+        const headerTitleSection = header.children[0]
         const headerTitle = headerTitleSection.children[0]
+        header.style.zIndex = 1
         gsap.to(
-            headerTitleSection,
+            header,
             {
-                duration: 1,
+                duration: 0.5,
                 ease: 'power2.inOut',
-                opacity: '+=1',
+                opacity: '1',
             }
         )
         headerTitle.innerHTML = cardName.toUpperCase()
 
         // Make the appropriate section show up
-        
+        const contentSection = document.querySelector('.about')
+        contentSection.style.zIndex = '1'
+        gsap.to(
+            contentSection,
+            {
+                duration: 0.5,
+                ease: 'power2.inOut',
+                opacity: '1'
+            }
+        )
+
 
 
 

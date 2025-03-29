@@ -1,5 +1,6 @@
 import Header from './Header'
 import Contacts from './Contacts'
+import About from './About'
 
 export default function Interface()
 {
@@ -7,6 +8,9 @@ export default function Interface()
 
         {/* Header */}
         <Header />
+
+        {/* About */}
+        <About />
 
         {/* Contacts */}
         <Contacts />

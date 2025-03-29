@@ -1,5 +1,5 @@
 import { Perf } from 'r3f-perf'
-import { useControls } from 'leva'
+import { useControls, Leva } from 'leva'
 import { OrbitControls, Center } from '@react-three/drei'
 import { EffectComposer, Bloom, ToneMapping } from '@react-three/postprocessing'
 import { ToneMappingMode } from 'postprocessing'
@@ -52,6 +52,8 @@ export default function Experience()
     return <>
 
         <Perf position="top-left" />
+
+        <Leva hidden/>
 
         {/* Orbit Controls */}
         {/* <OrbitControls /> */}
