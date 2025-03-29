@@ -28,8 +28,24 @@ export function Card({position = [ 0, 0, 0 ], cardName, frontSideURL, backSideUR
 
     const click = (event) =>
     {
-        // Depending on the card that was clicked a different page will reveal itself
-        console.log('Clicked!')
+    
+        // Display the appropriate section title in the header
+        const headerTitleSection = document.querySelector('.title-section')
+        const headerTitle = headerTitleSection.children[0]
+        gsap.to(
+            headerTitleSection,
+            {
+                duration: 1,
+                ease: 'power2.inOut',
+                opacity: '+=1',
+            }
+        )
+        headerTitle.innerHTML = cardName.toUpperCase()
+
+        // Make the appropriate section show up
+        
+
+
 
         // Don't trigger click on back side of card
         event.stopPropagation()
