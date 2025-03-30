@@ -54,7 +54,10 @@ export default function Interface()
             (state) => state.activeCard,
             (value) => 
             {
-                fadeInContent(value)
+                if (value)
+                {
+                    fadeInContent(value)
+                } 
             }
         )
 

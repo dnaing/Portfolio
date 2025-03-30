@@ -13,6 +13,14 @@ export default create(subscribeWithSelector((set) =>
             {
                 return { activeCard: cardName } 
             })
+        },
+
+        setActiveCardNull: () =>
+        {
+            set(() => 
+            {
+                return { activeCard: null } 
+            })
         }
     }
 }))

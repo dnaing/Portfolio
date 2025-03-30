@@ -6,6 +6,7 @@ export default function Header()
 {
 
     const activeCard = useCard((state) => state.activeCard)
+    const setActiveCardNull = useCard((state) => state.setActiveCardNull)
 
     const fadeOutContent = () =>
     {
@@ -34,6 +35,9 @@ export default function Header()
                 onComplete: () => { section.style.zIndex = -1 }
             }
         )
+
+        // Set active card status in the store to null
+        setActiveCardNull()
     }
 
     return <>
