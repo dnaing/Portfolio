@@ -21,6 +21,16 @@ export default create(subscribeWithSelector((set) =>
             {
                 return { activeCard: null } 
             })
+        },
+
+        cameraPosition: [ 0, 0, 5 ],
+
+        setCameraPosition: () =>
+        {
+            set((newPosition) =>
+            {
+                return { cameraPosition: newPosition }
+            })
         }
     }
 }))

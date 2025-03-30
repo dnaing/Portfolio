@@ -59,7 +59,7 @@ export default function Experience()
         {/* <OrbitControls /> */}
 
         {/* Parallax */}
-        <Parallax />
+        {/* <Parallax /> */}
 
         {/* Postprocess */}
         <EffectComposer>
@@ -93,7 +93,7 @@ export default function Experience()
         <Center>
             {cardsArray.map((value, index) => (
                 <group key={ index } position={ value.position }  >
-                    <Card cardName={ value.cardName } frontSideURL={ value.frontSideURL } backSideURL={ value.backSideURL } />
+                    <Card cardName={ value.cardName } frontSideURL={ value.frontSideURL } backSideURL={ value.backSideURL } position={ value.position } />
                 </group>
             ))}
         </Center>

@@ -1,15 +1,27 @@
 import gsap from 'gsap'
 import useCard from '../../stores/useCard'
 
-
 export default function Header()
 {
+
+
 
     const activeCard = useCard((state) => state.activeCard)
     const setActiveCardNull = useCard((state) => state.setActiveCardNull)
 
     const fadeOutContent = () =>
     {
+
+        // GSAP animation of the camera
+        gsap.to(
+            state.camera.position,
+            { 
+                duration: 1,
+                ease: 'power2.inOut',
+                x: 0,
+                z: 5
+            }
+        )
 
         // Fade out the header
         const header = document.querySelector('.header')

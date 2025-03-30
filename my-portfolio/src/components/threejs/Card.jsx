@@ -2,12 +2,14 @@ import * as THREE from 'three'
 import React from 'react'
 import { useGLTF, useTexture, Float, Text3D } from '@react-three/drei'
 import { useRef, useEffect } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import { gsap } from 'gsap'
 
 import useCard from '../../stores/useCard'
 
-export function Card({position = [ 0, 0, 0 ], cardName, frontSideURL, backSideURL, }) {
+export function Card({position, cardName, frontSideURL, backSideURL, }) {
+
+    const state = useThree()
     
     const { nodes, materials } = useGLTF('./models/card.glb')
 
@@ -33,7 +35,18 @@ export function Card({position = [ 0, 0, 0 ], cardName, frontSideURL, backSideUR
     {
     
         setActiveCard(cardName)
-        
+
+        // GSAP animation of the camera
+        gsap.to(
+            state.camera.position,
+            { 
+                duration: 1,
+                ease: 'power2.inOut',
+                x: position[0] - 6,
+                z: 3.25
+            }
+        )
+
 
         // Don't trigger click on back side of card
         event.stopPropagation()
@@ -101,7 +114,6 @@ export function Card({position = [ 0, 0, 0 ], cardName, frontSideURL, backSideUR
         >
             <group 
                 dispose={null} 
-                position={ position } 
                 scale={ 0.4 } 
             >
 
