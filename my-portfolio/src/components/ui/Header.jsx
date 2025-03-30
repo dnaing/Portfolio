@@ -1,9 +1,13 @@
-import gsap from "gsap"
+import gsap from 'gsap'
+import useCard from '../../stores/useCard'
+
 
 export default function Header()
 {
 
-    const exit = () => 
+    const activeCard = useCard((state) => state.activeCard)
+
+    const fadeOutContent = () =>
     {
 
         // Fade out the header
@@ -14,19 +18,20 @@ export default function Header()
                 duration: 0.5,
                 ease: 'power2.inOut',
                 opacity: '0',
-                onComplete: () => { header.style.zIndex = '-1' }
+                onComplete: () => { header.style.zIndex = -1 }
             }
         )
-
-        // Fade out the appropriate content section
-        const contentSection = document.querySelector('.about')
+        
+        // Fade out the section information
+        const className = '.' + activeCard.toLowerCase()
+        const section = document.querySelector(className)
         gsap.to(
-            contentSection,
+            section,
             {
                 duration: 0.5,
                 ease: 'power2.inOut',
                 opacity: '0',
-                onComplete: () => { contentSection.style.zIndex = '-1' }
+                onComplete: () => { section.style.zIndex = -1 }
             }
         )
     }
@@ -38,7 +43,7 @@ export default function Header()
                 <div className="title"/>
             </div>
 
-            <button className="exit-button" onClick={ exit }>
+            <button className="exit-button" onClick={ fadeOutContent }>
                 <div className="text" >EXIT</div>
             </button>
 

@@ -151,7 +151,7 @@ body,
     justify-content: center;
     position: absolute;
     top: 13%;
-    left: 0;
+    right: 0;
     width: 50%;
     height: 75%;
     background-color: #00000070;
@@ -171,3 +171,114 @@ body,
     font-family: "sans-serif, serif, Times New Roman";
 }
 
+/* Skills */
+
+.skills
+{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 13%;
+    right: 0;
+    width: 50%;
+    height: 75%;
+    background-color: #00000070;
+    opacity: 0;
+    z-index: -1;
+    overflow-y: scroll;
+}
+
+.skills .skills-section
+{
+    color: #ffffff;
+    user-select: none;
+    pointer-events: none;
+    padding-top: 35px;
+    padding-left: 35px;
+    padding-right: 35px;
+    font-family: "sans-serif, serif, Times New Roman";
+}
+
+/* Projects */
+
+.projects
+{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 13%;
+    left: 0;
+    width: 100%;
+    height: 75%;
+    background-color: #00000070;
+    opacity: 0;
+    z-index: -1;
+    overflow-y: scroll;
+}
+
+.projects .projects-section
+{
+    color: #ffffff;
+    user-select: none;
+    pointer-events: none;
+    padding-top: 35px;
+    padding-left: 35px;
+    padding-right: 35px;
+    font-family: "sans-serif, serif, Times New Roman";
+}
+
+/* Experience */
+
+.experience
+{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 13%;
+    left: 0;
+    width: 50%;
+    height: 75%;
+    background-color: #00000070;
+    opacity: 0;
+    z-index: -1;
+    overflow-y: scroll;
+}
+
+.experience .experience-section
+{
+    color: #ffffff;
+    user-select: none;
+    pointer-events: none;
+    padding-top: 35px;
+    padding-left: 35px;
+    padding-right: 35px;
+    font-family: "sans-serif, serif, Times New Roman";
+}
+
+/* Resume */
+
+.resume
+{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 13%;
+    left: 0;
+    width: 50%;
+    height: 75%;
+    background-color: #00000070;
+    opacity: 0;
+    z-index: -1;
+    overflow-y: scroll;
+}
+
+.resume .resume-section
+{
+    color: #ffffff;
+    user-select: none;
+    pointer-events: none;
+    padding-top: 35px;
+    padding-left: 35px;
+    padding-right: 35px;
+    font-family: "sans-serif, serif, Times New Roman";
+}

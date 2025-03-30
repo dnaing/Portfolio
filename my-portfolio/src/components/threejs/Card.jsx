@@ -5,12 +5,16 @@ import { useRef, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { gsap } from 'gsap'
 
+import useCard from '../../stores/useCard'
+
 export function Card({position = [ 0, 0, 0 ], cardName, frontSideURL, backSideURL, }) {
     
     const { nodes, materials } = useGLTF('./models/card.glb')
 
     const title = useRef()
     const card = useRef()
+
+    const setActiveCard = useCard((state) => state.setActiveCard)
 
     const frontSideTexture = useTexture(frontSideURL)
     frontSideTexture.flipY = false
@@ -28,35 +32,8 @@ export function Card({position = [ 0, 0, 0 ], cardName, frontSideURL, backSideUR
     const click = (event) =>
     {
     
-        // Display the appropriate section title in the header
-        const header = document.querySelector('.header')
-        const headerTitleSection = header.children[0]
-        const headerTitle = headerTitleSection.children[0]
-        header.style.zIndex = 1
-        gsap.to(
-            header,
-            {
-                duration: 0.5,
-                ease: 'power2.inOut',
-                opacity: '1',
-            }
-        )
-        headerTitle.innerHTML = cardName.toUpperCase()
-
-        // Make the appropriate section show up
-        const contentSection = document.querySelector('.about')
-        contentSection.style.zIndex = '1'
-        gsap.to(
-            contentSection,
-            {
-                duration: 0.5,
-                ease: 'power2.inOut',
-                opacity: '1'
-            }
-        )
-
-
-
+        setActiveCard(cardName)
+        
 
         // Don't trigger click on back side of card
         event.stopPropagation()
