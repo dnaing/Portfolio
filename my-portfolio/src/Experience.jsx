@@ -59,10 +59,10 @@ export default function Experience()
         {/* Orbit Controls */}
         {/* <OrbitControls /> */}
 
-        {/* Parallax */}
+        {/* Parallax Only */}
         {/* <Parallax /> */}
 
-        {/* Camera Animations */}
+        {/* Camera Animations and Parallax */}
         <Camera />
 
 

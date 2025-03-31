@@ -56,7 +56,6 @@ export default function Interface()
             {
                 if (value)
                 {
-                    console.log(value)
                     fadeInContent(value)
                 } 
             }
