@@ -5,6 +5,7 @@ import { EffectComposer, Bloom, ToneMapping } from '@react-three/postprocessing'
 import { ToneMappingMode } from 'postprocessing'
 
 import Parallax from './components/threejs/Parallax'
+import Camera from './components/threejs/Camera'
 import Fog from './components/threejs/Fog'
 import CustomSparkles from './components/threejs/CustomSparkles'
 import { Card } from './components/threejs/Card'
@@ -60,6 +61,10 @@ export default function Experience()
 
         {/* Parallax */}
         {/* <Parallax /> */}
+
+        {/* Camera Animations */}
+        <Camera />
+
 
         {/* Postprocess */}
         <EffectComposer>

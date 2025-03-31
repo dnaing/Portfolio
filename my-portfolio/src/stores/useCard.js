@@ -7,6 +7,8 @@ export default create(subscribeWithSelector((set) =>
 
         activeCard: null,
 
+        cameraPosition: [ 0, 0, 5 ],
+
         setActiveCard: (cardName) =>
         {
             set(() => 
@@ -23,11 +25,9 @@ export default create(subscribeWithSelector((set) =>
             })
         },
 
-        cameraPosition: [ 0, 0, 5 ],
-
-        setCameraPosition: () =>
+        setCameraPosition: (newPosition) =>
         {
-            set((newPosition) =>
+            set(() =>
             {
                 return { cameraPosition: newPosition }
             })

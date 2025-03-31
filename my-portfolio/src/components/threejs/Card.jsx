@@ -17,6 +17,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, }) {
     const card = useRef()
 
     const setActiveCard = useCard((state) => state.setActiveCard)
+    const setCameraPosition = useCard((state) => state.setCameraPosition)
 
     const frontSideTexture = useTexture(frontSideURL)
     frontSideTexture.flipY = false
@@ -33,20 +34,20 @@ export function Card({position, cardName, frontSideURL, backSideURL, }) {
 
     const click = (event) =>
     {
-    
         setActiveCard(cardName)
+        setCameraPosition([ position[0] - 6, 0, 3.25 ])
+
 
         // GSAP animation of the camera
-        gsap.to(
-            state.camera.position,
-            { 
-                duration: 1,
-                ease: 'power2.inOut',
-                x: position[0] - 6,
-                z: 3.25
-            }
-        )
-
+        // gsap.to(
+        //     state.camera.position,
+        //     { 
+        //         duration: 1,
+        //         ease: 'power2.inOut',
+        //         x: position[0] - 6,
+        //         z: 3.25
+        //     }
+        // )
 
         // Don't trigger click on back side of card
         event.stopPropagation()

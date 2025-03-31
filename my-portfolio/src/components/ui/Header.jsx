@@ -8,20 +8,13 @@ export default function Header()
 
     const activeCard = useCard((state) => state.activeCard)
     const setActiveCardNull = useCard((state) => state.setActiveCardNull)
+    const setCameraPosition = useCard((state) => state.setCameraPosition)
 
     const fadeOutContent = () =>
     {
 
-        // GSAP animation of the camera
-        gsap.to(
-            state.camera.position,
-            { 
-                duration: 1,
-                ease: 'power2.inOut',
-                x: 0,
-                z: 5
-            }
-        )
+        // Update global state of our camera position back to default
+        setCameraPosition([ 0, 0, 5 ])
 
         // Fade out the header
         const header = document.querySelector('.header')
