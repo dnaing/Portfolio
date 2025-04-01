@@ -15,6 +15,8 @@ export default function Interface()
 
     const fadeInContent = (activeCard) =>
     {
+
+        const delay = activeCard === 'Projects' ? 0.4 : 1
         
         // Fade in the header
         const header = document.querySelector('.header')
@@ -24,6 +26,7 @@ export default function Interface()
         gsap.to(
             header,
             {
+                delay: delay,
                 duration: 0.5,
                 ease: 'power2.inOut',
                 opacity: '1',
@@ -38,6 +41,7 @@ export default function Interface()
         gsap.to(
             section,
             {
+                delay: delay,
                 duration: 0.5,
                 ease: 'power2.inOut',
                 opacity: '1'

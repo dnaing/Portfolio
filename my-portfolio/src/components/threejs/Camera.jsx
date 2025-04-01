@@ -42,7 +42,7 @@ export default function Camera()
         {
             cameraPanAmount *= -1
         }
-        else if (newCameraPosition[0] == 0)
+        else if (newCameraPosition[0] === 0)
         {
             cameraPanAmount = 0
         }
@@ -59,7 +59,7 @@ export default function Camera()
         ).to(
             camera.position,
             {
-                duration: 0.6,
+                duration: newCameraPosition[0] === 0 ? 0.3 : 0.6,
                 ease: 'power2.inOut',
                 x: newCameraPosition[0] - cameraPanAmount,
 
@@ -73,7 +73,10 @@ export default function Camera()
 
         if (tl)
         {
-            tl.reverse()
+            setTimeout(() => {
+                tl.reverse()
+            }, 300)
+            
         }
 
     }
