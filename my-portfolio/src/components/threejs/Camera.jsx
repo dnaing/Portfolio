@@ -6,22 +6,76 @@ import useCard from '../../stores/useCard'
 export default function Camera()
 {
 
-    const state = useThree()
-
     const [ isParallaxEnabled, setIsParallaxEnabled ] = useState(true)
+    let tl
 
-    const animateCameraPosition = (newCameraPosition) =>
+    const { camera } = useThree();
+
+    const visibleHeightAtZDepth = ( depth, camera, z ) => 
     {
-        gsap.to(
-            state.camera.position,
-            { 
-                duration: 1,
+        // compensate for cameras not positioned at z=0
+        const cameraOffset = z;
+        console.log(cameraOffset)
+        if ( depth < cameraOffset ) depth -= cameraOffset;
+        else depth += cameraOffset;
+        
+        // vertical fov in radians
+        const vFOV = camera.fov * Math.PI / 180; 
+        console.log(vFOV)
+        
+        // Math.abs to ensure the result is always positive
+        return 2 * Math.tan( vFOV / 2 ) * Math.abs( depth );
+    };
+        
+    const visibleWidthAtZDepth = ( depth, camera, z ) => 
+    {
+        const height = visibleHeightAtZDepth( depth, camera, z );
+        console.log(camera.aspect)
+        return height * camera.aspect;
+    }
+
+    const animateCameraPositionIn = (newCameraPosition) =>
+    {
+
+        let cameraPanAmount = visibleWidthAtZDepth(0, camera, 3.25) / 4; 
+        if (newCameraPosition[0] < 0)
+        {
+            cameraPanAmount *= -1
+        }
+        else if (newCameraPosition[0] == 0)
+        {
+            cameraPanAmount = 0
+        }
+        
+        tl = gsap.timeline()
+        tl.to(
+            camera.position,
+            {
+                duration: 0.6,
                 ease: 'power2.inOut',
                 x: newCameraPosition[0],
-                y: newCameraPosition[1],
                 z: newCameraPosition[2]
             }
+        ).to(
+            camera.position,
+            {
+                duration: 0.6,
+                ease: 'power2.inOut',
+                x: newCameraPosition[0] - cameraPanAmount,
+
+            }
         )
+
+    }
+
+    const animateCameraPositionOut = () =>
+    {
+
+        if (tl)
+        {
+            tl.reverse()
+        }
+
     }
     
     useEffect(() => 
@@ -36,25 +90,24 @@ export default function Camera()
                 {
                     
                     // If our new position is the initial one, we want to re-enable parallax
+                    // This also means that we had hit the exit button
                     if (value[0] === 0 && value[1] === 0 && value[2] === 5 )
                     {
                         // Wait until the camera animation finishes before re-enabling it
                         setTimeout(() => {
                             setIsParallaxEnabled(true)
-                            
-                        }, 1000)
-                        animateCameraPosition(value)
+                        }, 1200)
+                        animateCameraPositionOut()
                         
                     }
 
                     // Otherwise, our new position is an active card, so we want to disable parallax
+                    // This also means that we had hit a card
                     else
                     {
                         setIsParallaxEnabled(false)
-                        animateCameraPosition(value)
+                        animateCameraPositionIn(value)
                     }
-
-                    
                 } 
             }
         )
