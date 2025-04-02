@@ -1,94 +1,195 @@
 import * as THREE from 'three'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useGLTF, useTexture, Float, Text3D } from '@react-three/drei'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { gsap } from 'gsap'
 
 import useCard from '../../stores/useCard'
 
-export function Card({position, cardName, frontSideURL, backSideURL, }) {
+export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup }) {
 
-    const state = useThree()
-    
     const { nodes, materials } = useGLTF('./models/card.glb')
 
     const title = useRef()
     const card = useRef()
+    const cardGroup = useRef()
 
+    const activeCard = useCard((state) => state.activeCard)
     const setActiveCard = useCard((state) => state.setActiveCard)
     const setCameraPosition = useCard((state) => state.setCameraPosition)
 
     const frontSideTexture = useTexture(frontSideURL)
-    frontSideTexture.flipY = false
-    frontSideTexture.wrapS = THREE.RepeatWrapping;
-    frontSideTexture.repeat.x = - 1
-    frontSideTexture.colorSpace = THREE.SRGBColorSpace
-
     const backSideTexture = useTexture(backSideURL)
-    backSideTexture.flipY = false
-    backSideTexture.colorSpace = THREE.SRGBColorSpace
 
-    nodes.Front.material.map = frontSideTexture
-    nodes.Back.material.map = backSideTexture
+    // Load in front texture and set it up
+    const frontMaterial = useMemo(() =>
+    {    
+        frontSideTexture.flipY = false
+        frontSideTexture.wrapS = THREE.RepeatWrapping;
+        frontSideTexture.repeat.x = - 1
+        frontSideTexture.colorSpace = THREE.SRGBColorSpace
 
+        const frontMaterial = materials.front.clone()
+        frontMaterial.map = frontSideTexture
+        frontMaterial.transparent = true
+        frontMaterial.opacity = 1
+
+        return frontMaterial
+    }, [frontSideTexture])
+    
+    // Load in back texture and set it up
+    const backMaterial = useMemo(() =>
+    {
+        backSideTexture.flipY = false
+        backSideTexture.wrapS = THREE.RepeatWrapping;
+        backSideTexture.repeat.x = - 1
+        backSideTexture.colorSpace = THREE.SRGBColorSpace
+
+        const backMaterial = materials.back.clone()
+        backMaterial.map = backSideTexture
+        backMaterial.transparent = true
+        backMaterial.opacity = 1
+
+        return backMaterial
+
+    }, [backSideTexture])
+    
     const click = (event) =>
     {
-        setActiveCard(cardName)
-        setCameraPosition([ position[0] - 6, 0, 3.25 ])
+        
+        if (!activeCard)
+        {
 
+            // Fade out the other main cards
+            // Currently it is fading out every single card
+            // console.log(cardsGroup.current)
 
-        // GSAP animation of the camera
-        // gsap.to(
-        //     state.camera.position,
-        //     { 
-        //         duration: 1,
-        //         ease: 'power2.inOut',
-        //         x: position[0] - 6,
-        //         z: 3.25
-        //     }
-        // )
+            cardsGroup.current.traverse((child) =>
+            {
+                if ( 
+                    child.parent !== cardGroup.current && 
+                    child instanceof THREE.Mesh && 
+                    (child.material instanceof THREE.MeshBasicMaterial || child.material instanceof THREE.MeshStandardMaterial) 
+                )
+                {
+                    // Fade out the cards
+                    gsap.to(child.material,
+                        {
+                            duration: 0.5,
+                            opacity: 0,
+                            onComplete: (() => {
+
+                                // remove pointer on hover
+                                // don't allow clicks on it
+
+                            })
+                        }
+                    )
+                } 
+            })
+            // console.log(cardGroup.current)
+            // console.log('===============================================')
+            // cardsGroup.current.traverse((child) => 
+            // { 
+            //     if (child instanceof THREE.Group && child === cardGroup.current)
+            //     {
+            //         console.log("Not our card")
+            //         console.log(child)
+            //         child.traverse((grandchild) =>
+            //         {
+            //             if (grandchild instanceof THREE.Mesh && (grandchild.material instanceof THREE.MeshBasicMaterial || grandchild.material instanceof THREE.MeshStandardMaterial))
+            //                 {
+            //                     // Fade out the cards
+            //                     gsap.to(grandchild.material,
+            //                         {
+            //                             duration: 0.5,
+            //                             opacity: 0,
+            //                             onComplete: (() => {
+            
+            //                                 // remove pointer on hover
+            //                                 // don't allow clicks on it
+            
+            //                             })
+            //                         }
+            //                     )
+            //                 } 
+            //         })
+            //     }
+                
+
+            // })
+
+            // Update global states for which card is active and what camera position we should be at
+            setActiveCard(cardName)
+            
+            setCameraPosition([ position[0] - 6, 0, 3.25 ])
+
+            // Make sure the cursor isn't a pointer anymore
+            document.body.style.cursor = 'default'
+
+            // Animate the card back to its proper size
+            gsap.to(
+                card.current.scale,
+                {
+                    duration: 0.3,
+                    ease: 'power2.inOut',
+                    x: '3.5',
+                    z: '2.5'
+                }
+            )
+        }
+
 
         // Don't trigger click on back side of card
         event.stopPropagation()
         
     }
 
+    // Enlargen the card
     const pointerEnter = () =>
     {
-        document.body.style.cursor = 'pointer'
+        if (!activeCard)
+        {
+            document.body.style.cursor = 'pointer'
 
-        gsap.to(
-            card.current.scale,
-            {
-                duration: 0.3,
-                ease: 'power2.inOut',
-                x: '3.85',
-                z: '2.75'
+            gsap.to(
+                card.current.scale,
+                {
+                    duration: 0.3,
+                    ease: 'power2.inOut',
+                    x: '3.85',
+                    z: '2.75'
 
-            }
-        )
+                }
+            )
+        }
     }
 
+    // Delargen the card
     const pointerLeave = () =>
     {
-        document.body.style.cursor = 'default'
+        if (!activeCard)
+        {
+            document.body.style.cursor = 'default'
 
-        gsap.to(
-            card.current.scale,
-            {
-                duration: 0.3,
-                ease: 'power2.inOut',
-                x: '3.5',
-                z: '2.5'
-            }
-        )
+            gsap.to(
+                card.current.scale,
+                {
+                    duration: 0.3,
+                    ease: 'power2.inOut',
+                    x: '3.5',
+                    z: '2.5'
+                }
+            )
+        }
     }
 
     useFrame((state) =>
     {
         title.current.lookAt(state.camera.position)
     })
+
 
     useEffect(() =>
     {
@@ -104,6 +205,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, }) {
             title.current.geometry.translate(-textWidthX, -textWidthY, 0)
         }
     }, [])
+    
 
     return <>
         <Float
@@ -114,8 +216,10 @@ export function Card({position, cardName, frontSideURL, backSideURL, }) {
             floatingRange={[-0.1, 0.1]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
         >
             <group 
+                ref={ cardGroup }
                 dispose={null} 
-                scale={ 0.4 } 
+                scale={ 0.4 }
+
             >
 
                 <Text3D
@@ -125,7 +229,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, }) {
                     position-y={ 4.85 }
                 >
                     { cardName }
-                    <meshBasicMaterial color={ [ 15, 15, 15 ] } toneMapped={ false } />
+                    <meshBasicMaterial color={ [ 15, 15, 15 ] } toneMapped={ false } transparent={ true } opacity={ 1 } />
                 </Text3D>
 
                 <mesh
@@ -134,14 +238,14 @@ export function Card({position, cardName, frontSideURL, backSideURL, }) {
                     onPointerEnter={ () => { pointerEnter() } }
                     onPointerLeave={ () => { pointerLeave() } }
                     geometry={nodes.Front.geometry}
-                    material={materials.front.clone()}
+                    material={frontMaterial}
                     position={[0, 0, 0.01]}
                     rotation={[-Math.PI / 2, Math.PI / 2, 0]}
                     scale={[3.5, 1, 2.5]}
                 />
                 <mesh
                     geometry={nodes.Back.geometry}
-                    material={materials.back}
+                    material={backMaterial}
                     rotation={[Math.PI / 2, -Math.PI / 2, 0]}
                     scale={[3.5, 1, 2.5]}
                 />

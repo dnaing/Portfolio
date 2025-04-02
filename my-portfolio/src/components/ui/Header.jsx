@@ -4,8 +4,6 @@ import useCard from '../../stores/useCard'
 export default function Header()
 {
 
-
-
     const activeCard = useCard((state) => state.activeCard)
     const setActiveCardNull = useCard((state) => state.setActiveCardNull)
     const setCameraPosition = useCard((state) => state.setCameraPosition)

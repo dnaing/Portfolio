@@ -1,5 +1,6 @@
 import { Perf } from 'r3f-perf'
 import { useControls, Leva } from 'leva'
+import { useRef } from 'react'
 import { OrbitControls, Center } from '@react-three/drei'
 import { EffectComposer, Bloom, ToneMapping } from '@react-three/postprocessing'
 import { ToneMappingMode } from 'postprocessing'
@@ -13,6 +14,7 @@ import { Card } from './components/threejs/Card'
 export default function Experience()
 {
 
+    const cardsGroup = useRef()
     const { backgroundColor } = useControls({ backgroundColor: '#0d0425' })
 
     const cardsInfo = 
@@ -95,10 +97,10 @@ export default function Experience()
         />
 
         {/* Main Cards */}
-        <Center>
+        <Center ref={ cardsGroup }>
             {cardsArray.map((value, index) => (
                 <group key={ index } position={ value.position }  >
-                    <Card cardName={ value.cardName } frontSideURL={ value.frontSideURL } backSideURL={ value.backSideURL } position={ value.position } />
+                    <Card cardName={ value.cardName } frontSideURL={ value.frontSideURL } backSideURL={ value.backSideURL } position={ value.position } cardsGroup={ cardsGroup } />
                 </group>
             ))}
         </Center>

@@ -15,13 +15,11 @@ export default function Camera()
     {
         // compensate for cameras not positioned at z=0
         const cameraOffset = z;
-        console.log(cameraOffset)
         if ( depth < cameraOffset ) depth -= cameraOffset;
         else depth += cameraOffset;
         
         // vertical fov in radians
         const vFOV = camera.fov * Math.PI / 180; 
-        console.log(vFOV)
         
         // Math.abs to ensure the result is always positive
         return 2 * Math.tan( vFOV / 2 ) * Math.abs( depth );
@@ -30,7 +28,6 @@ export default function Camera()
     const visibleWidthAtZDepth = ( depth, camera, z ) => 
     {
         const height = visibleHeightAtZDepth( depth, camera, z );
-        console.log(camera.aspect)
         return height * camera.aspect;
     }
 
