@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { OrbitControls, Center } from '@react-three/drei'
 import { EffectComposer, Bloom, ToneMapping } from '@react-three/postprocessing'
 import { ToneMappingMode } from 'postprocessing'
+import { Fluid, useConfig } from '@whatisjery/react-fluid-distortion';
 
 import Parallax from './components/threejs/Parallax'
 import Camera from './components/threejs/Camera'
@@ -52,6 +53,8 @@ export default function Experience()
         })
     }
 
+    const config = useConfig()
+
     return <>
 
         <Perf position="top-left" />
@@ -70,6 +73,19 @@ export default function Experience()
 
         {/* Postprocess */}
         <EffectComposer>
+            <Fluid
+                // {...config} 
+                fluidColor="#78fffa"
+                radius={ 0.05 }
+                intensity={ 5 }
+                force={ 1.2 }
+                curl={ 2 }
+                swirl={ 4 }
+                blend={ 10 }
+                densityDissipation={0.97}
+                velocityDissipation={ 1 }
+
+            />
             <Bloom
                 mipmapBlur 
                 intensity={ 0.1 }
