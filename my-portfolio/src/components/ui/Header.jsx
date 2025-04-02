@@ -40,7 +40,10 @@ export default function Header()
         )
 
         // Set active card status in the store to null
-        setActiveCardNull()
+        setTimeout(() => {
+            setActiveCardNull()
+        }, activeCard === 'Projects' ? 800 : 1100)
+        
     }
 
     return <>

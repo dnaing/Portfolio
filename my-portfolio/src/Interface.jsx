@@ -16,7 +16,7 @@ export default function Interface()
     const fadeInContent = (activeCard) =>
     {
 
-        const delay = activeCard === 'Projects' ? 0.4 : 1
+        const delay = activeCard === 'Projects' ? 1.0 : 1.5
         
         // Fade in the header
         const header = document.querySelector('.header')

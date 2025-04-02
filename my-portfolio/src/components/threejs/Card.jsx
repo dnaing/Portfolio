@@ -72,6 +72,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
                 gsap.to(child.material,
                     {
                         duration: 0.5,
+                        ease: 'power2.inOut',
                         opacity: 0,
                         onComplete: (() => {
 
@@ -117,6 +118,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
                 gsap.to(child.material,
                     {
                         duration: 0.5,
+                        ease: 'power2.inOut',
                         opacity: 1,
                     }
                 )
@@ -132,10 +134,14 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
 
             fadeOtherMainCardsOut()
 
+            setTimeout(() => {
+                setCameraPosition([ position[0] - 6, 0, 3.25 ])
+            }, 500)
+
             // Update global states for which card is active and what camera position we should be at
             setActiveCard(cardName)
             
-            setCameraPosition([ position[0] - 6, 0, 3.25 ])
+            
 
             // Make sure the cursor isn't a pointer anymore
             document.body.style.cursor = 'default'
