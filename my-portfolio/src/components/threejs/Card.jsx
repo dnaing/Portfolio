@@ -24,7 +24,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
 
     // Load in front texture and set it up
     const frontMaterial = useMemo(() =>
-    {    
+    {   
         frontSideTexture.flipY = false
         frontSideTexture.wrapS = THREE.RepeatWrapping;
         frontSideTexture.repeat.x = - 1
@@ -34,6 +34,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
         frontMaterial.map = frontSideTexture
         frontMaterial.transparent = true
         frontMaterial.opacity = 1
+        frontMaterial.depthWrite = false
 
         return frontMaterial
     }, [frontSideTexture])
@@ -50,75 +51,86 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
         backMaterial.map = backSideTexture
         backMaterial.transparent = true
         backMaterial.opacity = 1
+        backMaterial.depthWrite = false
 
         return backMaterial
 
     }, [backSideTexture])
-    
+
+    const fadeOtherMainCardsOut = () =>
+    {
+
+        // Fades other main cards out
+        cardsGroup.current.traverse((child) =>
+        {
+            if ( 
+                child.parent !== cardGroup.current && 
+                child instanceof THREE.Mesh && 
+                (child.material instanceof THREE.MeshBasicMaterial || child.material instanceof THREE.MeshStandardMaterial) 
+            )
+            {
+                gsap.to(child.material,
+                    {
+                        duration: 0.5,
+                        opacity: 0,
+                        onComplete: (() => {
+
+                            // Disallow other main cards to be interactable if fade option is 'OUT
+                            // Allow other main cards to be interactable if fade option is 'IN'
+
+                            if (child.material instanceof THREE.MeshBasicMaterial)
+                            {
+                                child.scale.set(0, 0, 0)
+                            }
+                            else
+                            {
+                                child.scale.set(0, 0, 0)
+                            }
+                        })
+                    }
+                )
+            } 
+        })
+    }
+
+    const fadeOtherMainCardsIn = () =>
+    {
+
+        // Fades other main cards in
+        cardsGroup.current.traverse((child) =>
+        {
+            if ( 
+                child.parent !== cardGroup.current && 
+                child instanceof THREE.Mesh && 
+                (child.material instanceof THREE.MeshBasicMaterial || child.material instanceof THREE.MeshStandardMaterial) 
+            )
+            {
+                if (child.material instanceof THREE.MeshBasicMaterial)
+                {
+                    child.scale.set(1, 1, 1)
+                }
+                else
+                {
+                    child.scale.set(3.5, 1, 2.5)
+                }
+
+                gsap.to(child.material,
+                    {
+                        duration: 0.5,
+                        opacity: 1,
+                    }
+                )
+            } 
+        })
+    }
+  
     const click = (event) =>
     {
         
         if (!activeCard)
         {
 
-            // Fade out the other main cards
-            // Currently it is fading out every single card
-            // console.log(cardsGroup.current)
-
-            cardsGroup.current.traverse((child) =>
-            {
-                if ( 
-                    child.parent !== cardGroup.current && 
-                    child instanceof THREE.Mesh && 
-                    (child.material instanceof THREE.MeshBasicMaterial || child.material instanceof THREE.MeshStandardMaterial) 
-                )
-                {
-                    // Fade out the cards
-                    gsap.to(child.material,
-                        {
-                            duration: 0.5,
-                            opacity: 0,
-                            onComplete: (() => {
-
-                                // remove pointer on hover
-                                // don't allow clicks on it
-
-                            })
-                        }
-                    )
-                } 
-            })
-            // console.log(cardGroup.current)
-            // console.log('===============================================')
-            // cardsGroup.current.traverse((child) => 
-            // { 
-            //     if (child instanceof THREE.Group && child === cardGroup.current)
-            //     {
-            //         console.log("Not our card")
-            //         console.log(child)
-            //         child.traverse((grandchild) =>
-            //         {
-            //             if (grandchild instanceof THREE.Mesh && (grandchild.material instanceof THREE.MeshBasicMaterial || grandchild.material instanceof THREE.MeshStandardMaterial))
-            //                 {
-            //                     // Fade out the cards
-            //                     gsap.to(grandchild.material,
-            //                         {
-            //                             duration: 0.5,
-            //                             opacity: 0,
-            //                             onComplete: (() => {
-            
-            //                                 // remove pointer on hover
-            //                                 // don't allow clicks on it
-            
-            //                             })
-            //                         }
-            //                     )
-            //                 } 
-            //         })
-            //     }
-                
-
-            // })
+            fadeOtherMainCardsOut()
 
             // Update global states for which card is active and what camera position we should be at
             setActiveCard(cardName)
@@ -140,13 +152,11 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
             )
         }
 
-
         // Don't trigger click on back side of card
-        event.stopPropagation()
-        
+        event.stopPropagation()  
     }
 
-    // Enlargen the card
+    // Enlargen the current card if not selected
     const pointerEnter = () =>
     {
         if (!activeCard)
@@ -166,7 +176,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
         }
     }
 
-    // Delargen the card
+    // Delargen the current card if not selected
     const pointerLeave = () =>
     {
         if (!activeCard)
@@ -193,6 +203,19 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
 
     useEffect(() =>
     {
+
+        const unsubscribeActiveCard = useCard.subscribe(
+            (state) => state.activeCard,
+            (value) =>
+            {
+                if (!value)
+                {
+                    // Fade back in other main cards and resize them to scale of 3.5, 1, 2.5
+                    fadeOtherMainCardsIn()
+                }
+            }
+        )
+
         if (title.current)
         {
 
@@ -204,8 +227,13 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
 
             title.current.geometry.translate(-textWidthX, -textWidthY, 0)
         }
+
+        return () =>
+        {
+            unsubscribeActiveCard()
+        }
+
     }, [])
-    
 
     return <>
         <Float
@@ -229,7 +257,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
                     position-y={ 4.85 }
                 >
                     { cardName }
-                    <meshBasicMaterial color={ [ 15, 15, 15 ] } toneMapped={ false } transparent={ true } opacity={ 1 } />
+                    <meshBasicMaterial color={ [ 15, 15, 15 ] } toneMapped={ false } transparent={ true } opacity={ 1 } depthWrite={ false } />
                 </Text3D>
 
                 <mesh
