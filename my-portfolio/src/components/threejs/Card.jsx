@@ -1,9 +1,10 @@
 import * as THREE from 'three'
 import React, { useMemo } from 'react'
 import { useGLTF, useTexture, Float, Text3D } from '@react-three/drei'
-import { useRef, useEffect, useState } from 'react'
-import { useFrame, useThree } from '@react-three/fiber'
+import { useRef, useEffect } from 'react'
+import { useFrame } from '@react-three/fiber'
 import { gsap } from 'gsap'
+import CustomShaderMaterial from 'three-custom-shader-material'
 
 import useCard from '../../stores/useCard'
 
@@ -63,10 +64,11 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
         // Fades other main cards out
         cardsGroup.current.traverse((child) =>
         {
+
             if ( 
                 child.parent !== cardGroup.current && 
                 child instanceof THREE.Mesh && 
-                (child.material instanceof THREE.MeshBasicMaterial || child.material instanceof THREE.MeshStandardMaterial) 
+                (child.material instanceof THREE.MeshBasicMaterial || child.material.isMeshStandardMaterial) 
             )
             {
                 gsap.to(child.material,
@@ -78,7 +80,6 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
 
                             // Disallow other main cards to be interactable if fade option is 'OUT
                             // Allow other main cards to be interactable if fade option is 'IN'
-
                             if (child.material instanceof THREE.MeshBasicMaterial)
                             {
                                 child.scale.set(0, 0, 0)
@@ -103,7 +104,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
             if ( 
                 child.parent !== cardGroup.current && 
                 child instanceof THREE.Mesh && 
-                (child.material instanceof THREE.MeshBasicMaterial || child.material instanceof THREE.MeshStandardMaterial) 
+                (child.material instanceof THREE.MeshBasicMaterial || child.material.isMeshStandardMaterial) 
             )
             {
                 if (child.material instanceof THREE.MeshBasicMaterial)
@@ -141,8 +142,6 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
             // Update global states for which card is active and what camera position we should be at
             setActiveCard(cardName)
             
-            
-
             // Make sure the cursor isn't a pointer anymore
             document.body.style.cursor = 'default'
 
@@ -253,9 +252,9 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
                 ref={ cardGroup }
                 dispose={null} 
                 scale={ 0.4 }
-
             >
 
+                {/* Card Name */}
                 <Text3D
                     ref={ title }  
                     font="./fonts/berry_rotunda.json" 
@@ -266,23 +265,47 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
                     <meshBasicMaterial color={ [ 15, 15, 15 ] } toneMapped={ false } transparent={ true } opacity={ 1 } depthWrite={ false } />
                 </Text3D>
 
+                {/* Front Side */}
                 <mesh
                     ref={ card }
                     onClick={ (event) => click(event) }
                     onPointerEnter={ () => { pointerEnter() } }
                     onPointerLeave={ () => { pointerLeave() } }
                     geometry={nodes.Front.geometry}
-                    material={frontMaterial}
+                    // material={frontMaterial}
+                    rotation={[Math.PI / 2, -Math.PI / 2, 0]}
+                    scale={[3.5, 1, 2.5]}
+                >
+                    <CustomShaderMaterial
+                        baseMaterial={ THREE.MeshStandardMaterial }
+                        map={ frontMaterial.map }
+                        transparent={ frontMaterial.transparent }
+                        opacity={ frontMaterial.opacity }
+                        depthWrite={ frontMaterial.depthWrite } 
+                    />
+                </mesh>
+
+                {/* Back Side */}
+                <mesh
+                    ref={ card }
+                    onClick={ (event) => click(event) }
+                    onPointerEnter={ () => { pointerEnter() } }
+                    onPointerLeave={ () => { pointerLeave() } }
+                    geometry={nodes.Back.geometry}
+                    // material={backMaterial}
                     position={[0, 0, 0.01]}
                     rotation={[-Math.PI / 2, Math.PI / 2, 0]}
                     scale={[3.5, 1, 2.5]}
-                />
-                <mesh
-                    geometry={nodes.Back.geometry}
-                    material={backMaterial}
-                    rotation={[Math.PI / 2, -Math.PI / 2, 0]}
-                    scale={[3.5, 1, 2.5]}
-                />
+                >
+                    <CustomShaderMaterial
+                        baseMaterial={ THREE.MeshStandardMaterial }
+                        map={ backMaterial.map }
+                        transparent={ backMaterial.transparent }
+                        opacity={ backMaterial.opacity }
+                        depthWrite={ backMaterial.depthWrite } 
+                    />
+                </mesh>
+
             </group>
         </Float>
         

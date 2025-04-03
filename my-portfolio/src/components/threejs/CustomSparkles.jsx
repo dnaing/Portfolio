@@ -2,26 +2,8 @@ import { useControls } from 'leva'
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { useFrame, extend } from '@react-three/fiber'
-import { shaderMaterial } from '@react-three/drei'
 
-import sparklesVertexShader from '../../shaders/sparkles/vertex.glsl'
-import sparklesFragmentShader from '../../shaders/sparkles/fragment.glsl'
-
-
-
-const CustomSparklesMaterial = shaderMaterial(
-    {
-        uTime: 0,
-        uPixelRatio: Math.min(window.devicePixelRatio, 2),
-        uSize: 1,
-        uOpacity: 1,
-        uEmissiveIntensity: 3,
-        uSpeed: 0.5,
-        uNoise: new THREE.Vector3(Math.random(), Math.random(), Math.random()),
-    },
-    sparklesVertexShader,
-    sparklesFragmentShader
-)
+import CustomSparklesMaterial from '../custom-materials/CustomSparklesMaterial'
 
 extend({ CustomSparklesMaterial })
 
