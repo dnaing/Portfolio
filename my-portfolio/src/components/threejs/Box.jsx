@@ -1,18 +1,36 @@
-import { extend } from "@react-three/fiber"
+import * as THREE from 'three'
 
-import CustomCardMaterial from "../custom-materials/CustomCardMaterial"
+import CustomShaderMaterial from 'three-custom-shader-material'
+import { Card } from './Card'
 
-extend({ CustomCardMaterial })
+import cardVertexShader from '../../shaders/card/vertex.glsl'
+import cardFragmentShader from '../../shaders/card/fragment.glsl'
+
+import { Float } from '@react-three/drei'
+import { useTexture } from '@react-three/drei'
 
 export default function Box()
 {
 
+
+    const frontSideTexture = useTexture('./images/Joker_2.png')
+
+
     return <>
 
-        <mesh>
-            <boxGeometry />
-            <customCardMaterial />
+        <mesh position={[ 0, 0, 1 ]}>
+            <planeGeometry args={[ 5, 5, 30, 30 ]} />
+            <CustomShaderMaterial
+                baseMaterial={ THREE.MeshStandardMaterial }
+                vertexShader={ cardVertexShader }
+                fragmentShader={ cardFragmentShader }
+                map={ frontSideTexture }
+                // wireframe
+                color="hotpink"
+                side={THREE.DoubleSide}
+            />
         </mesh>
-    
+
+
     </>
 }

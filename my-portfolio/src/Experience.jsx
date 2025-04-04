@@ -11,6 +11,8 @@ import Camera from './components/threejs/Camera'
 import Fog from './components/threejs/Fog'
 import CustomSparkles from './components/threejs/CustomSparkles'
 import { Card } from './components/threejs/Card'
+import Box from './components/threejs/Box'
+import Model from './components/threejs/Test'
 
 export default function Experience()
 {
@@ -59,7 +61,8 @@ export default function Experience()
 
         <Perf position="top-left" />
 
-        <Leva hidden/>
+        {/* <Leva hidden/> */}
+        
 
         {/* Orbit Controls */}
         {/* <OrbitControls /> */}
@@ -76,7 +79,7 @@ export default function Experience()
             <Fluid
                 // {...config} 
                 fluidColor="#78fffa"
-                radius={ 0.05 }
+                radius={ 0.03 }
                 intensity={ 5 }
                 force={ 1.2 }
                 curl={ 2 }
@@ -120,5 +123,8 @@ export default function Experience()
                 </group>
             ))}
         </Center>
+
+        {/* <Box /> */}
+        {/* <Model /> */}
     </>
 }

@@ -4,11 +4,19 @@ import { useGLTF, useTexture, Float, Text3D } from '@react-three/drei'
 import { useRef, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { gsap } from 'gsap'
+import { useControls } from 'leva'
 import CustomShaderMaterial from 'three-custom-shader-material'
 
 import useCard from '../../stores/useCard'
+import cardVertexShader from '../../shaders/card/vertex.glsl'
+import cardFragmentShader from '../../shaders/card/fragment.glsl'
+
 
 export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup }) {
+
+
+    // GUI
+    // const { strength } = useControls({ strength: 0 })
 
     const { nodes, materials } = useGLTF('./models/card.glb')
 
@@ -23,12 +31,18 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
     const frontSideTexture = useTexture(frontSideURL)
     const backSideTexture = useTexture(backSideURL)
 
+    const uniforms = {
+        uTime: new THREE.Uniform(0),
+        uPositionFrequency: new THREE.Uniform(1),
+        uTimeFrequency: new THREE.Uniform(1),
+        uStrength: new THREE.Uniform(1)
+    }
+
     // Load in front texture and set it up
     const frontMaterial = useMemo(() =>
     {   
-        frontSideTexture.flipY = false
-        frontSideTexture.wrapS = THREE.RepeatWrapping;
-        frontSideTexture.repeat.x = - 1
+        frontSideTexture.repeat.y = - 1
+        frontSideTexture.rotation = Math.PI / 2
         frontSideTexture.colorSpace = THREE.SRGBColorSpace
 
         const frontMaterial = materials.front.clone()
@@ -43,9 +57,8 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
     // Load in back texture and set it up
     const backMaterial = useMemo(() =>
     {
-        backSideTexture.flipY = false
-        backSideTexture.wrapS = THREE.RepeatWrapping;
-        backSideTexture.repeat.x = - 1
+        backSideTexture.repeat.y = - 1
+        backSideTexture.rotation = Math.PI / 2
         backSideTexture.colorSpace = THREE.SRGBColorSpace
 
         const backMaterial = materials.back.clone()
@@ -146,6 +159,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
             document.body.style.cursor = 'default'
 
             // Animate the card back to its proper size
+
             gsap.to(
                 card.current.scale,
                 {
@@ -167,7 +181,6 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
         if (!activeCard)
         {
             document.body.style.cursor = 'pointer'
-
             gsap.to(
                 card.current.scale,
                 {
@@ -175,7 +188,6 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
                     ease: 'power2.inOut',
                     x: '3.85',
                     z: '2.75'
-
                 }
             )
         }
@@ -200,11 +212,15 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
         }
     }
 
-    useFrame((state) =>
+    useFrame((state, delta) =>
     {
+
+        // Update uniforms
+        uniforms.uTime.value = state.clock.getElapsedTime()
+
+
         title.current.lookAt(state.camera.position)
     })
-
 
     useEffect(() =>
     {
@@ -272,37 +288,46 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
                     onPointerEnter={ () => { pointerEnter() } }
                     onPointerLeave={ () => { pointerLeave() } }
                     geometry={nodes.Front.geometry}
-                    // material={frontMaterial}
-                    rotation={[Math.PI / 2, -Math.PI / 2, 0]}
+                    rotation={[Math.PI / 2, Math.PI / 2, 0]}
                     scale={[3.5, 1, 2.5]}
                 >
                     <CustomShaderMaterial
                         baseMaterial={ THREE.MeshStandardMaterial }
+                        // vertexShader={ cardVertexShader }
+                        // fragmentShader={ cardFragmentShader }
+                        uniforms={ uniforms }
+
                         map={ frontMaterial.map }
                         transparent={ frontMaterial.transparent }
                         opacity={ frontMaterial.opacity }
                         depthWrite={ frontMaterial.depthWrite } 
+                        side={THREE.FrontSide}
+                        // wireframe
                     />
                 </mesh>
 
                 {/* Back Side */}
                 <mesh
-                    ref={ card }
-                    onClick={ (event) => click(event) }
-                    onPointerEnter={ () => { pointerEnter() } }
-                    onPointerLeave={ () => { pointerLeave() } }
+                    // onClick={ (event) => click(event) }
+                    // onPointerEnter={ () => { pointerEnter() } }
+                    // onPointerLeave={ () => { pointerLeave() } }
                     geometry={nodes.Back.geometry}
-                    // material={backMaterial}
-                    position={[0, 0, 0.01]}
-                    rotation={[-Math.PI / 2, Math.PI / 2, 0]}
+                    position={[0, 0, -0.01]}
+                    rotation={[Math.PI / 2, Math.PI / 2, 0]}
                     scale={[3.5, 1, 2.5]}
                 >
                     <CustomShaderMaterial
                         baseMaterial={ THREE.MeshStandardMaterial }
+                        // vertexShader={ cardVertexShader }
+                        // fragmentShader={ cardFragmentShader }
+                        uniforms={ uniforms }
+
                         map={ backMaterial.map }
                         transparent={ backMaterial.transparent }
                         opacity={ backMaterial.opacity }
                         depthWrite={ backMaterial.depthWrite } 
+                        side={THREE.BackSide}
+                        // wireframe
                     />
                 </mesh>
 
