@@ -29,7 +29,7 @@ export default function CustomSparkles({ count = 100, size = 100, opacity = 1, e
         const i3 = i * 3
         positionArray[i3 + 0] = (Math.random() - 0.5) * 40
         positionArray[i3 + 1] = (Math.random() - 0.5) * 20
-        positionArray[i3 + 2] = (Math.random() - 0.5) * 10 - 6
+        positionArray[i3 + 2] = (Math.random() - 0.5) * 10 - 7
 
         colorArray[i3 + 0] = threeSparklesColor.r
         colorArray[i3 + 1] = threeSparklesColor.g

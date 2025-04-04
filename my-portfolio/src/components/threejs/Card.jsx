@@ -293,8 +293,8 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
                 >
                     <CustomShaderMaterial
                         baseMaterial={ THREE.MeshStandardMaterial }
-                        // vertexShader={ cardVertexShader }
-                        // fragmentShader={ cardFragmentShader }
+                        vertexShader={ cardVertexShader }
+                        fragmentShader={ cardFragmentShader }
                         uniforms={ uniforms }
 
                         map={ frontMaterial.map }
@@ -318,8 +318,8 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
                 >
                     <CustomShaderMaterial
                         baseMaterial={ THREE.MeshStandardMaterial }
-                        // vertexShader={ cardVertexShader }
-                        // fragmentShader={ cardFragmentShader }
+                        vertexShader={ cardVertexShader }
+                        fragmentShader={ cardFragmentShader }
                         uniforms={ uniforms }
 
                         map={ backMaterial.map }

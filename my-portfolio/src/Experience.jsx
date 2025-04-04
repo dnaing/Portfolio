@@ -61,7 +61,7 @@ export default function Experience()
 
         <Perf position="top-left" />
 
-        {/* <Leva hidden/> */}
+        <Leva hidden/>
         
 
         {/* Orbit Controls */}

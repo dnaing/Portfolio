@@ -5,6 +5,8 @@ uniform float uPositionFrequency;
 uniform float uTimeFrequency;
 uniform float uStrength;
 
+varying vec2 vUv;
+
 
 float getWobble(vec3 position)
 {
@@ -22,7 +24,9 @@ void main()
     
     // csm_Position.y += sin(csm_Position.x * 10.0) * 0.5;
 
-    float wobble = getWobble(csm_Position);
+    // float wobble = getWobble(csm_Position);
 
-    csm_Position += wobble * normal;
+    // csm_Position += wobble * normal;
+
+    vUv = uv;
 }
