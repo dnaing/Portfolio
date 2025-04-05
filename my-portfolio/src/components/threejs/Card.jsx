@@ -12,11 +12,7 @@ import cardVertexShader from '../../shaders/card/vertex.glsl'
 import cardFragmentShader from '../../shaders/card/fragment.glsl'
 
 
-export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup }) {
-
-
-    // GUI
-    // const { strength } = useControls({ strength: 0 })
+export function Card({cardName, cardColor = new THREE.Vector3(0,0,0), frontSideURL, backSideURL, position, cardsGroup }) {
 
     const { nodes, materials } = useGLTF('./models/card.glb')
 
@@ -32,10 +28,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
     const backSideTexture = useTexture(backSideURL)
 
     const uniforms = {
-        uTime: new THREE.Uniform(0),
-        uPositionFrequency: new THREE.Uniform(1),
-        uTimeFrequency: new THREE.Uniform(1),
-        uStrength: new THREE.Uniform(1)
+        uColor: new THREE.Uniform(cardColor)
     }
 
     // Load in front texture and set it up
@@ -212,13 +205,8 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
         }
     }
 
-    useFrame((state, delta) =>
+    useFrame((state) =>
     {
-
-        // Update uniforms
-        uniforms.uTime.value = state.clock.getElapsedTime()
-
-
         title.current.lookAt(state.camera.position)
     })
 
@@ -256,6 +244,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
 
     }, [])
 
+
     return <>
         <Float
             // autoInvalidate
@@ -278,7 +267,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
                     position-y={ 4.85 }
                 >
                     { cardName }
-                    <meshBasicMaterial color={ [ 1.5, 1.5, 1.5 ] } toneMapped={ false } transparent={ true } opacity={ 1 } depthWrite={ false } />
+                    <meshBasicMaterial color={ [ cardColor.x, cardColor.y, cardColor.z ] } toneMapped={ false } transparent={ true } opacity={ 1 } depthWrite={ false } />
                 </Text3D>
 
                 {/* Front Side */}

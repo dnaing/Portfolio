@@ -1,5 +1,6 @@
 import { Perf } from 'r3f-perf'
 import { useControls, Leva } from 'leva'
+import * as THREE from 'three'
 import { useRef, Suspense } from 'react'
 import { OrbitControls, Center } from '@react-three/drei'
 import { EffectComposer, Bloom, ToneMapping, FXAA, SMAA } from '@react-three/postprocessing'
@@ -25,30 +26,35 @@ export default function Experience()
     [
         {
             cardName: 'About',
-            frontSideURL: './images/pixel-cards/club.png'
+            frontSideURL: './images/pixel-cards/club.png',
             // frontSideURL: './images/normal/cardClubsA.png'
+            cardColor: new THREE.Vector3(15, 0, 0) // red
 
         },
         {
             cardName: 'Skills',
-            frontSideURL: './images/pixel-cards/diamond.png'
+            frontSideURL: './images/pixel-cards/diamond.png',
             // frontSideURL: './images/normal/cardDiamondsA.png'
+            cardColor: new THREE.Vector3(0, 1, 15) // blue
 
         },
         {
             cardName: 'Projects',
-            frontSideURL: './images/pixel-cards/joker.png'
+            frontSideURL: './images/pixel-cards/joker.png',
             // frontSideURL: './images/normal/cardHeartsA.png'
+            cardColor: new THREE.Vector3(10, 0, 10) // purple
         },
         {
             cardName: 'Experience',
-            frontSideURL: './images/pixel-cards/heart.png'
+            frontSideURL: './images/pixel-cards/heart.png',
             // frontSideURL: './images/normal/cardHeartsA.png'
+            cardColor: new THREE.Vector3(0, 3, 0) // green
         },
         {
             cardName: 'Resume',
-            frontSideURL: './images/pixel-cards/spade.png'
+            frontSideURL: './images/pixel-cards/spade.png',
             // frontSideURL: './images/normal/cardClubsA.png'
+            cardColor: new THREE.Vector3(5, 3, 0) // yellow
         }
     ]
 
@@ -58,6 +64,7 @@ export default function Experience()
         cardsArray.push({
             position: [ i * 3, 0, 0 ],
             cardName: cardsInfo[i].cardName,
+            cardColor: cardsInfo[i].cardColor,
             frontSideURL: cardsInfo[i].frontSideURL,
             backSideURL: './images/pixel-cards/back.png',
         })
@@ -132,7 +139,7 @@ export default function Experience()
         <Center ref={ cardsGroup }>
             {cardsArray.map((value, index) => (
                 <group key={ index } position={ value.position }  >
-                    <Card cardName={ value.cardName } frontSideURL={ value.frontSideURL } backSideURL={ value.backSideURL } position={ value.position } cardsGroup={ cardsGroup } />
+                    <Card cardName={ value.cardName } cardColor={ value.cardColor } frontSideURL={ value.frontSideURL } backSideURL={ value.backSideURL } position={ value.position } cardsGroup={ cardsGroup } />
                 </group>
             ))}
         </Center>

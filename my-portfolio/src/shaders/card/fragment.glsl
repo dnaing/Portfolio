@@ -1,4 +1,5 @@
-uniform float uTime;
+
+uniform vec3 uColor;
 
 varying vec2 vUv;
 
@@ -32,7 +33,7 @@ void main()
     // For cards with a dark background
 
     // // Outline Glow
-    vec3 glowColor = vec3(0.0, 1.0, 8.0);
+    vec3 glowColor = uColor;
 
     // Brightness
     float brightness = max(texColor.r, max(texColor.g, texColor.b));
