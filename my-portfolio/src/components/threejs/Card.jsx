@@ -278,7 +278,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
                     position-y={ 4.85 }
                 >
                     { cardName }
-                    <meshBasicMaterial color={ [ 15, 15, 15 ] } toneMapped={ false } transparent={ true } opacity={ 1 } depthWrite={ false } />
+                    <meshBasicMaterial color={ [ 1.5, 1.5, 1.5 ] } toneMapped={ false } transparent={ true } opacity={ 1 } depthWrite={ false } />
                 </Text3D>
 
                 {/* Front Side */}
@@ -302,6 +302,7 @@ export function Card({position, cardName, frontSideURL, backSideURL, cardsGroup 
                         opacity={ frontMaterial.opacity }
                         depthWrite={ frontMaterial.depthWrite } 
                         side={THREE.FrontSide}
+                        
                         // wireframe
                     />
                 </mesh>

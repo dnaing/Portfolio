@@ -12,7 +12,9 @@ export default function CustomSparkles({ count = 100, size = 100, opacity = 1, e
 
     const customSparklesMaterial = useRef()
 
-    const { sparklesColor } = useControls({ sparklesColor: '#279cb1' })
+    // const { sparklesColor } = useControls({ sparklesColor: '#279cb1' })
+    const { sparklesColor } = useControls({ sparklesColor: '#494949' })
+
     const [ threeSparklesColor, setThreeSparklesColor ]  = useState(new THREE.Color(sparklesColor))
 
     const sparklesCount = count

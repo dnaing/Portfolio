@@ -1,8 +1,8 @@
 import { Perf } from 'r3f-perf'
 import { useControls, Leva } from 'leva'
-import { useRef } from 'react'
+import { useRef, Suspense } from 'react'
 import { OrbitControls, Center } from '@react-three/drei'
-import { EffectComposer, Bloom, ToneMapping } from '@react-three/postprocessing'
+import { EffectComposer, Bloom, ToneMapping, FXAA, SMAA } from '@react-three/postprocessing'
 import { ToneMappingMode } from 'postprocessing'
 import { Fluid, useConfig } from '@whatisjery/react-fluid-distortion';
 
@@ -18,29 +18,37 @@ export default function Experience()
 {
 
     const cardsGroup = useRef()
-    const { backgroundColor } = useControls({ backgroundColor: '#0d0425' })
+    // const { backgroundColor } = useControls({ backgroundColor: '#0d0425' })
+    const { backgroundColor } = useControls({ backgroundColor: '#070707' })
 
     const cardsInfo = 
     [
         {
             cardName: 'About',
-            frontSideURL: './images/Spades_K.png'
+            frontSideURL: './images/pixel-cards/club.png'
+            // frontSideURL: './images/normal/cardClubsA.png'
+
         },
         {
             cardName: 'Skills',
-            frontSideURL: './images/Diamonds_K.png'
+            frontSideURL: './images/pixel-cards/diamond.png'
+            // frontSideURL: './images/normal/cardDiamondsA.png'
+
         },
         {
             cardName: 'Projects',
-            frontSideURL: './images/Joker_2.png'
+            frontSideURL: './images/pixel-cards/joker.png'
+            // frontSideURL: './images/normal/cardHeartsA.png'
         },
         {
             cardName: 'Experience',
-            frontSideURL: './images/Hearts_K.png'
+            frontSideURL: './images/pixel-cards/heart.png'
+            // frontSideURL: './images/normal/cardHeartsA.png'
         },
         {
             cardName: 'Resume',
-            frontSideURL: './images/Clubs_K.png'
+            frontSideURL: './images/pixel-cards/spade.png'
+            // frontSideURL: './images/normal/cardClubsA.png'
         }
     ]
 
@@ -51,7 +59,7 @@ export default function Experience()
             position: [ i * 3, 0, 0 ],
             cardName: cardsInfo[i].cardName,
             frontSideURL: cardsInfo[i].frontSideURL,
-            backSideURL: './images/Back_2.png',
+            backSideURL: './images/pixel-cards/back.png',
         })
     }
 
@@ -75,27 +83,32 @@ export default function Experience()
 
 
         {/* Postprocess */}
-        <EffectComposer>
-            <Fluid
-                // {...config} 
-                fluidColor="#78fffa"
-                radius={ 0.03 }
-                intensity={ 5 }
-                force={ 1.2 }
-                curl={ 2 }
-                swirl={ 4 }
-                blend={ 10 }
-                densityDissipation={0.97}
-                velocityDissipation={ 1 }
-
-            />
-            <Bloom
-                mipmapBlur 
-                intensity={ 0.1 }
-                luminanceThreshold={ 0 }
-            />
-            <ToneMapping mode={ ToneMappingMode.ACES_FILMIC } />
-        </EffectComposer>
+        <Suspense fallback={ null }>
+            <SMAA />
+            {/* <FXAA /> */}
+            <EffectComposer multisampling={ 8 }>
+                <Fluid
+                    // {...config}
+                    // fluidColor="#78fffa"
+                    fluidColor='#ffffff'
+                    radius={ 0.03 }
+                    intensity={ 5 }
+                    force={ 1.2 }
+                    curl={ 2 }
+                    swirl={ 4 }
+                    blend={ 10 }
+                    densityDissipation={0.97}
+                    velocityDissipation={ 1 }
+                />
+                <Bloom
+                    mipmapBlur
+                    intensity={ 1.0 }
+                    luminanceThreshold={ 0.5 }
+                    radius={ 0.5 }
+                />
+                <ToneMapping mode={ ToneMappingMode.ACES_FILMIC } />
+            </EffectComposer>
+        </Suspense>
 
         {/* Background Color */}
         <color args={ [ backgroundColor ] } attach="background" />
@@ -108,7 +121,7 @@ export default function Experience()
 
         {/* Particles */}
         <CustomSparkles
-            count={ 200 }
+            count={ 100 }
             size={ 400 } 
             opacity={ 1 }
             emissiveIntensity={ 3 }

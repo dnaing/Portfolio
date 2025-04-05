@@ -10,6 +10,8 @@ export default function App() {
         <Canvas 
             // frameloop="demand"
             // gl={{ logarithmicDepthBuffer: true }}
+            gl={{ antialias: true }} 
+            dpr={[1, 2]}
         >
             <Experience />
         </Canvas>
