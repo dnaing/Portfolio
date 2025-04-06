@@ -35,26 +35,26 @@ export default function Experience()
             cardName: 'Skills',
             frontSideURL: './images/pixel-cards/diamond.png',
             // frontSideURL: './images/normal/cardDiamondsA.png'
-            cardColor: new THREE.Vector3(0, 1, 15) // blue
+            cardColor: new THREE.Vector3(0, 3, 10) // blue
 
         },
         {
             cardName: 'Projects',
             frontSideURL: './images/pixel-cards/joker.png',
             // frontSideURL: './images/normal/cardHeartsA.png'
-            cardColor: new THREE.Vector3(10, 0, 10) // purple
+            cardColor: new THREE.Vector3(3, 1, 8) // violet
         },
         {
             cardName: 'Experience',
             frontSideURL: './images/pixel-cards/heart.png',
             // frontSideURL: './images/normal/cardHeartsA.png'
-            cardColor: new THREE.Vector3(0, 3, 0) // green
+            cardColor: new THREE.Vector3(0, 3, 2) // green
         },
         {
             cardName: 'Resume',
             frontSideURL: './images/pixel-cards/spade.png',
             // frontSideURL: './images/normal/cardClubsA.png'
-            cardColor: new THREE.Vector3(5, 3, 0) // yellow
+            cardColor: new THREE.Vector3(4.5, 1, 0) // amber
         }
     ]
 
