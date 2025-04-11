@@ -173,7 +173,7 @@ export function Card({cardName, cardColor = new THREE.Vector3(0,0,0), frontSideU
     {
         if (!activeCard)
         {
-            document.body.style.cursor = 'pointer'
+            document.body.style.cursor = 'pointer'  
             gsap.to(
                 card.current.scale,
                 {
@@ -236,7 +236,7 @@ export function Card({cardName, cardColor = new THREE.Vector3(0,0,0), frontSideU
 
             title.current.geometry.translate(-textWidthX, -textWidthY, 0)
         }
-
+  
         return () =>
         {
             unsubscribeActiveCard()

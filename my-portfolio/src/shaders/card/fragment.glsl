@@ -1,4 +1,5 @@
 
+uniform float uTime;
 uniform vec3 uColor;
 
 varying vec2 vUv;
@@ -35,10 +36,14 @@ void main()
     // // Outline Glow
     vec3 glowColor = uColor;
 
+    // Pulsate glow color from factor of 0.5 to 1.5
+    // float glowBrightness = ((sin(uTime) + 1.0) / 2.0) + 0.5;
+    // glowColor *= glowBrightness;
+
     // Brightness
     float brightness = max(texColor.r, max(texColor.g, texColor.b));
 
-    // Use smoothstep to ocntrol the transition of the glow effect
+    // Use smoothstep to control the transition of the glow effect
     float glowFactor = smoothstep(0.15, 0.25, brightness); // Adjust 0.15 and 0.25 for more/less softness
 
     // Mix glows into texColor

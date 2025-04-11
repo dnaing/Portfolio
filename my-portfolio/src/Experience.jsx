@@ -14,6 +14,7 @@ import CustomSparkles from './components/threejs/CustomSparkles'
 import { Card } from './components/threejs/Card'
 import Box from './components/threejs/Box'
 import Model from './components/threejs/Test'
+import BackgroundCards from './components/threejs/BackGroundCards'
 
 export default function Experience()
 {
@@ -91,20 +92,20 @@ export default function Experience()
 
         {/* Postprocess */}
         <Suspense fallback={ null }>
-            <SMAA />
-            {/* <FXAA /> */}
+            {/* <SMAA /> */}
+            <FXAA />
             <EffectComposer multisampling={ 8 }>
                 <Fluid
                     // {...config}
                     // fluidColor="#78fffa"
                     fluidColor='#ffffff'
-                    radius={ 0.03 }
+                    radius={ 0.02 }
                     intensity={ 5 }
                     force={ 1.2 }
                     curl={ 2 }
                     swirl={ 4 }
                     blend={ 10 }
-                    densityDissipation={0.97}
+                    densityDissipation={0.92}
                     velocityDissipation={ 1 }
                 />
                 <Bloom
@@ -143,6 +144,8 @@ export default function Experience()
                 </group>
             ))}
         </Center>
+
+        {/* <BackgroundCards /> */}
 
         {/* <Box /> */}
         {/* <Model /> */}
