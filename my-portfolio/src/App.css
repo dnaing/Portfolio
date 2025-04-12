@@ -165,12 +165,11 @@ body,
 .about
 {
     display: flex;
-    justify-content: center;
     position: absolute;
-    top: 13%;
+    top: 20%;
     right: 0;
     width: 50%;
-    height: 75%;
+    height: 68%;
     background-color: #000000f0;
     opacity: 0;
     z-index: -1;
@@ -178,15 +177,24 @@ body,
     direction: ltr;
 }
 
-.about .about-section
+.about-section
 {
     color: #ffffff;
     user-select: none;
     pointer-events: none;
-    padding-top: 35px;
+    /* padding-left: 35px; */
+    /* padding-right: 35px; */
+    font-family: "sans-serif, serif, Times New Roman";
+}
+
+.about-description
+{
+    font-size: 20px;
+    line-height: 1.4;
+    padding-top: 5px;
     padding-left: 35px;
     padding-right: 35px;
-    font-family: "sans-serif, serif, Times New Roman";
+    padding-bottom: 30px;
 }
 
 /* Skills */
@@ -196,10 +204,10 @@ body,
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 13%;
+    top: 20%;
     right: 0;
     width: 50%;
-    height: 75%;
+    height: 68%;
     background-color: #000000f0;
     opacity: 0;
     z-index: -1;
@@ -207,7 +215,7 @@ body,
     direction: ltr;
 }
 
-.skills .skills-section
+.skills-section
 {
     color: #ffffff;
     user-select: none;
@@ -225,10 +233,10 @@ body,
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 13%;
+    top: 20%;
     left: 0;
     width: 100%;
-    height: 75%;
+    height: 68%;
     background-color: #000000f0;
     opacity: 0;
     z-index: -1;
@@ -236,7 +244,7 @@ body,
     direction: ltr;
 }
 
-.projects .projects-section
+.projects-section
 {
     color: #ffffff;
     user-select: none;
@@ -254,10 +262,10 @@ body,
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 13%;
+    top: 20%;
     left: 0;
     width: 50%;
-    height: 75%;
+    height: 68%;
     background-color: #000000f0;
     opacity: 0;
     z-index: -1;
@@ -265,7 +273,7 @@ body,
     direction: rtl;
 }
 
-.experience .experience-section
+.experience-section
 {
     color: #ffffff;
     user-select: none;
@@ -283,10 +291,10 @@ body,
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 13%;
+    top: 20%;
     left: 0;
     width: 50%;
-    height: 75%;
+    height: 68%;
     background-color: #000000f0;
     opacity: 0;
     z-index: -1;
@@ -294,7 +302,7 @@ body,
     direction: rtl;
 }
 
-.resume .resume-section
+.resume-section
 {
     color: #ffffff;
     user-select: none;
