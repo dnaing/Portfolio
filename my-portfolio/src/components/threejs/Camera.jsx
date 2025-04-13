@@ -34,7 +34,7 @@ export default function Camera()
     const animateCameraPositionIn = (newCameraPosition) =>
     {
 
-        let cameraPanAmount = visibleWidthAtZDepth(0, camera, 3.25) / 4; 
+        let cameraPanAmount = visibleWidthAtZDepth(0, camera, 3.25) / 3.3; 
         if (newCameraPosition[0] < 0)
         {
             cameraPanAmount *= -1

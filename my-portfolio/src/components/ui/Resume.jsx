@@ -9,7 +9,7 @@ export default function Resume()
             <img
                 src="./images/resume.png" 
                 alt="My Resume"
-                width={775}
+                width={900}
                 style={{paddingBottom:"25px"}}
             />
 

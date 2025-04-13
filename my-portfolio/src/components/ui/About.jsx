@@ -14,7 +14,7 @@ export default function About()
                         Whether it be playing games on the Playstation 2 or just messing around on those old,
                         janky computers back then, I was fascinated with it all. In high school, that curiosity deepened. 
                         I learned how computers worked under the hood and eventually built my own PC from the ground up. 
-                        Around that time, I also got involved in robotics and joined my school's team. 
+                        Around that time, I also got involved in robotics and joined my school's team, where 
                         I had the opportunity to compete in several VEX Robotics and Botball competitions, 
                         contributing both as a builder and a coder. This hands-on experience inspired me to pursue computer science, and I went on 
                         to study it as my major at the University of California - Irvine. Eventually, I earned my Bachelor's degree in Computer Science
