@@ -6,12 +6,12 @@ export default function Resume()
 
             <div className="resume-section">
 
-            <img
-                src="./images/resume.png" 
-                alt="My Resume"
-                width={900}
-                style={{paddingBottom:"25px"}}
-            />
+            <div className="resume-item">
+                <img
+                    src="./images/resume.png"
+                    alt="My Resume"
+                />
+            </div>
 
             </div>
             
