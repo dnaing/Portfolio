@@ -12,6 +12,7 @@ export default function About()
                     
                     <div className="about-item">
                         <h1>Origins</h1>
+                        <hr/>
                         <p>
                             Hello, My name is Derek Naing and my love for technology started as a kid.
                             Whether it be playing games on the Playstation 2 or just messing around on those old,
@@ -27,6 +28,7 @@ export default function About()
 
                     <div className="about-item">
                         <h1>Pursuits</h1>
+                        <hr/>
                         <p>
                         There are so many exciting pathways in the world of software, and I wanted to explore them all.
                         For a while, I was captivated by artificial intelligence. Later, I got into game development and created a
@@ -44,6 +46,7 @@ export default function About()
 
                     <div className="about-item">
                         <h1>Curiosities</h1>
+                        <hr/>
                         <p>
                             Outside of coding and software, I have a wide range of interests that keep me inspired and balanced. I'm an avid gamer,
                             with a love for roguelike titles, as well as the soulsborne series. This passion extends into board games and tabletop RPGs
