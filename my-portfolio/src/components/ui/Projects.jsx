@@ -17,7 +17,7 @@ export default function Projects()
                             something that truly represents me. After browsing countless examples online, the ones 
                             that left a lasting impression were those that incorporated 3D rendered scenes. 
                             That sparked the idea to bring 3D into my own site. As someone who's always been drawn 
-                            to fantasy and mystical themes —and more recently, cardistry— I decided to build my 
+                            to fantasy and mystical themes — and more recently, cardistry — I decided to build my 
                             portfolio around those inspirations.
                         </p>
                         <div className="project-skills">
