@@ -48,11 +48,12 @@ body,
     left: 50%;
     width: 25%;
     height: 40px;
-    transform: translateX(-50%); 
+    transform: translateX(-50%) translateY(2%); 
     color: #ffffff;
     background: #000000f0;
     border-top-left-radius: 0.5em;
     border-top-right-radius: 0.5em;
+    border: white 2px solid;
     user-select: none;
 }
 
@@ -131,6 +132,7 @@ body,
     background-color: #000000f0;
     width: 16%;
     border-radius: 0.5em;
+    border: white 2px solid;
 }
 
 .header .title-section .title
@@ -151,9 +153,10 @@ body,
     width: 16%;
     height: 100%;
     border-radius: 0.5em;
+    border: white 2px solid;
+    border-width: 2px;
     color: #ffffff;
     font-size: 36px;
-    border: none;
     cursor: pointer;
     user-select: none;
     font-family: "sans-serif, serif, Times New Roman";
