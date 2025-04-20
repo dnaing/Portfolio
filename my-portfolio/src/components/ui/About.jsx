@@ -9,6 +9,11 @@ export default function About()
                 <div className="about-description">
 
 
+                    <div className="about-profile">
+                        <img className="about-profile" src="./images/me.jpg" alt="Picture of Derek" />
+                    </div>
+                    
+                    {/* <hr /> */}
                     
                     <div className="about-item">
                         <h1>Origins</h1>

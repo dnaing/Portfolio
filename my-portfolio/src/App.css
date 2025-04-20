@@ -310,6 +310,21 @@ body,
     padding-bottom: 30px;
 }
 
+.about-profile
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    /* margin-bottom: 15px; */
+}
+
+.about-profile > img
+{
+    width: 40%;
+    border-radius: 0.5em;
+    border: white 2px solid;
+}
+
 .about-item
 {
     border-style: solid;
@@ -319,7 +334,7 @@ body,
     padding-right: 30px;
     padding-left: 30px;
     padding-bottom: 15px;
-    margin-top: 15px;
+    margin-top: 30px;
 }
 
 .about-item > h1

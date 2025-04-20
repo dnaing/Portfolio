@@ -8,13 +8,13 @@ export default function Resume()
 
                 <div className="resume-item">
                     <img
-                        src="./images/resume.png"
+                        src="./images/resume/resume.png"
                         alt="My Resume"
                     />
                 </div>
 
                 <div className="resume-download">
-                    <a className="neon-effect" href="/images/resume.pdf" download="derek-resume">Download</a>
+                    <a className="neon-effect" href="/images/resume/resume.pdf" download="derek-resume">Download</a>
                 </div>
             
             </div>
