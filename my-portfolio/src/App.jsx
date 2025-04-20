@@ -1,11 +1,16 @@
 import './App.css'
 
 import { Canvas } from '@react-three/fiber'
+import { Suspense } from 'react'
 
 import Experience from './Experience'
+import LoadingScreen from './components/ui/LoadingScreen'
 import Interface from './Interface'
 
 export default function App() {
+
+    
+
     return <>
         <Canvas 
             // frameloop="demand"
@@ -13,8 +18,12 @@ export default function App() {
             gl={{ antialias: true }} 
             dpr={[1, 2]}
         >
-            <Experience />
+            <Suspense fallback={null}>
+                <Experience />
+            </Suspense>
+            
         </Canvas>
+        <LoadingScreen />
         <Interface />
     </>
 }

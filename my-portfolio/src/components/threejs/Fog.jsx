@@ -5,9 +5,11 @@ import { Cloud, Clouds } from '@react-three/drei'
 export default function Fog()
 {
 
-    const { fogColor } = useControls({
-        fogColor: '#ffffff'
-    })
+    // const { fogColor } = useControls({
+    //     fogColor: '#ffffff'
+    // })
+
+    const fogColor = '#ffffff'
 
     return <>
 

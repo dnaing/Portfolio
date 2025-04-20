@@ -91,32 +91,32 @@ export default function Experience()
 
 
         {/* Postprocess */}
-        <Suspense fallback={ null }>
+
             {/* <SMAA /> */}
-            <FXAA />
-            <EffectComposer multisampling={ 8 }>
-                <Fluid
-                    // {...config}
-                    // fluidColor="#78fffa"
-                    fluidColor='#ffffff'
-                    radius={ 0.02 }
-                    intensity={ 5 }
-                    force={ 1.2 }
-                    curl={ 2 }
-                    swirl={ 4 }
-                    blend={ 10 }
-                    densityDissipation={0.92}
-                    velocityDissipation={ 1 }
-                />
-                <Bloom
-                    mipmapBlur
-                    intensity={ 1.0 }
-                    luminanceThreshold={ 0.5 }
-                    radius={ 0.5 }
-                />
-                <ToneMapping mode={ ToneMappingMode.ACES_FILMIC } />
-            </EffectComposer>
-        </Suspense>
+        <FXAA />
+        <EffectComposer multisampling={ 8 }>
+            <Fluid
+                // {...config}
+                // fluidColor="#78fffa"
+                fluidColor='#ffffff'
+                radius={ 0.02 }
+                intensity={ 5 }
+                force={ 1.2 }
+                curl={ 2 }
+                swirl={ 4 }
+                blend={ 10 }
+                densityDissipation={0.92}
+                velocityDissipation={ 1 }
+            />
+            <Bloom
+                mipmapBlur
+                intensity={ 1.0 }
+                luminanceThreshold={ 0.5 }
+                radius={ 0.5 }
+            />
+            <ToneMapping mode={ ToneMappingMode.ACES_FILMIC } />
+        </EffectComposer>
+
 
         {/* Background Color */}
         <color args={ [ backgroundColor ] } attach="background" />
@@ -137,6 +137,7 @@ export default function Experience()
         />
 
         {/* Main Cards */}
+        
         <Center ref={ cardsGroup }>
             {cardsArray.map((value, index) => (
                 <group key={ index } position={ value.position }  >
