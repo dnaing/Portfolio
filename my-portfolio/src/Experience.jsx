@@ -21,7 +21,7 @@ export default function Experience()
 
     const cardsGroup = useRef()
     // const { backgroundColor } = useControls({ backgroundColor: '#0d0425' })
-    const { backgroundColor } = useControls({ backgroundColor: '#070707' })
+    const { backgroundColor } = useControls({ backgroundColor: '#061224' })
 
     const cardsInfo = 
     [
@@ -75,7 +75,7 @@ export default function Experience()
 
     return <>
 
-        <Perf position="top-left" />
+        {/* <Perf position="top-left" /> */}
 
         <Leva hidden/>
         

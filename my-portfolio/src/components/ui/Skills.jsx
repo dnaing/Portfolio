@@ -11,6 +11,7 @@ import { FaReact } from "react-icons/fa";
 import { SiExpress } from "react-icons/si";
 import { FaNode } from "react-icons/fa";
 import { FaFlutter } from "react-icons/fa6";
+import { SiFlask } from "react-icons/si";
 import { GrMysql } from "react-icons/gr";
 import { SiMongodb } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
@@ -97,6 +98,11 @@ export default function Skills()
                             <FaFlutter />
                             <h4>Flutter</h4>
                         </div>
+                        <div className="skills-item">
+                            <SiFlask />
+                            <h4>Flask</h4>
+                        </div>
+
 
                     </div>
 

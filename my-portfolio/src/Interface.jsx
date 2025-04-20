@@ -3,6 +3,7 @@ import gsap from 'gsap'
 
 import Header from './components/ui/Header'
 import Contacts from './components/ui/Contacts'
+import Audio from './components/ui/Audio'
 import About from './components/ui/About'
 import Skills from './components/ui/Skills'
 import Projects from './components/ui/Projects'
@@ -96,6 +97,10 @@ export default function Interface()
 
         {/* Contacts */}
         <Contacts />
+
+        {/* Music Toggle */}
+        <Audio />
+
 
     </div>
 }

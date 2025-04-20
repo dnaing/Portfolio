@@ -47,6 +47,12 @@ export default function Header()
     }
 
     return <>
+
+        <div className="name-section">
+            <h1>Derek Naing</h1>
+            <h3>Fullstack Web Developer</h3>
+        </div>
+        
         <div className="header">
 
             <div className="title-section">
