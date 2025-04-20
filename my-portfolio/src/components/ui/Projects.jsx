@@ -26,7 +26,7 @@ export default function Projects()
                             <p>Blender</p>
                         </div>
                         <div className="project-links">
-                            <a href="https://github.com/dnaing/Portfolio">Github</a>
+                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/Portfolio">Github</a>
                         </div>
                     </div>
                     
@@ -65,7 +65,7 @@ export default function Projects()
                             <p>Kotlin</p>
                         </div>
                         <div className="project-links">
-                            <a href="https://github.com/dnaing/Night-Timer">Github</a>
+                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/Night-Timer">Github</a>
                         </div>
                     </div>
 
@@ -106,8 +106,8 @@ export default function Projects()
                             <p>GCP</p>
                         </div>
                         <div className="project-links">
-                            <a href="https://github.com/dnaing/Star-Wars">Github</a>
-                            <a href="https://www.thestarwarscodex.com/">Live</a>
+                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/Star-Wars">Github</a>
+                            <a className="project-link-button neon-effect" href="https://www.thestarwarscodex.com/">Live</a>
                         </div>
                     </div>
                     
@@ -146,7 +146,7 @@ export default function Projects()
                             <p>Flask</p>
                         </div>
                         <div className="project-links">
-                            <a href="https://github.com/dnaing/SearchEngine">Github</a>
+                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/SearchEngine">Github</a>
                         </div>
                     </div>
                     
@@ -186,7 +186,7 @@ export default function Projects()
                             <p>Flask</p>
                         </div>
                         <div className="project-links">
-                            <a href="https://github.com/dnaing/MyRecipes">Github</a>
+                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/MyRecipes">Github</a>
                         </div>
                     </div>
                     

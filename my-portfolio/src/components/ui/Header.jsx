@@ -59,8 +59,8 @@ export default function Header()
                 <div className="title"/>
             </div>
 
-            <button className="exit-button" onClick={ fadeOutContent }>
-                <div className="text" >EXIT</div>
+            <button className="exit-button neon-effect" onClick={ fadeOutContent }>
+                <p>EXIT</p>
             </button>
 
         </div>

@@ -7,7 +7,8 @@ body,
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #000000;
+    /* background-color: #000000; */
+    background: radial-gradient(#1f1f1f, #000000);
     overflow: hidden;
 }
 
@@ -30,6 +31,7 @@ body,
 /* Loading Screen */
 
 .loading-screen {
+    background: radial-gradient(#272727, #000000);
     position: fixed;
     top: 0;
     left: 0;
@@ -37,9 +39,10 @@ body,
     right: 0;
     background-color: inherit;
     display: flex;
+    flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
-    transition: opacity 1s;
+    transition: opacity 0.5s ease-in-out;
     z-index: 1;
 }
   
@@ -52,24 +55,17 @@ body,
     font-weight: bold;
     font-size: 2.5rem;
     border-radius: 8px;
-    transition: background-color 1s;
-    font-family: "Almendra", serif;
+    user-select: none;
 }
 
-.loading-screen-button:hover {
-    background-color: rgba(0, 0, 0, 0.42);
-    cursor: pointer;
-}
-  
 .loading-screen-button:disabled {
-    opacity: 0.3;
+    opacity: 0.25;
     cursor: not-allowed;
 }
   
 .loading-screen-progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    position: relative;
+    top: 2rem;
     width: 100%;
     height: 12px;
 }
@@ -79,9 +75,12 @@ body,
     left: 0;
     top: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 1);
-    /* transition: width 1s; */
+    background-color: white;
+    border-radius: 0.5em;
+    box-shadow: 0 0 12px rgb(255, 255, 255);
+    transition: width 1s;
 }
+
 
 .loading-screen-started {
     opacity: 0;
@@ -109,7 +108,7 @@ body,
     left: 50%;
     width: 25%;
     height: 40px;
-    transform: translateX(-50%) translateY(2%); 
+    transform: translateX(-50%) translateY(5%); 
     color: #ffffff;
     background: #000000f0;
     border-top-left-radius: 0.5em;
@@ -236,9 +235,6 @@ body,
     width: 8rem;
     height: 100%;
     border-radius: 0.2em;
-    border: white 2px solid;
-    border-width: 2px;
-    color: #ffffff;
     font-size: 36px;
     cursor: pointer;
     user-select: none;
@@ -282,7 +278,7 @@ body,
 {
     display: flex;
     position: absolute;
-    top: 20%;
+    top: 18%;
     right: 0;
     width: clamp(800px, 60vw, 100%);
     max-width: 100%;
@@ -344,7 +340,7 @@ body,
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 20%;
+    top: 18%;
     right: 0;
     width: clamp(800px, 60vw, 100%);
     max-width: 100%;
@@ -424,7 +420,7 @@ body,
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 20%;
+    top: 18%;
     left: 0;
     width: 100%;
     height: 70%;
@@ -524,30 +520,33 @@ body,
     padding-top: 15px;
 }
 
-.project-links > a
+.project-link-button
 {
     position: relative;
     display: inline-block;
     cursor: pointer;
-    color: white;
-    border: white 0.1em solid;
     border-radius: 0.5em;
     padding: 0.5em 0em;
     width: 20%;
-    background-color: #1f1f1ff0;
-
-    text-shadow: 0 0 0.5em hsl(0, 0%, 100% / 0.75);
-    box-shadow: inset 0 0 0.5em 0 hsl(0, 0%, 100%), 0 0 0.5em 0 hsl(0, 0%, 100%);
     text-align: center;
     text-decoration: none;
     font-weight: bold;
+}
+
+.neon-effect
+{
+    color: white;
+    border: white 0.1em solid;
+    background-color: #000000f0;
+    text-shadow: 0 0 0.5em hsl(0, 0%, 100% / 0.75);
+    box-shadow: inset 0 0 0.5em 0 hsl(0, 0%, 100%), 0 0 0.5em 0 hsl(0, 0%, 100%);
     transition: background-color 100ms linear;
 }
 
-.project-links > a::after
+.neon-effect::after
 {
     content: "";
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     right: 0;
@@ -558,21 +557,22 @@ body,
     transition: opacity 100ms linear;
 }
 
-.project-links > a:hover,
-.project-links > a:focus
+.neon-effect:hover,
+.neon-effect:focus
 {
     background-color: hsl(0, 0%, 100%);
     color: black;
     text-shadow: none;
+    cursor: pointer;
 }
 
-.project-links > a:focus:not(:hover) 
+.neon-effect:focus:not(:hover) 
 {
     color: hsl(0, 0%, 100%);
-    background-color: #1f1f1ff0;
+    background-color: #000000f0;
 }
 
-.project-links > a:hover::after
+.neon-effect:hover::after
 {
     opacity: 0.25;
 }
@@ -626,7 +626,7 @@ video
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 20%;
+    top: 18%;
     left: 0;
     width: clamp(800px, 60vw, 100%);
     max-width: 100%;
@@ -703,7 +703,7 @@ video
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 20%;
+    top: 18%;
     left: 0;
     width: clamp(800px, 60vw, 100%);
     max-width: 100%;
@@ -754,13 +754,10 @@ video
 
 .resume-download > a
 {
-    color: white;
-    width: 20%;
+    border-radius: 0.25em;
     padding: 15px;
     font-size: 2rem;
     font-weight: bold;
-    border: white 2px solid;
-    border-radius: 0.25em;
     text-decoration: none;
     text-align: center;
 }
