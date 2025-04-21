@@ -10,7 +10,7 @@ export default function LoadingScreen()
 
     useEffect(() => 
     {
-        if (loaded === 12)
+        if (loaded === 10)
         {
             setTimeout(() =>
             {
@@ -28,7 +28,7 @@ export default function LoadingScreen()
                 <div
                 className="loading-screen-progress-value"
                 style={{
-                    width: `${(loaded / 12) * 100}%`,
+                    width: `${(loaded / 10) * 100}%`,
                 }}
                 />
             </div>

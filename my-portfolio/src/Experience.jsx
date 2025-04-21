@@ -12,9 +12,7 @@ import Camera from './components/threejs/Camera'
 import Fog from './components/threejs/Fog'
 import CustomSparkles from './components/threejs/CustomSparkles'
 import { Card } from './components/threejs/Card'
-import Box from './components/threejs/Box'
-import Model from './components/threejs/Test'
-import BackgroundCards from './components/threejs/BackGroundCards'
+
 
 export default function Experience()
 {
@@ -145,10 +143,6 @@ export default function Experience()
                 </group>
             ))}
         </Center>
-
-        {/* <BackgroundCards /> */}
-
-        {/* <Box /> */}
-        {/* <Model /> */}
+        
     </>
 }

@@ -13,7 +13,7 @@ import cardFragmentShader from '../../shaders/card/fragment.glsl'
 
 export function Card({cardName, cardColor = new THREE.Vector3(0,0,0), frontSideURL, backSideURL, position, cardsGroup }) {
 
-    const { nodes, materials } = useGLTF('./models/card.glb')
+    const { nodes, materials } = useGLTF('/models/card.glb')
 
     const title = useRef()
     const card = useRef()
@@ -224,17 +224,17 @@ export function Card({cardName, cardColor = new THREE.Vector3(0,0,0), frontSideU
             }
         )
 
-        // if (title.current)
-        // {
+        if (title.current)
+        {
 
-            // title.current.geometry.computeBoundingBox()
-            // const boundingBox = title.current.geometry.boundingBox
+            title.current.geometry.computeBoundingBox()
+            const boundingBox = title.current.geometry.boundingBox
 
-            // const textWidthX = boundingBox.max.x * 0.3
-            // const textWidthY = boundingBox.max.y * 0.3
+            const textWidthX = boundingBox.max.x * 0.5
+            const textWidthY = boundingBox.max.y * 0.3
 
-            // title.current.geometry.translate(-textWidthX, -textWidthY, 0)
-        // }
+            title.current.geometry.translate(-textWidthX, -textWidthY, 0)
+        }
   
         return () =>
         {
@@ -259,18 +259,18 @@ export function Card({cardName, cardColor = new THREE.Vector3(0,0,0), frontSideU
             >
 
                 {/* Card Name */}
-                <Center disableY>
-                    <Text3D
-                        ref={ title }
-                        font="./fonts/berry_rotunda.json"
-                        size={ 0.45 }
-                        position-y={ 4.85 }
-                        position-x={0}
-                    >
-                        { cardName }
-                        <meshBasicMaterial color={ [ cardColor.x, cardColor.y, cardColor.z ] } toneMapped={ false } transparent={ true } opacity={ 1 } depthWrite={ false } />
-                    </Text3D>
-                </Center>
+                {/* <Center disableY> */}
+                <Text3D
+                    ref={ title }
+                    font="./fonts/berry_rotunda.json"
+                    size={ 0.45 }
+                    position-y={ 4.85 }
+                    position-x={0}
+                >
+                    { cardName }
+                    <meshBasicMaterial color={ [ cardColor.x, cardColor.y, cardColor.z ] } toneMapped={ false } transparent={ true } opacity={ 1 } depthWrite={ false } />
+                </Text3D>
+                {/* </Center> */}
 
                 {/* Front Side */}
                 <mesh
@@ -329,4 +329,4 @@ export function Card({cardName, cardColor = new THREE.Vector3(0,0,0), frontSideU
     </>
 }
 
-useGLTF.preload('./models/card.glb')
+useGLTF.preload('/models/card.glb')
