@@ -56,11 +56,11 @@ export default function Header()
         <div className="header">
 
             <div className="title-section">
-                <div className="title"/>
+                <h1 className="title"></h1>
             </div>
 
             <button className="exit-button neon-effect" onClick={ fadeOutContent }>
-                <p>EXIT</p>
+                <h1>EXIT</h1>
             </button>
 
         </div>

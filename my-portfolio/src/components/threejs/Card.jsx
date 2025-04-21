@@ -227,13 +227,13 @@ export function Card({cardName, cardColor = new THREE.Vector3(0,0,0), frontSideU
         // if (title.current)
         // {
 
-        //     title.current.geometry.computeBoundingBox()
-        //     const boundingBox = title.current.geometry.boundingBox
+            // title.current.geometry.computeBoundingBox()
+            // const boundingBox = title.current.geometry.boundingBox
 
-        //     const textWidthX = boundingBox.max.x * 0.3
-        //     const textWidthY = boundingBox.max.y * 0.3
+            // const textWidthX = boundingBox.max.x * 0.3
+            // const textWidthY = boundingBox.max.y * 0.3
 
-        //     title.current.geometry.translate(-textWidthX, -textWidthY, 0)
+            // title.current.geometry.translate(-textWidthX, -textWidthY, 0)
         // }
   
         return () =>

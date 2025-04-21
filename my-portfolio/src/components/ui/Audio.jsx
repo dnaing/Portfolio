@@ -33,14 +33,14 @@ export default function Audio()
         { audioState ? 
             (
                 <div className="audio-button audio-button-on" onClick={toggleAudio}>
-                    <IoVolumeHighOutline size={35} />
+                    <IoVolumeHighOutline size={25} />
                 </div>
                 
                 
             ) : 
             (
                 <div className="audio-button audio-button-off" onClick={toggleAudio}>
-                    <IoVolumeMuteOutline size={35} />
+                    <IoVolumeMuteOutline size={25} />
                 </div>
             )
         }
