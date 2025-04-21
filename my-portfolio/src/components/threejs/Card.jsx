@@ -230,7 +230,10 @@ export function Card({cardName, cardColor = new THREE.Vector3(0,0,0), frontSideU
             title.current.geometry.computeBoundingBox()
             const boundingBox = title.current.geometry.boundingBox
 
-            const textWidthX = boundingBox.max.x * 0.5
+            const isDeployed = import.meta.env.PROD
+            const xOffset = isDeployed ? 0.5 : 0.3
+
+            const textWidthX = boundingBox.max.x * xOffset
             const textWidthY = boundingBox.max.y * 0.3
 
             title.current.geometry.translate(-textWidthX, -textWidthY, 0)
@@ -259,18 +262,18 @@ export function Card({cardName, cardColor = new THREE.Vector3(0,0,0), frontSideU
             >
 
                 {/* Card Name */}
-                {/* <Center disableY> */}
-                <Text3D
-                    ref={ title }
-                    font="./fonts/berry_rotunda.json"
-                    size={ 0.45 }
-                    position-y={ 4.85 }
-                    position-x={0}
-                >
-                    { cardName }
-                    <meshBasicMaterial color={ [ cardColor.x, cardColor.y, cardColor.z ] } toneMapped={ false } transparent={ true } opacity={ 1 } depthWrite={ false } />
-                </Text3D>
-                {/* </Center> */}
+                <group>
+                    <Text3D
+                        ref={ title }
+                        font="./fonts/berry_rotunda.json"
+                        size={ 0.45 }
+                        position-y={ 4.85 }
+                        position-x={0}
+                    >
+                        { cardName }
+                        <meshBasicMaterial color={ [ cardColor.x, cardColor.y, cardColor.z ] } toneMapped={ false } transparent={ true } opacity={ 1 } depthWrite={ false } />
+                    </Text3D>
+                </group>
 
                 {/* Front Side */}
                 <mesh
