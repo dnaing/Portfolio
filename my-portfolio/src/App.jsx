@@ -2,6 +2,7 @@ import './App.css'
 
 import { Canvas } from '@react-three/fiber'
 import { Suspense } from 'react'
+import { Leva } from 'leva'
 
 import Experience from './Experience'
 import LoadingScreen from './components/ui/LoadingScreen'
@@ -21,8 +22,8 @@ export default function App() {
             <Suspense fallback={null}>
                 <Experience />
             </Suspense>
-            
         </Canvas>
+        <Leva collapsed={true} />
         <LoadingScreen />
         <Interface />
     </>

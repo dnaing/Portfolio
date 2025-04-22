@@ -2,7 +2,7 @@ import { Perf } from 'r3f-perf'
 import { useControls, Leva } from 'leva'
 import * as THREE from 'three'
 import { useRef, Suspense } from 'react'
-import { OrbitControls, Center } from '@react-three/drei'
+import { OrbitControls, Center, Sky } from '@react-three/drei'
 import { EffectComposer, Bloom, ToneMapping, FXAA, SMAA } from '@react-three/postprocessing'
 import { ToneMappingMode } from 'postprocessing'
 import { Fluid, useConfig } from '@whatisjery/react-fluid-distortion';
@@ -12,6 +12,8 @@ import Camera from './components/threejs/Camera'
 import Fog from './components/threejs/Fog'
 import CustomSparkles from './components/threejs/CustomSparkles'
 import { Card } from './components/threejs/Card'
+import Smoke from './components/threejs/Smoke'
+
 
 
 export default function Experience()
@@ -19,7 +21,9 @@ export default function Experience()
 
     const cardsGroup = useRef()
     // const { backgroundColor } = useControls({ backgroundColor: '#0d0425' })
-    const { backgroundColor } = useControls({ backgroundColor: '#061224' })
+    // const { backgroundColor } = useControls({ backgroundColor: '#061224' })
+    const { backgroundColor } = useControls({ backgroundColor: '#2d3345' })
+    
 
     const cardsInfo = 
     [
@@ -73,11 +77,10 @@ export default function Experience()
 
     return <>
 
-        {/* <Perf position="top-left" /> */}
+        <Perf position="top-left" />
 
-        <Leva hidden/>
+        {/* <Leva/> */}
         
-
         {/* Orbit Controls */}
         {/* <OrbitControls /> */}
 
@@ -87,10 +90,9 @@ export default function Experience()
         {/* Camera Animations and Parallax */}
         <Camera />
 
-
         {/* Postprocess */}
 
-            {/* <SMAA /> */}
+        {/* <SMAA /> */}
         <FXAA />
         <EffectComposer multisampling={ 8 }>
             <Fluid
@@ -108,13 +110,12 @@ export default function Experience()
             />
             <Bloom
                 mipmapBlur
-                intensity={ 1.0 }
+                intensity={ 0.75 }
                 luminanceThreshold={ 0.5 }
                 radius={ 0.5 }
             />
             <ToneMapping mode={ ToneMappingMode.ACES_FILMIC } />
         </EffectComposer>
-
 
         {/* Background Color */}
         <color args={ [ backgroundColor ] } attach="background" />
@@ -123,11 +124,12 @@ export default function Experience()
         <ambientLight intensity={ 4 } />
 
         {/* Fog */}
-        <Fog />
+        {/* <Fog /> */}
+        <Smoke/>
 
         {/* Particles */}
         <CustomSparkles
-            count={ 100 }
+            count={ 50 }
             size={ 400 } 
             opacity={ 1 }
             emissiveIntensity={ 3 }
@@ -135,7 +137,6 @@ export default function Experience()
         />
 
         {/* Main Cards */}
-        
         <Center ref={ cardsGroup }>
             {cardsArray.map((value, index) => (
                 <group key={ index } position={ value.position }  >
@@ -143,6 +144,8 @@ export default function Experience()
                 </group>
             ))}
         </Center>
+
         
+  
     </>
 }

@@ -19,7 +19,7 @@ export default function Fog()
                 segments={ 10 }
                 concentrate="inside"
                 scale={ 2 }
-                volume={ 10 }
+                volume={ 5 }
                 speed={ 0.25 }
                 growth={ 1 }
                 fade={ 100 }

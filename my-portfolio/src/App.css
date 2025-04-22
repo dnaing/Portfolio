@@ -127,7 +127,7 @@ body,
 
 .contact .icon
 {
-    font-size: 20px;
+    font-size: clamp(1rem, 2vw, 1.2rem);
     padding-left: 5px;
 }
 
@@ -156,7 +156,7 @@ body,
 
 .contact .text:hover
 {
-    font-size: clamp(0.7rem, 2vw, 0.95rem);
+    font-size: clamp(0.65rem, 2vw, 0.9rem);
 }
 
 .contact .text:hover:after
