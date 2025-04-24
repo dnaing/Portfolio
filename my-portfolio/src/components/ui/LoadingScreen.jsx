@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 export default function LoadingScreen() 
 {
 
-    const { active, progress, errors, item, loaded, total } = useProgress()
+    const { loaded } = useProgress()
     const [ start, setStart ] = useState(false)
     const [ disable, setDisable ] = useState(true)
 
     useEffect(() => 
     {
-        if (loaded === 9)
+        if (loaded === 8)
         {
             setTimeout(() =>
             {
@@ -28,7 +28,7 @@ export default function LoadingScreen()
                 <div
                 className="loading-screen-progress-value"
                 style={{
-                    width: `${(loaded / 9) * 100}%`,
+                    width: `${(loaded / 8) * 100}%`,
                 }}
                 />
             </div>

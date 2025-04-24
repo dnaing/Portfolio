@@ -1,10 +1,9 @@
 import * as THREE from 'three'
 import React, { useMemo } from 'react'
-import { useGLTF, useTexture, Float, Text3D, Center} from '@react-three/drei'
-import { useRef, useEffect, Suspense } from 'react'
+import { useGLTF, useTexture, Float, Text3D } from '@react-three/drei'
+import { useRef, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { gsap } from 'gsap'
-import { useControls } from 'leva'
 import CustomShaderMaterial from 'three-custom-shader-material'
 
 import useCard from '../../stores/useCard'
@@ -24,7 +23,7 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
     const setCameraPosition = useCard((state) => state.setCameraPosition)
 
     const frontSideTexture = useTexture(frontSideURL)
-    const backSideTexture = useTexture(backSideURL)
+    // const backSideTexture = useTexture(backSideURL)
 
     const uniforms = {
         uColor: new THREE.Uniform(cardColor)
@@ -47,21 +46,21 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
     }, [frontSideTexture])
     
     // Load in back texture and set it up
-    const backMaterial = useMemo(() =>
-    {
-        backSideTexture.repeat.y = - 1
-        backSideTexture.rotation = Math.PI / 2
-        backSideTexture.colorSpace = THREE.SRGBColorSpace
+    // const backMaterial = useMemo(() =>
+    // {
+    //     backSideTexture.repeat.y = - 1
+    //     backSideTexture.rotation = Math.PI / 2
+    //     backSideTexture.colorSpace = THREE.SRGBColorSpace
 
-        const backMaterial = materials.back.clone()
-        backMaterial.map = backSideTexture
-        backMaterial.transparent = true
-        backMaterial.opacity = 1
-        backMaterial.depthWrite = false
+    //     const backMaterial = materials.back.clone()
+    //     backMaterial.map = backSideTexture
+    //     backMaterial.transparent = true
+    //     backMaterial.opacity = 1
+    //     backMaterial.depthWrite = false
 
-        return backMaterial
+    //     return backMaterial
 
-    }, [backSideTexture])
+    // }, [backSideTexture])
 
     const fadeOtherMainCardsOut = () =>
     {
@@ -78,22 +77,22 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
             {
                 gsap.to(child.material,
                     {
-                        duration: 0.5,
+                        duration: 0.75,
                         ease: 'power2.inOut',
                         opacity: 0,
-                        onComplete: (() => {
+                        // onComplete: (() => {
 
-                            // Disallow other main cards to be interactable if fade option is 'OUT
-                            // Allow other main cards to be interactable if fade option is 'IN'
-                            if (child.material instanceof THREE.MeshBasicMaterial)
-                            {
-                                child.scale.set(0, 0, 0)
-                            }
-                            else
-                            {
-                                child.scale.set(0, 0, 0)
-                            }
-                        })
+                        //     // Disallow other main cards to be interactable if fade option is 'OUT
+                        //     // Allow other main cards to be interactable if fade option is 'IN'
+                        //     if (child.material instanceof THREE.MeshBasicMaterial)
+                        //     {
+                        //         child.scale.set(0, 0, 0)
+                        //     }
+                        //     else
+                        //     {
+                        //         child.scale.set(0, 0, 0)
+                        //     }
+                        // })
                     }
                 )
             } 
@@ -112,18 +111,18 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
                 (child.material instanceof THREE.MeshBasicMaterial || child.material.isMeshStandardMaterial) 
             )
             {
-                if (child.material instanceof THREE.MeshBasicMaterial)
-                {
-                    child.scale.set(1, 1, 1)
-                }
-                else
-                {
-                    child.scale.set(3.5, 1, 2.5)
-                }
+                // if (child.material instanceof THREE.MeshBasicMaterial)
+                // {
+                //     child.scale.set(1, 1, 1)
+                // }
+                // else
+                // {
+                //     child.scale.set(3.5, 1, 2.5)
+                // }
 
                 gsap.to(child.material,
                     {
-                        duration: 0.5,
+                        duration: 0.75,
                         ease: 'power2.inOut',
                         opacity: 1,
                     }
@@ -206,7 +205,11 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
 
     useFrame((state) =>
     {
-        title.current.lookAt(state.camera.position)
+        if (title.current)
+        {
+            title.current.lookAt(state.camera.position)
+        }
+        
     })
 
     useEffect(() =>
@@ -303,7 +306,7 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
                 </mesh>
 
                 {/* Back Side */}
-                <mesh
+                {/* <mesh
                     // onClick={ (event) => click(event) }
                     // onPointerEnter={ () => { pointerEnter() } }
                     // onPointerLeave={ () => { pointerLeave() } }
@@ -325,7 +328,7 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
                         side={THREE.BackSide}
                         // wireframe
                     />
-                </mesh>
+                </mesh> */}
 
             </group>
         </Float>

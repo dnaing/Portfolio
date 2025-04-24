@@ -1,20 +1,17 @@
 import { Perf } from 'r3f-perf'
-import { useControls, Leva } from 'leva'
+import { useControls } from 'leva'
 import * as THREE from 'three'
 import { useRef, Suspense } from 'react'
-import { OrbitControls, Center, Sky } from '@react-three/drei'
+import { OrbitControls, Center } from '@react-three/drei'
 import { EffectComposer, Bloom, ToneMapping, FXAA, SMAA } from '@react-three/postprocessing'
 import { ToneMappingMode } from 'postprocessing'
 import { Fluid, useConfig } from '@whatisjery/react-fluid-distortion';
 
-import Parallax from './components/threejs/Parallax'
 import Camera from './components/threejs/Camera'
 import Fog from './components/threejs/Fog'
 import CustomSparkles from './components/threejs/CustomSparkles'
 import Card from './components/threejs/Card'
 import Smoke from './components/threejs/Smoke'
-import Ocean from './components/threejs/Ocean'
-import Box from './components/threejs/Box'
 import Sea from './components/threejs/Sea'
 
 
@@ -85,31 +82,33 @@ export default function Experience()
         <Perf position="top-left" />
 
         {/* Orbit Controls */}
-        <OrbitControls />
+        {/* <OrbitControls /> */}
 
         {/* Camera Animations and Parallax */}
-        {/* <Camera /> */}
+        <Camera />
 
         {/* Postprocess */}
  
+        {/* For fluid effects, put them as first component in effect composer */}
+        {/* <Fluid
+        {...config}
+        // fluidColor="#78fffa"
+        fluidColor='#ffffff'
+        radius={ 0.02 }
+        intensity={ 5 }
+        force={ 1.2 }
+        curl={ 2 }
+        swirl={ 4 }
+        blend={ 10 }
+        densityDissipation={0.92}
+        velocityDissipation={ 1 }
+    /> */}
         <EffectComposer 
             multisampling={ 4 }
             resolutionScale={ 0.75 }
         >
             <FXAA />
-            {/* <Fluid
-                {...config}
-                // fluidColor="#78fffa"
-                fluidColor='#ffffff'
-                radius={ 0.02 }
-                intensity={ 5 }
-                force={ 1.2 }
-                curl={ 2 }
-                swirl={ 4 }
-                blend={ 10 }
-                densityDissipation={0.92}
-                velocityDissipation={ 1 }
-            /> */}
+
             <Bloom
                 mipmapBlur
                 intensity={ 0.8 }
@@ -126,7 +125,7 @@ export default function Experience()
         <ambientLight intensity={ 5 } />
 
         {/* Fog */}
-        <Smoke/>
+        {/* <Smoke/> */}
 
         {/* Particles */}
         <CustomSparkles
@@ -147,12 +146,6 @@ export default function Experience()
         </Center>
 
         <Sea />
-
-        {/* <fog attach="fog" color="#1a1a1a" near={0} far={50} /> */}
-        {/* <mesh>
-            <planeGeometry args={ [ 5, 5 ] } />
-            <meshLambertMaterial fog={true} />
-        </mesh> */}
 
     </>
 }
