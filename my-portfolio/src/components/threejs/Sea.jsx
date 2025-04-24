@@ -24,12 +24,12 @@ export default function Sea()
             uSmallWavesSpeed: { value: 0.2, min: 0, max: 4, step: 0.001 },
             uSmallWavesIterations: { value: 2, min: 0, max: 5, step: 1 },
             
-            uDepthColor: '#053148',
-            uSurfaceColor: '#9bd8ff',
+            uDepthColor: '#5e7edf',
+            uSurfaceColor: '#040713',
             uFogColor: '#000000',
-            uColorOffset: { value: 0.6, min: 0, max: 1, step: 0.001 },
-            uColorMultiplier: { value: 0.2, min: 0, max: 10, step: 0.001 },
-            uFogDensity: { value: 90, min: 0, max: 100, step: 1 }
+            uColorOffset: { value: 0.925, min: 0, max: 1, step: 0.001 },
+            uColorMultiplier: { value: 0.8, min: 0, max: 10, step: 0.001 },
+            uFogDensity: { value: 88, min: 0, max: 100, step: 1 }
         }
     )
 

@@ -30,18 +30,46 @@ uniform float uFogDensity;
 
 varying float vElevation;
 varying vec3 vPosition;
+varying vec3 vNormal;
+
+#include ../includes/directionalLight.glsl
 
 void main()
 {
     float distanceToCamera = distance(cameraPosition, vPosition);
 
+    vec3 viewDirection = normalize(vPosition - cameraPosition);
+    vec3 normal = normalize(vNormal);
+
+    // Light
+    vec3 light = vec3(0.0);
+
+    light += directionalLight(
+        vec3(1.0), // Light color
+        1.0, // Light intensity
+        normal, // Normal
+        vec3(-1.0, 0.5, 0.0), // Light position
+        viewDirection, // View direction
+        30.0 // Specular power
+    );
+
+    // Base Color
     float mixStrength = (vElevation + uColorOffset) * uColorMultiplier;
+    mixStrength = smoothstep(0.0, 1.0, mixStrength);
     vec3 color = mix(uDepthColor, uSurfaceColor, mixStrength);
+    
+    color *= light;
+
+    // Fog
     float fogFactor = clamp(distanceToCamera / (101.0 - uFogDensity), 0.0, 1.0);
     vec3 finalColor = mix(color, uFogColor, fogFactor);
+    
+    // No Fog
+    // vec3 finalColor = color;
 
+    // Final Color
     gl_FragColor = vec4(finalColor, 1.0);
 
-    #include <colorspace_fragment>
     #include <tonemapping_fragment>
+    #include <colorspace_fragment>
 }

@@ -21,7 +21,7 @@ const SeaMaterial = shaderMaterial(
         uFogColor: new THREE.Color('#1a2a3b'),
         uColorOffset: 0.6,
         uColorMultiplier: 0.2,
-        uFogDensity: 90
+        uFogDensity: 92
 
     },
     seaVertexShader,
