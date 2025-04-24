@@ -23,10 +23,15 @@
 
 uniform vec3 uDepthColor;
 uniform vec3 uSurfaceColor;
+uniform vec3 uEmissiveColor;
 uniform vec3 uFogColor;
 uniform float uColorOffset;
 uniform float uColorMultiplier;
 uniform float uFogDensity;
+
+uniform float uSmoothMin;
+uniform float uSmoothMax;
+uniform float uEmissiveStrength;
 
 varying float vElevation;
 varying vec3 vPosition;
@@ -59,6 +64,10 @@ void main()
     vec3 color = mix(uDepthColor, uSurfaceColor, mixStrength);
     
     color *= light;
+
+    // Emission
+    float emissiveFactor = smoothstep(uSmoothMin, uSmoothMax, vElevation);
+    color.rgb += uEmissiveColor * emissiveFactor * uEmissiveStrength;
 
     // Fog
     float fogFactor = clamp(distanceToCamera / (101.0 - uFogDensity), 0.0, 1.0);

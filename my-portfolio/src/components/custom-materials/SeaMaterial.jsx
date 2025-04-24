@@ -18,10 +18,15 @@ const SeaMaterial = shaderMaterial(
 
         uDepthColor: new THREE.Color('#053148'),
         uSurfaceColor: new THREE.Color('#9bd8ff'),
+        uEmissiveColor: new THREE.Color('#8888ff'),
         uFogColor: new THREE.Color('#1a2a3b'),
         uColorOffset: 0.6,
         uColorMultiplier: 0.2,
-        uFogDensity: 92
+        uFogDensity: 92,
+
+        uSmoothMin: 0,
+        uSmoothMax: 0,
+        uEmissiveStrength: 0
 
     },
     seaVertexShader,
