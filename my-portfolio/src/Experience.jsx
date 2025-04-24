@@ -11,8 +11,11 @@ import Parallax from './components/threejs/Parallax'
 import Camera from './components/threejs/Camera'
 import Fog from './components/threejs/Fog'
 import CustomSparkles from './components/threejs/CustomSparkles'
-import { Card } from './components/threejs/Card'
+import Card from './components/threejs/Card'
 import Smoke from './components/threejs/Smoke'
+import Ocean from './components/threejs/Ocean'
+import Box from './components/threejs/Box'
+import Sea from './components/threejs/Sea'
 
 
 
@@ -20,10 +23,12 @@ export default function Experience()
 {
 
     const cardsGroup = useRef()
-    // const { backgroundColor } = useControls({ backgroundColor: '#0d0425' })
-    // const { backgroundColor } = useControls({ backgroundColor: '#061224' })
-    const { backgroundColor } = useControls({ backgroundColor: '#2d3345' })
-    
+
+    // // // const { backgroundColor } = useControls({ backgroundColor: '#0d0425' })
+    // // // const { backgroundColor } = useControls({ backgroundColor: '#061224' })
+    // // // const { backgroundColor } = useControls({ backgroundColor: '#2d3345' })
+    // const { backgroundColor } = useControls({ backgroundColor: '#1a2a3b' })
+    const { backgroundColor } = useControls({ backgroundColor: '#000000' })
 
     const cardsInfo = 
     [
@@ -73,30 +78,27 @@ export default function Experience()
         })
     }
 
-    const config = useConfig()
+    // const config = useConfig()
 
     return <>
 
         <Perf position="top-left" />
 
-        {/* <Leva/> */}
-        
         {/* Orbit Controls */}
-        {/* <OrbitControls /> */}
-
-        {/* Parallax Only */}
-        {/* <Parallax /> */}
+        <OrbitControls />
 
         {/* Camera Animations and Parallax */}
-        <Camera />
+        {/* <Camera /> */}
 
         {/* Postprocess */}
-
-        {/* <SMAA /> */}
-        <FXAA />
-        <EffectComposer multisampling={ 8 }>
-            <Fluid
-                // {...config}
+ 
+        <EffectComposer 
+            multisampling={ 4 }
+            resolutionScale={ 0.75 }
+        >
+            <FXAA />
+            {/* <Fluid
+                {...config}
                 // fluidColor="#78fffa"
                 fluidColor='#ffffff'
                 radius={ 0.02 }
@@ -107,12 +109,12 @@ export default function Experience()
                 blend={ 10 }
                 densityDissipation={0.92}
                 velocityDissipation={ 1 }
-            />
+            /> */}
             <Bloom
                 mipmapBlur
-                intensity={ 0.75 }
-                luminanceThreshold={ 0.5 }
-                radius={ 0.5 }
+                intensity={ 0.8 }
+                luminanceThreshold={ 0.8 }
+                radius={ 0.55 }
             />
             <ToneMapping mode={ ToneMappingMode.ACES_FILMIC } />
         </EffectComposer>
@@ -121,10 +123,9 @@ export default function Experience()
         <color args={ [ backgroundColor ] } attach="background" />
 
         {/* Lighting */}
-        <ambientLight intensity={ 4 } />
+        <ambientLight intensity={ 5 } />
 
         {/* Fog */}
-        {/* <Fog /> */}
         <Smoke/>
 
         {/* Particles */}
@@ -145,7 +146,13 @@ export default function Experience()
             ))}
         </Center>
 
-        
-  
+        <Sea />
+
+        {/* <fog attach="fog" color="#1a1a1a" near={0} far={50} /> */}
+        {/* <mesh>
+            <planeGeometry args={ [ 5, 5 ] } />
+            <meshLambertMaterial fog={true} />
+        </mesh> */}
+
     </>
 }

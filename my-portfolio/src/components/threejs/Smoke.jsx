@@ -30,8 +30,8 @@ export default function Smoke()
 
     return <>
 
-        <mesh position={ [ 0, 0, -15 ] }>
-            <planeGeometry args={[ 80, 40 ]}/>
+        <mesh position={ [ 0, 7, -15 ] }>
+            <planeGeometry args={[ 80, 50 ]}/>
             <CustomShaderMaterial
                 ref={ fogMaterial }
                 baseMaterial={ THREE.MeshStandardMaterial }

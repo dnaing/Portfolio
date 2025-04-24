@@ -59,7 +59,7 @@ export default function CustomSparkles({ count = 100, size = 100, opacity = 1, e
 
     useFrame((state, delta) => 
     {
-        customSparklesMaterial.current.uTime += delta
+        customSparklesMaterial.current.uniforms.uTime.value += delta
     })
 
     return <>

@@ -11,7 +11,7 @@ import useCard from '../../stores/useCard'
 import cardVertexShader from '../../shaders/card/vertex.glsl'
 import cardFragmentShader from '../../shaders/card/fragment.glsl'
 
-export function Card({cardName, cardColor = new THREE.Vector3(0,0,0), frontSideURL, backSideURL, position, cardsGroup }) {
+export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), frontSideURL, backSideURL, position, cardsGroup }) {
 
     const { nodes, materials } = useGLTF('/models/card.glb')
 
@@ -230,10 +230,11 @@ export function Card({cardName, cardColor = new THREE.Vector3(0,0,0), frontSideU
             title.current.geometry.computeBoundingBox()
             const boundingBox = title.current.geometry.boundingBox
 
-            const isDeployed = import.meta.env.PROD
-            const xOffset = isDeployed ? 0.5 : 0.3
+            // const isDeployed = import.meta.env.PROD
+            // const xOffset = isDeployed ? 0.5 : 0.3
+            // console.log(xOffset)
 
-            const textWidthX = boundingBox.max.x * xOffset
+            const textWidthX = boundingBox.max.x * 0.5
             const textWidthY = boundingBox.max.y * 0.3
 
             title.current.geometry.translate(-textWidthX, -textWidthY, 0)

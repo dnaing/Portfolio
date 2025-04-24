@@ -24,7 +24,7 @@ export default function App() {
             </Suspense>
         </Canvas>
         <Leva collapsed={true} />
-        <LoadingScreen />
+        {/* <LoadingScreen /> */}
         <Interface />
     </>
 }
