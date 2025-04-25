@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import CustomShaderMaterial from 'three-custom-shader-material'
 import { useControls } from 'leva'
 
-import fogFragmentShader from '../../shaders/fog/fragment.glsl'
+import smokeFragmentShader from '../../shaders/smoke/fragment.glsl'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useRef, useEffect } from 'react'
 
@@ -14,17 +14,17 @@ export default function Smoke()
         uYMod: { value: 3.0, min: 0.0, max: 5.0, step: 0.01 },
     })
 
-    const fogMaterial = useRef()
+    const smokeMaterial = useRef()
 
     const { size, gl } = useThree();
 
     useFrame((state, delta) =>
     {
-        if (fogMaterial.current)
+        if (smokeMaterial.current)
         {
-            fogMaterial.current.uniforms.uTime.value += delta
-            fogMaterial.current.uniforms.uXMod.value = uXMod
-            fogMaterial.current.uniforms.uYMod.value = uYMod
+            smokeMaterial.current.uniforms.uTime.value += delta
+            smokeMaterial.current.uniforms.uXMod.value = uXMod
+            smokeMaterial.current.uniforms.uYMod.value = uYMod
         }
     })
 
@@ -33,9 +33,9 @@ export default function Smoke()
         <mesh position={ [ 0, 7, -15 ] }>
             <planeGeometry args={[ 80, 50 ]}/>
             <CustomShaderMaterial
-                ref={ fogMaterial }
+                ref={ smokeMaterial }
                 baseMaterial={ THREE.MeshStandardMaterial }
-                fragmentShader={ fogFragmentShader }
+                fragmentShader={ smokeFragmentShader }
                 uniforms={
                     {
                         uTime: new THREE.Uniform(0),

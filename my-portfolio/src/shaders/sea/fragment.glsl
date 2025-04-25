@@ -38,6 +38,7 @@ varying vec3 vPosition;
 varying vec3 vNormal;
 
 #include ../includes/directionalLight.glsl
+#include ../includes/pointLight.glsl
 
 void main()
 {
@@ -49,6 +50,7 @@ void main()
     // Light
     vec3 light = vec3(0.0);
 
+    //  Directional Light
     light += directionalLight(
         vec3(1.0), // Light color
         1.0, // Light intensity
@@ -57,6 +59,18 @@ void main()
         viewDirection, // View direction
         30.0 // Specular power
     );
+
+    // Point Light
+    // light += pointLight(
+    //     vec3(0.5), // Light color
+    //     100.0, // Light intensity
+    //     normal, // Normal
+    //     vec3(0.0, 0.25, 0.0), // Light position
+    //     viewDirection, // View direction
+    //     30.0, // Specular power
+    //     vPosition,
+    //     0.95
+    // );
 
     // Base Color
     float mixStrength = (vElevation + uColorOffset) * uColorMultiplier;

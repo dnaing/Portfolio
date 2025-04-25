@@ -79,7 +79,7 @@ export default function Experience()
 
     return <>
 
-        <Perf position="top-left" />
+        {/* <Perf position="top-left" /> */}
 
         {/* Orbit Controls */}
         {/* <OrbitControls /> */}
@@ -125,7 +125,7 @@ export default function Experience()
         <ambientLight intensity={ 5 } />
 
         {/* Fog */}
-        {/* <Smoke/> */}
+        <Smoke/>
 
         {/* Particles */}
         <CustomSparkles

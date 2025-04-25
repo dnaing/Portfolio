@@ -36,7 +36,7 @@ float noise (in vec2 _st) {
         (d - b) * u.x * u.y;
 }
 
-#define NUM_OCTAVES 4
+#define NUM_OCTAVES 3
 float fbm ( in vec2 _st) {
     float v = 0.0;
     float a = 0.5;
@@ -61,7 +61,7 @@ void main()
     st.x *= 1.5;
     // st += st * abs(sin(uTime*0.1)*1.0);
 
-    vec3 color = vec3(0.0);
+    vec3 color = vec3(0.05, 0.05, 0.05);
 
     vec2 q = vec2(0.0);
     q.x = fbm( st + 0.00*uTime) * uXMod;
