@@ -51,6 +51,7 @@ export default function Camera()
                 duration: 0.6,
                 ease: 'power2.inOut',
                 x: newCameraPosition[0],
+                y: 0,
                 z: newCameraPosition[2]
             }
         ).to(
@@ -80,6 +81,9 @@ export default function Camera()
     
     useEffect(() => 
     {
+
+        // // Initialize Camera Position
+        // camera.position.set(0, 100, 5)
         
         // Subscribe to the card store
         const unsubscribeCameraPosition = useCard.subscribe(
@@ -131,7 +135,7 @@ export default function Camera()
 
             // Animate Camera
             const parallaxX = state.pointer.x 
-            const parallaxY = state.pointer.y
+            const parallaxY = state.pointer.y + 1 // 1.5 offset added to y to elevate camera position
             const dampStrength = 3
             const xRange = 0.6
             const yRange = 0.3

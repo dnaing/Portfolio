@@ -32,7 +32,7 @@ export default function Sea()
                     uFogColor: '#000000',
                     uColorOffset: { value: 0.925, min: 0, max: 1, step: 0.001 },
                     uColorMultiplier: { value: 0.8, min: 0, max: 10, step: 0.001 },
-                    uFogDensity: { value: 90, min: 0, max: 100, step: 1 },
+                    uFogDensity: { value: 92, min: 0, max: 100, step: 1 },
 
                     uSmoothMin: { value: 0.0, min: -5, max: 5, step: 0.01 },
                     uSmoothMax: { value: -5.85, min: -15, max: 0, step: 0.01 },

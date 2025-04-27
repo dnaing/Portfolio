@@ -13,6 +13,7 @@ import CustomSparkles from './components/threejs/CustomSparkles'
 import Card from './components/threejs/Card'
 import Smoke from './components/threejs/Smoke'
 import Sea from './components/threejs/Sea'
+import Sun from './components/threejs/Sun'
 
 
 
@@ -135,6 +136,8 @@ export default function Experience()
             emissiveIntensity={ 3 }
             speed={ 0.5 }
         />
+
+        <Sun />
 
         {/* Main Cards */}
         <Center ref={ cardsGroup }>

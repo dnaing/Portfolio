@@ -271,7 +271,7 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
                         ref={ title }
                         font="./fonts/berry_rotunda.json"
                         size={ 0.45 }
-                        position-y={ 4.85 }
+                        position-y={ 4.7 }
                         position-x={0}
                     >
                         { cardName }
