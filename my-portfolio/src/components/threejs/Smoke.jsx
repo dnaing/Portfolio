@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import CustomShaderMaterial from 'three-custom-shader-material'
-import { useControls } from 'leva'
+import { useControls, folder } from 'leva'
 
 import smokeFragmentShader from '../../shaders/smoke/fragment.glsl'
 import { useFrame, useThree } from '@react-three/fiber'
@@ -9,10 +9,16 @@ import { useRef, useEffect } from 'react'
 export default function Smoke()
 {
 
-    const { uXMod, uYMod } = useControls({
-        uXMod: { value: 2.0, min: 0.0, max: 5.0, step: 0.01 },
-        uYMod: { value: 3.0, min: 0.0, max: 5.0, step: 0.01 },
-    })
+    const { uXMod, uYMod } = useControls(
+        {
+            'Smoke Settings': folder(
+                {
+                    uXMod: { value: 2.0, min: 0.0, max: 5.0, step: 0.01 },
+                    uYMod: { value: 3.0, min: 0.0, max: 5.0, step: 0.01 },
+                }, {collapsed: true}
+            )
+        }
+    )
 
     const smokeMaterial = useRef()
 

@@ -1,5 +1,5 @@
 import { Perf } from 'r3f-perf'
-import { useControls } from 'leva'
+import { useControls, folder } from 'leva'
 import * as THREE from 'three'
 import { useRef, Suspense } from 'react'
 import { OrbitControls, Center } from '@react-three/drei'
@@ -26,7 +26,16 @@ export default function Experience()
     // // // const { backgroundColor } = useControls({ backgroundColor: '#061224' })
     // // // const { backgroundColor } = useControls({ backgroundColor: '#2d3345' })
     // const { backgroundColor } = useControls({ backgroundColor: '#1a2a3b' })
-    const { backgroundColor } = useControls({ backgroundColor: '#000000' })
+
+    const { backgroundColor } = useControls(
+        {
+            'Background Setting': folder(
+                { 
+                    backgroundColor: '#000000' 
+                }, {collapsed: true}
+            )
+        }
+    )
 
     const cardsInfo = 
     [
@@ -80,7 +89,7 @@ export default function Experience()
 
     return <>
 
-        {/* <Perf position="top-left" /> */}
+        <Perf position="top-left" />
 
         {/* Orbit Controls */}
         {/* <OrbitControls /> */}

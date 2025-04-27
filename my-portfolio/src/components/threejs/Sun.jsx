@@ -1,7 +1,7 @@
 import { shaderMaterial } from '@react-three/drei'
 import { extend, useFrame } from '@react-three/fiber'
-import { useEffect, useRef } from 'react'
-import { useControls } from 'leva'
+import { useRef } from 'react'
+import { useControls, folder } from 'leva'
 import * as THREE from 'three'
 
 import sunVertexShader from '../../shaders/sun/vertex.glsl'
@@ -65,10 +65,16 @@ export default function Sun()
     }
 
     // Tweaks
-    const { uAtmosphereDayColor, uAtmosphereTwilightColor } = useControls({
-        uAtmosphereDayColor: '#00aaff',
-        uAtmosphereTwilightColor: '#ff6600'
-    })
+    const { uAtmosphereDayColor, uAtmosphereTwilightColor } = useControls(
+        {
+            'Sun Settings': folder(
+                {
+                    uAtmosphereDayColor: '#909090',
+                    uAtmosphereTwilightColor: '#454545'
+                }, {collapsed: true}
+            )
+        }
+    )
 
     useFrame((state, delta) =>
     {

@@ -1,10 +1,26 @@
-import { useControls } from 'leva'
+import { useControls, folder } from 'leva'
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { useFrame, extend } from '@react-three/fiber'
+import { shaderMaterial } from '@react-three/drei'
 
-import CustomSparklesMaterial from '../custom-materials/CustomSparklesMaterial'
+import sparklesVertexShader from '../../shaders/sparkles/vertex.glsl'
+import sparklesFragmentShader from '../../shaders/sparkles/fragment.glsl'
 
+const CustomSparklesMaterial = shaderMaterial(
+    {
+        uTime: 0,
+        uSparklesColor: new THREE.Color('#494949'),
+        uPixelRatio: Math.min(window.devicePixelRatio, 2),
+        uSize: 1,
+        uOpacity: 1,
+        uEmissiveIntensity: 3,
+        uSpeed: 0.5,
+        uNoise: new THREE.Vector3(Math.random(), Math.random(), Math.random()),
+    },
+    sparklesVertexShader,
+    sparklesFragmentShader
+)
 extend({ CustomSparklesMaterial })
 
 export default function CustomSparkles({ count = 100, size = 100, opacity = 1, emissiveIntensity = 1, speed = 1 })
@@ -12,19 +28,19 @@ export default function CustomSparkles({ count = 100, size = 100, opacity = 1, e
 
     const customSparklesMaterial = useRef()
 
-    // const { sparklesColor } = useControls({ sparklesColor: '#279cb1' })
-    const { sparklesColor } = useControls({ sparklesColor: '#494949' })
-
-    const [ threeSparklesColor, setThreeSparklesColor ]  = useState(new THREE.Color(sparklesColor))
+    const { uSparklesColor } = useControls(
+        {
+            'Sparkles Settings': folder(
+                {
+                    uSparklesColor: '#494949' 
+                }, {collapsed: true}
+            )
+        }
+    )
 
     const sparklesCount = count
     const positionArray = new Float32Array(sparklesCount * 3)
     const scaleArray = new Float32Array(sparklesCount)
-    const colorArray = new Float32Array(sparklesCount * 3)
-
-    useEffect(() => {
-        setThreeSparklesColor(new THREE.Color(sparklesColor))
-    }, [sparklesColor])
 
     for (let i = 0; i < sparklesCount; i++)
     {
@@ -32,10 +48,6 @@ export default function CustomSparkles({ count = 100, size = 100, opacity = 1, e
         positionArray[i3 + 0] = (Math.random() - 0.5) * 40
         positionArray[i3 + 1] = (Math.random() - 0.5) * 20
         positionArray[i3 + 2] = (Math.random() - 0.5) * 10 - 7
-
-        colorArray[i3 + 0] = threeSparklesColor.r
-        colorArray[i3 + 1] = threeSparklesColor.g
-        colorArray[i3 + 2] = threeSparklesColor.b
 
         scaleArray[i] = Math.random() + 0.25
     }
@@ -67,10 +79,10 @@ export default function CustomSparkles({ count = 100, size = 100, opacity = 1, e
             <bufferGeometry>
                 <bufferAttribute attach="attributes-position" args={[positionArray, 3]} />
                 <bufferAttribute attach="attributes-aScale" args={[scaleArray, 1]} />
-                <bufferAttribute attach="attributes-aColor" args={[colorArray, 3]} />
             </bufferGeometry>
             <customSparklesMaterial
                 ref={ customSparklesMaterial }
+                uSparklesColor={ new THREE.Color(uSparklesColor) }
                 transparent 
                 depthWrite={ false }
                 toneMapped={ false }
