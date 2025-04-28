@@ -14,8 +14,8 @@ import Card from './components/threejs/Card'
 import Smoke from './components/threejs/Smoke'
 import Sea from './components/threejs/Sea'
 import Sun from './components/threejs/Sun'
-
-
+import Beam from './components/threejs/Beam'
+import Beam2 from './components/threejs/Beam2'
 
 export default function Experience()
 {
@@ -85,11 +85,11 @@ export default function Experience()
         })
     }
 
-    // const config = useConfig()
+    const config = useConfig()
 
     return <>
 
-        <Perf position="top-left" />
+        {/* <Perf position="top-left" /> */}
 
         {/* Orbit Controls */}
         {/* <OrbitControls /> */}
@@ -119,6 +119,20 @@ export default function Experience()
         >
             <FXAA />
 
+            <Fluid
+                // {...config}
+                // fluidColor="#78fffa"
+                fluidColor='#ffffff'
+                radius={ 0.03 }
+                intensity={ 8 }
+                force={ 2 }
+                curl={ 3 }
+                swirl={ 4 }
+                blend={ 15 }
+                densityDissipation={0.92}
+                velocityDissipation={ 1 }
+            />
+
             <Bloom
                 mipmapBlur
                 intensity={ 0.8 }
@@ -147,6 +161,8 @@ export default function Experience()
         />
 
         <Sun />
+        {/* <Beam /> */}
+        {/* <Beam2 /> */}
 
         {/* Main Cards */}
         <Center ref={ cardsGroup }>

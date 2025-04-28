@@ -69,8 +69,8 @@ export default function Sun()
         {
             'Sun Settings': folder(
                 {
-                    uAtmosphereDayColor: '#909090',
-                    uAtmosphereTwilightColor: '#454545'
+                    uAtmosphereDayColor: '#03a0ff',
+                    uAtmosphereTwilightColor: '#065680'
                 }, {collapsed: true}
             )
         }
@@ -93,7 +93,7 @@ export default function Sun()
 
         {/* Sun */}
         <mesh position={ [ 0, 5.6, -5 ] }>
-            <sphereGeometry args={ [ 1.4, 60, 60 ] } />
+            <sphereGeometry args={ [ 1.4, 75, 75 ] } />
             <sunMaterial 
                 ref={ sunMaterial }
                 uAtmosphereDayColor={ uAtmosphereDayColor }
@@ -103,7 +103,7 @@ export default function Sun()
 
         {/* Sun Atmosphere */}
         <mesh position={ [ 0, 5.6, -5 ] }>
-            <sphereGeometry args={ [ 1.44, 60, 60 ] } />
+            <sphereGeometry args={ [ 1.46, 75, 75 ] } />
             <atmosphereMaterial
                 ref={ atmosphereMaterial }
                 uAtmosphereDayColor={ uAtmosphereDayColor }

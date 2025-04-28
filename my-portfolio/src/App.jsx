@@ -23,8 +23,8 @@ export default function App() {
                 <Experience />
             </Suspense>
         </Canvas>
-        <Leva collapsed={true} />
-        {/* <LoadingScreen /> */}
+        <Leva collapsed={true} hidden />
+        <LoadingScreen />
         <Interface />
     </>
 }

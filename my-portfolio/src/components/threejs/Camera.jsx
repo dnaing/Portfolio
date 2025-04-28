@@ -83,7 +83,7 @@ export default function Camera()
     {
 
         // // Initialize Camera Position
-        // camera.position.set(0, 100, 5)
+        // camera.position.set(0, 0, 5)
         
         // Subscribe to the card store
         const unsubscribeCameraPosition = useCard.subscribe(
