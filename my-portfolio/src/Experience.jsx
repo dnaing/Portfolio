@@ -79,17 +79,11 @@ export default function Experience()
     const maxGap = 3.2
     const gap = THREE.MathUtils.mapLinear(aspectRatio, minAspectRatio, maxAspectRatio, minGap, maxGap)
 
-    // Remap card size depending on how much horizontal space is available
-    const minCardWidth = 1.7
-    const maxCardWidth = 2.5
-    const cardWidth = THREE.MathUtils.mapLinear(aspectRatio, minAspectRatio, maxAspectRatio, minCardWidth, maxCardWidth)
-
     const offset = gap * 2
     for (let i = 0; i < 5; i++)
     {
         cardsArray.push({
             position: [ (i * gap) - offset, 0, 0 ], // (i * gap) - offset is how we center the cards
-            cardWidth: cardWidth,
             cardName: cardsInfo[i].cardName,
             cardColor: cardsInfo[i].cardColor,
             frontSideURL: cardsInfo[i].frontSideURL,
@@ -161,7 +155,7 @@ export default function Experience()
         <group ref={ cardsGroup }>
             {cardsArray.map((value, index) => (
                 <group key={ index } position={ value.position }  >
-                    <Card cardName={ value.cardName } position={ value.position } cardWidth={ value.cardWidth } cardColor={ value.cardColor } frontSideURL={ value.frontSideURL }  cardsGroup={ cardsGroup } />
+                    <Card cardName={ value.cardName } position={ value.position } cardColor={ value.cardColor } frontSideURL={ value.frontSideURL }  cardsGroup={ cardsGroup } />
                 </group>
             ))}
         </group>

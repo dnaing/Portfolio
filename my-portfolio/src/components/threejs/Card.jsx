@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import React, { useMemo } from 'react'
 import { useGLTF, useTexture, Float, Text3D } from '@react-three/drei'
 import { useRef, useEffect } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import { gsap } from 'gsap'
 import CustomShaderMaterial from 'three-custom-shader-material'
 
@@ -10,7 +10,9 @@ import useCard from '../../stores/useCard'
 import cardVertexShader from '../../shaders/card/vertex.glsl'
 import cardFragmentShader from '../../shaders/card/fragment.glsl'
 
-export default function Card({ cardName, position, cardWidth, cardColor = new THREE.Vector3(0,0,0), frontSideURL, cardsGroup }) {
+export default function Card({ cardName, position, cardColor = new THREE.Vector3(0,0,0), frontSideURL, cardsGroup }) {
+
+    const { size } = useThree()
 
     const { nodes, materials } = useGLTF('/models/card.glb')
 
@@ -24,7 +26,31 @@ export default function Card({ cardName, position, cardWidth, cardColor = new TH
 
     const frontSideTexture = useTexture(frontSideURL)
 
+    // Get aspect ratio information
+    const aspectRatio = size.width / size.height
+    const minAspectRatio = 1.33
+    const maxAspectRatio = 2.32
+
+    /**
+     * Adjust all sizings responsively
+     */
+
+    // Remap card size depending on how much horizontal space is available
+    const minCardWidth = 1.7
+    const maxCardWidth = 2.5
+    const cardWidth = THREE.MathUtils.mapLinear(aspectRatio, minAspectRatio, maxAspectRatio, minCardWidth, maxCardWidth)
     const cardHeight = cardWidth * 1.4
+
+    // Remap card font sizing depending on how much horizontal space is available
+    const minCardFontSize = 0.35
+    const maxCardFontSize = 0.45
+    const cardFontSize = THREE.MathUtils.mapLinear(aspectRatio, minAspectRatio, maxAspectRatio, minCardFontSize, maxCardFontSize)
+
+    // Remap card font vertical gap depending on how much horizontal space is available
+    const minCardFontHeight = 3.2
+    const maxCardFontHeight = 4.8
+    const cardFontHeight = THREE.MathUtils.mapLinear(aspectRatio, minAspectRatio, maxAspectRatio, minCardFontHeight, maxCardFontHeight)
+
 
     const uniforms = {
         uColor: new THREE.Uniform(cardColor)
@@ -177,7 +203,6 @@ export default function Card({ cardName, position, cardWidth, cardColor = new TH
 
     useEffect(() =>
     {
-
         const unsubscribeActiveCard = useCard.subscribe(
             (state) => state.activeCard,
             (value) =>
@@ -190,6 +215,15 @@ export default function Card({ cardName, position, cardWidth, cardColor = new TH
             }
         )
 
+        return () =>
+        {
+            unsubscribeActiveCard()
+        }
+
+    }, [])
+
+    useEffect(() =>
+    {
         if (title.current)
         {
 
@@ -201,13 +235,7 @@ export default function Card({ cardName, position, cardWidth, cardColor = new TH
 
             title.current.geometry.translate(-textWidthX, -textWidthY, 0)
         }
-  
-        return () =>
-        {
-            unsubscribeActiveCard()
-        }
-
-    }, [])
+    }, [aspectRatio])
 
 
     return <>
@@ -229,8 +257,8 @@ export default function Card({ cardName, position, cardWidth, cardColor = new TH
                     <Text3D
                         ref={ title }
                         font="./fonts/berry_rotunda.json"
-                        size={ 0.45 }
-                        position-y={ 4.7 }
+                        size={ cardFontSize }
+                        position-y={ cardFontHeight }
                         position-x={0}
                     >
                         { cardName }
