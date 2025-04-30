@@ -1,5 +1,7 @@
 import gsap from 'gsap'
+import { useRef } from 'react'
 import useCard from '../../stores/useCard'
+
 
 export default function Header()
 {
@@ -7,6 +9,8 @@ export default function Header()
     const activeCard = useCard((state) => state.activeCard)
     const setActiveCardNull = useCard((state) => state.setActiveCardNull)
     const setCameraPosition = useCard((state) => state.setCameraPosition)
+
+    const audio = useRef()
 
     const fadeOutContent = () =>
     {
@@ -46,7 +50,21 @@ export default function Header()
         
     }
 
+    
+    
+    const playClick = () =>
+    {
+        if (audio.current)
+        {
+            audio.current.volume = 0.1
+            audio.current.currentTime = 0
+            audio.current.play()
+        }
+    }
+
     return <>
+
+        <audio ref={ audio } className="click-audio" src="./audio/click.wav" preload="auto"></audio>
 
         <div className="name-section">
             <h1>Derek Naing</h1>
@@ -60,7 +78,7 @@ export default function Header()
             </div>
 
             <button className="exit-button neon-effect" onClick={ fadeOutContent }>
-                <h1>EXIT</h1>
+                <h1 onPointerEnter={playClick}>EXIT</h1>
             </button>
 
         </div>

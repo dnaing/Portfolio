@@ -1,7 +1,23 @@
+import { useRef } from "react"
+
 export default function Projects()
 {
 
+    const audio = useRef()
+
+    const playClick = () =>
+    {
+        if (audio.current)
+        {
+            audio.current.volume = 0.1
+            audio.current.currentTime = 0
+            audio.current.play()
+        }
+    }
+
     return <>
+
+        <audio ref={ audio } className="click-audio" src="./audio/click.wav" preload="auto"></audio>
 
         <div className="projects">
 
@@ -26,7 +42,7 @@ export default function Projects()
                             <p>Blender</p>
                         </div>
                         <div className="project-links">
-                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/Portfolio">Github</a>
+                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/Portfolio" onPointerEnter={playClick}>Github</a>
                         </div>
                     </div>
                     
@@ -65,7 +81,7 @@ export default function Projects()
                             <p>Kotlin</p>
                         </div>
                         <div className="project-links">
-                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/Night-Timer">Github</a>
+                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/Night-Timer" onPointerEnter={playClick}>Github</a>
                         </div>
                     </div>
 
@@ -106,8 +122,8 @@ export default function Projects()
                             <p>GCP</p>
                         </div>
                         <div className="project-links">
-                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/Star-Wars">Github</a>
-                            <a className="project-link-button neon-effect" href="https://www.thestarwarscodex.com/">Live</a>
+                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/Star-Wars" onPointerEnter={playClick}>Github</a>
+                            <a className="project-link-button neon-effect" href="https://www.thestarwarscodex.com/" onPointerEnter={playClick}>Live</a>
                         </div>
                     </div>
                     
@@ -146,7 +162,7 @@ export default function Projects()
                             <p>Flask</p>
                         </div>
                         <div className="project-links">
-                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/SearchEngine">Github</a>
+                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/SearchEngine" onPointerEnter={playClick}>Github</a>
                         </div>
                     </div>
                     
@@ -186,7 +202,7 @@ export default function Projects()
                             <p>Flask</p>
                         </div>
                         <div className="project-links">
-                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/MyRecipes">Github</a>
+                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/MyRecipes" onPointerEnter={playClick}>Github</a>
                         </div>
                     </div>
                     

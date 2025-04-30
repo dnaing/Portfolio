@@ -133,13 +133,25 @@ body,
 
 .contact .text
 {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
     position: relative;
     color: #ffffff;
     text-decoration: none; 
     transition-duration: 0.25s;
     transition-timing-function: ease-in-out;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
-    
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif  
+}
+
+.contact .text > span
+{
+    padding-top: 2px;
+}
+
+.contact .text .icon
+{
+    padding-bottom: 6px;
 }
 
 .contact .text:after
@@ -149,6 +161,7 @@ body,
     width: 0; height: 3px;
     display: block;
     right: 0;
+    bottom: 0;
     background: #ffffff;
     transition: width .2s ease;
     -webkit-transition: width .2s ease;

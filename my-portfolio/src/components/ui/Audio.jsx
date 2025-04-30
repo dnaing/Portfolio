@@ -27,7 +27,7 @@ export default function Audio()
 
     return <>
 
-        <audio ref={audio} className="audio" loop>
+        <audio ref={audio} className="audio-background" loop preload="auto">
             <source src="audio/background.mp3" type="audio/mpeg" />
         </audio>
         { audioState ? 
