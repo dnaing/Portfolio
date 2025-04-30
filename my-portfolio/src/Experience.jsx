@@ -50,14 +50,16 @@ export default function Experience()
             cardName: 'Skills',
             frontSideURL: './images/pixel-cards/diamond.png',
             // frontSideURL: './images/normal/cardDiamondsA.png'
-            cardColor: new THREE.Vector3(0, 3, 10) // blue
+            cardColor: new THREE.Vector3(3, 1, 8) // violet
+            
 
         },
         {
             cardName: 'Projects',
             frontSideURL: './images/pixel-cards/joker.png',
             // frontSideURL: './images/normal/cardHeartsA.png'
-            cardColor: new THREE.Vector3(3, 1, 8) // violet
+            cardColor: new THREE.Vector3(0, 3, 10) // blue
+            
         },
         {
             cardName: 'Experience',
