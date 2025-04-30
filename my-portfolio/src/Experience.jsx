@@ -1,31 +1,29 @@
 import { Perf } from 'r3f-perf'
 import { useControls, folder } from 'leva'
 import * as THREE from 'three'
-import { useRef, Suspense } from 'react'
+import { useRef } from 'react'
 import { OrbitControls, Center } from '@react-three/drei'
-import { EffectComposer, Bloom, ToneMapping, FXAA, SMAA } from '@react-three/postprocessing'
+import { useThree } from '@react-three/fiber'
+import { EffectComposer, Bloom, ToneMapping, FXAA } from '@react-three/postprocessing'
 import { ToneMappingMode } from 'postprocessing'
 import { Fluid, useConfig } from '@whatisjery/react-fluid-distortion';
 
 import Camera from './components/threejs/Camera'
-import Fog from './components/threejs/Fog'
 import CustomSparkles from './components/threejs/CustomSparkles'
 import Card from './components/threejs/Card'
 import Smoke from './components/threejs/Smoke'
 import Sea from './components/threejs/Sea'
 import Sun from './components/threejs/Sun'
-import Beam from './components/threejs/Beam'
-import Beam2 from './components/threejs/Beam2'
 
 export default function Experience()
 {
 
-    const cardsGroup = useRef()
+    const { size } = useThree()
 
-    // // // const { backgroundColor } = useControls({ backgroundColor: '#0d0425' })
-    // // // const { backgroundColor } = useControls({ backgroundColor: '#061224' })
-    // // // const { backgroundColor } = useControls({ backgroundColor: '#2d3345' })
-    // const { backgroundColor } = useControls({ backgroundColor: '#1a2a3b' })
+    // console.log(size)
+    // console.log('Viewport size:', window.innerWidth, window.innerHeight);
+
+    const cardsGroup = useRef()
 
     const { backgroundColor } = useControls(
         {
@@ -42,14 +40,12 @@ export default function Experience()
         {
             cardName: 'About',
             frontSideURL: './images/pixel-cards/club.png',
-            // frontSideURL: './images/normal/cardClubsA.png'
             cardColor: new THREE.Vector3(15, 0, 0) // red
 
         },
         {
             cardName: 'Skills',
             frontSideURL: './images/pixel-cards/diamond.png',
-            // frontSideURL: './images/normal/cardDiamondsA.png'
             cardColor: new THREE.Vector3(3, 1, 8) // violet
             
 
@@ -57,37 +53,43 @@ export default function Experience()
         {
             cardName: 'Projects',
             frontSideURL: './images/pixel-cards/joker.png',
-            // frontSideURL: './images/normal/cardHeartsA.png'
             cardColor: new THREE.Vector3(0, 3, 10) // blue
             
         },
         {
             cardName: 'Experience',
             frontSideURL: './images/pixel-cards/heart.png',
-            // frontSideURL: './images/normal/cardHeartsA.png'
             cardColor: new THREE.Vector3(0, 3, 2) // green
         },
         {
             cardName: 'Resume',
             frontSideURL: './images/pixel-cards/spade.png',
-            // frontSideURL: './images/normal/cardClubsA.png'
             cardColor: new THREE.Vector3(4.5, 1, 0) // amber
         }
     ]
 
     const cardsArray = []
+
+    const aspectRatio = size.width / size.height
+    const minAspectRatio = 1.33
+    const maxAspectRatio = 2.32
+    const minGap = 2
+    const maxGap = 3.2
+
+    // Remap gap depending on how much horizontal space is available
+    const gap = THREE.MathUtils.mapLinear(aspectRatio, minAspectRatio, maxAspectRatio, minGap, maxGap)
+
+    const offset = gap * 2
     for (let i = 0; i < 5; i++)
     {
         cardsArray.push({
-            position: [ i * 3, 0, 0 ],
+            position: [ (i * gap) - offset, 0, 0 ], // (i * gap) - offset is how we center the cards
             cardName: cardsInfo[i].cardName,
             cardColor: cardsInfo[i].cardColor,
             frontSideURL: cardsInfo[i].frontSideURL,
             backSideURL: './images/pixel-cards/back.png',
         })
     }
-
-    const config = useConfig()
 
     return <>
 
@@ -100,21 +102,7 @@ export default function Experience()
         <Camera />
 
         {/* Postprocess */}
- 
-        {/* For fluid effects, put them as first component in effect composer */}
-        {/* <Fluid
-        {...config}
-        // fluidColor="#78fffa"
-        fluidColor='#ffffff'
-        radius={ 0.02 }
-        intensity={ 5 }
-        force={ 1.2 }
-        curl={ 2 }
-        swirl={ 4 }
-        blend={ 10 }
-        densityDissipation={0.92}
-        velocityDissipation={ 1 }
-    /> */}
+
         <EffectComposer 
             multisampling={ 4 }
             resolutionScale={ 0.75 }
@@ -163,17 +151,15 @@ export default function Experience()
         />
 
         <Sun />
-        {/* <Beam /> */}
-        {/* <Beam2 /> */}
 
         {/* Main Cards */}
-        <Center ref={ cardsGroup }>
+        <group ref={ cardsGroup }>
             {cardsArray.map((value, index) => (
                 <group key={ index } position={ value.position }  >
                     <Card cardName={ value.cardName } cardColor={ value.cardColor } frontSideURL={ value.frontSideURL } backSideURL={ value.backSideURL } position={ value.position } cardsGroup={ cardsGroup } />
                 </group>
             ))}
-        </Center>
+        </group>
 
         <Sea />
 

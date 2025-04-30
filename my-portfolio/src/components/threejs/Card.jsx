@@ -140,7 +140,7 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
             fadeOtherMainCardsOut()
 
             setTimeout(() => {
-                setCameraPosition([ position[0] - 6, 0, 3.25 ])
+                setCameraPosition([ position[0], 0, 3.25 ]) // xyz
             }, 500)
 
             // Update global states for which card is active and what camera position we should be at
@@ -287,7 +287,7 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
                     onPointerLeave={ () => { pointerLeave() } }
                     geometry={nodes.Front.geometry}
                     rotation={[Math.PI / 2, Math.PI / 2, 0]}
-                    scale={[3.5, 1, 2.5]}
+                    scale={[2.38, 1, 1.7]} // height is always width * 1.4
                 >
                     <CustomShaderMaterial
                         baseMaterial={ THREE.MeshStandardMaterial }
@@ -300,35 +300,8 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
                         opacity={ frontMaterial.opacity }
                         depthWrite={ frontMaterial.depthWrite } 
                         side={THREE.FrontSide}
-                        
-                        // wireframe
                     />
                 </mesh>
-
-                {/* Back Side */}
-                {/* <mesh
-                    // onClick={ (event) => click(event) }
-                    // onPointerEnter={ () => { pointerEnter() } }
-                    // onPointerLeave={ () => { pointerLeave() } }
-                    geometry={nodes.Back.geometry}
-                    position={[0, 0, -0.01]}
-                    rotation={[Math.PI / 2, Math.PI / 2, 0]}
-                    scale={[3.5, 1, 2.5]}
-                >
-                    <CustomShaderMaterial
-                        baseMaterial={ THREE.MeshStandardMaterial }
-                        vertexShader={ cardVertexShader }
-                        fragmentShader={ cardFragmentShader }
-                        uniforms={ uniforms }
-
-                        map={ backMaterial.map }
-                        transparent={ backMaterial.transparent }
-                        opacity={ backMaterial.opacity }
-                        depthWrite={ backMaterial.depthWrite } 
-                        side={THREE.BackSide}
-                        // wireframe
-                    />
-                </mesh> */}
 
             </group>
         </Float>

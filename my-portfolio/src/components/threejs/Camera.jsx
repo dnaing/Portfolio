@@ -135,7 +135,7 @@ export default function Camera()
 
             // Animate Camera
             const parallaxX = state.pointer.x 
-            const parallaxY = state.pointer.y + 1 // 1.5 offset added to y to elevate camera position
+            const parallaxY = state.pointer.y + 3 // 1.5 offset added to y to elevate camera position
             const dampStrength = 3
             const xRange = 0.6
             const yRange = 0.3
