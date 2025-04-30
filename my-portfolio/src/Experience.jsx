@@ -73,21 +73,26 @@ export default function Experience()
     const aspectRatio = size.width / size.height
     const minAspectRatio = 1.33
     const maxAspectRatio = 2.32
-    const minGap = 2
-    const maxGap = 3.2
 
     // Remap gap depending on how much horizontal space is available
+    const minGap = 2
+    const maxGap = 3.2
     const gap = THREE.MathUtils.mapLinear(aspectRatio, minAspectRatio, maxAspectRatio, minGap, maxGap)
+
+    // Remap card size depending on how much horizontal space is available
+    const minCardWidth = 1.7
+    const maxCardWidth = 2.5
+    const cardWidth = THREE.MathUtils.mapLinear(aspectRatio, minAspectRatio, maxAspectRatio, minCardWidth, maxCardWidth)
 
     const offset = gap * 2
     for (let i = 0; i < 5; i++)
     {
         cardsArray.push({
             position: [ (i * gap) - offset, 0, 0 ], // (i * gap) - offset is how we center the cards
+            cardWidth: cardWidth,
             cardName: cardsInfo[i].cardName,
             cardColor: cardsInfo[i].cardColor,
             frontSideURL: cardsInfo[i].frontSideURL,
-            backSideURL: './images/pixel-cards/back.png',
         })
     }
 
@@ -156,7 +161,7 @@ export default function Experience()
         <group ref={ cardsGroup }>
             {cardsArray.map((value, index) => (
                 <group key={ index } position={ value.position }  >
-                    <Card cardName={ value.cardName } cardColor={ value.cardColor } frontSideURL={ value.frontSideURL } backSideURL={ value.backSideURL } position={ value.position } cardsGroup={ cardsGroup } />
+                    <Card cardName={ value.cardName } position={ value.position } cardWidth={ value.cardWidth } cardColor={ value.cardColor } frontSideURL={ value.frontSideURL }  cardsGroup={ cardsGroup } />
                 </group>
             ))}
         </group>

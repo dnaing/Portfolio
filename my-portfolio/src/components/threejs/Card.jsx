@@ -10,7 +10,7 @@ import useCard from '../../stores/useCard'
 import cardVertexShader from '../../shaders/card/vertex.glsl'
 import cardFragmentShader from '../../shaders/card/fragment.glsl'
 
-export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), frontSideURL, backSideURL, position, cardsGroup }) {
+export default function Card({ cardName, position, cardWidth, cardColor = new THREE.Vector3(0,0,0), frontSideURL, cardsGroup }) {
 
     const { nodes, materials } = useGLTF('/models/card.glb')
 
@@ -23,7 +23,8 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
     const setCameraPosition = useCard((state) => state.setCameraPosition)
 
     const frontSideTexture = useTexture(frontSideURL)
-    // const backSideTexture = useTexture(backSideURL)
+
+    const cardHeight = cardWidth * 1.4
 
     const uniforms = {
         uColor: new THREE.Uniform(cardColor)
@@ -45,23 +46,6 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
         return frontMaterial
     }, [frontSideTexture])
     
-    // Load in back texture and set it up
-    // const backMaterial = useMemo(() =>
-    // {
-    //     backSideTexture.repeat.y = - 1
-    //     backSideTexture.rotation = Math.PI / 2
-    //     backSideTexture.colorSpace = THREE.SRGBColorSpace
-
-    //     const backMaterial = materials.back.clone()
-    //     backMaterial.map = backSideTexture
-    //     backMaterial.transparent = true
-    //     backMaterial.opacity = 1
-    //     backMaterial.depthWrite = false
-
-    //     return backMaterial
-
-    // }, [backSideTexture])
-
     const fadeOtherMainCardsOut = () =>
     {
 
@@ -80,19 +64,6 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
                         duration: 0.75,
                         ease: 'power2.inOut',
                         opacity: 0,
-                        // onComplete: (() => {
-
-                        //     // Disallow other main cards to be interactable if fade option is 'OUT
-                        //     // Allow other main cards to be interactable if fade option is 'IN'
-                        //     if (child.material instanceof THREE.MeshBasicMaterial)
-                        //     {
-                        //         child.scale.set(0, 0, 0)
-                        //     }
-                        //     else
-                        //     {
-                        //         child.scale.set(0, 0, 0)
-                        //     }
-                        // })
                     }
                 )
             } 
@@ -111,14 +82,6 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
                 (child.material instanceof THREE.MeshBasicMaterial || child.material.isMeshStandardMaterial) 
             )
             {
-                // if (child.material instanceof THREE.MeshBasicMaterial)
-                // {
-                //     child.scale.set(1, 1, 1)
-                // }
-                // else
-                // {
-                //     child.scale.set(3.5, 1, 2.5)
-                // }
 
                 gsap.to(child.material,
                     {
@@ -156,8 +119,8 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
                 {
                     duration: 0.3,
                     ease: 'power2.inOut',
-                    x: '3.5',
-                    z: '2.5'
+                    x: cardHeight,
+                    z: cardWidth
                 }
             )
         }
@@ -177,8 +140,8 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
                 {
                     duration: 0.3,
                     ease: 'power2.inOut',
-                    x: '3.85',
-                    z: '2.75'
+                    x: cardHeight * 1.1,
+                    z: cardWidth * 1.1
                 }
             )
         }
@@ -196,8 +159,8 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
                 {
                     duration: 0.3,
                     ease: 'power2.inOut',
-                    x: '3.5',
-                    z: '2.5'
+                    x: cardHeight,
+                    z: cardWidth
                 }
             )
         }
@@ -232,10 +195,6 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
 
             title.current.geometry.computeBoundingBox()
             const boundingBox = title.current.geometry.boundingBox
-
-            // const isDeployed = import.meta.env.PROD
-            // const xOffset = isDeployed ? 0.5 : 0.3
-            // console.log(xOffset)
 
             const textWidthX = boundingBox.max.x * 0.5
             const textWidthY = boundingBox.max.y * 0.3
@@ -287,7 +246,7 @@ export default function Card({cardName, cardColor = new THREE.Vector3(0,0,0), fr
                     onPointerLeave={ () => { pointerLeave() } }
                     geometry={nodes.Front.geometry}
                     rotation={[Math.PI / 2, Math.PI / 2, 0]}
-                    scale={[2.38, 1, 1.7]} // height is always width * 1.4
+                    scale={[cardWidth * 1.4, 1, cardWidth]} // height is always width * 1.4
                 >
                     <CustomShaderMaterial
                         baseMaterial={ THREE.MeshStandardMaterial }
