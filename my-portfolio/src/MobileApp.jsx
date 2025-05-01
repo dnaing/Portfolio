@@ -1,4 +1,4 @@
-import './MobileApp.css'
+// import './MobileApp.css'
 
 import { Canvas } from '@react-three/fiber'
 import { Leva } from 'leva'
