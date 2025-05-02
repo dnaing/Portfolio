@@ -1,16 +1,24 @@
 import { useProgress } from "@react-three/drei";
 import { useEffect, useState } from "react";
 
-export default function LoadingScreen() 
+export default function LoadingScreen({ isMobile }) 
 {
+
+    // Desktop version loads 8 assets
+
+    // Mobile version loads 3 assets
+
+    const total = isMobile ? 3 : 8
 
     const { loaded } = useProgress()
     const [ start, setStart ] = useState(false)
     const [ disable, setDisable ] = useState(true)
 
+    
+
     useEffect(() => 
     {
-        if (loaded === 8)
+        if (loaded === total)
         {
             setTimeout(() =>
             {
@@ -28,7 +36,7 @@ export default function LoadingScreen()
                 <div
                 className="loading-screen-progress-value"
                 style={{
-                    width: `${(loaded / 8) * 100}%`,
+                    width: `${(loaded / total) * 100}%`,
                 }}
                 />
             </div>

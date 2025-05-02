@@ -14,16 +14,14 @@ import Card from './components/threejs/Card'
 import Smoke from './components/threejs/Smoke'
 import Sea from './components/threejs/Sea'
 import Sun from './components/threejs/Sun'
+import MobileCard from './components/threejs/MobileCard'
 
-export default function Experience()
+export default function Experience({ isMobile })
 {
 
+    // console.log(isMobile)
+
     const { size } = useThree()
-
-    // console.log(size)
-    // console.log('Viewport size:', window.innerWidth, window.innerHeight);
-
-    const cardsGroup = useRef()
 
     const { backgroundColor } = useControls(
         {
@@ -35,60 +33,69 @@ export default function Experience()
         }
     )
 
-    const cardsInfo = 
-    [
-        {
-            cardName: 'About',
-            frontSideURL: './images/pixel-cards/club.png',
-            cardColor: new THREE.Vector3(15, 0, 0) // red
-
-        },
-        {
-            cardName: 'Skills',
-            frontSideURL: './images/pixel-cards/diamond.png',
-            cardColor: new THREE.Vector3(3, 1, 8) // violet
-            
-
-        },
-        {
-            cardName: 'Projects',
-            frontSideURL: './images/pixel-cards/joker.png',
-            cardColor: new THREE.Vector3(0, 3, 10) // blue
-            
-        },
-        {
-            cardName: 'Experience',
-            frontSideURL: './images/pixel-cards/heart.png',
-            cardColor: new THREE.Vector3(0, 3, 2) // green
-        },
-        {
-            cardName: 'Resume',
-            frontSideURL: './images/pixel-cards/spade.png',
-            cardColor: new THREE.Vector3(4.5, 1, 0) // amber
-        }
-    ]
-
+    // Initialize card information
+    const cardsGroup = useRef()
+    const cardsInfo = []
     const cardsArray = []
 
-    const aspectRatio = size.width / size.height
-    const minAspectRatio = 1.33
-    const maxAspectRatio = 2.32
-
-    // Remap gap depending on how much horizontal space is available
-    const minGap = 2
-    const maxGap = 3.2
-    const gap = THREE.MathUtils.mapLinear(aspectRatio, minAspectRatio, maxAspectRatio, minGap, maxGap)
-
-    const offset = gap * 2
-    for (let i = 0; i < 5; i++)
+    
+    // If we're on desktop, we'll populate our card information
+    if (!isMobile)
     {
-        cardsArray.push({
-            position: [ (i * gap) - offset, 0, 0 ], // (i * gap) - offset is how we center the cards
-            cardName: cardsInfo[i].cardName,
-            cardColor: cardsInfo[i].cardColor,
-            frontSideURL: cardsInfo[i].frontSideURL,
-        })
+
+        cardsInfo.push(
+            {
+                cardName: 'About',
+                frontSideURL: './images/pixel-cards/club.png',
+                cardColor: new THREE.Vector3(15, 0, 0) // red
+    
+            },
+            {
+                cardName: 'Skills',
+                frontSideURL: './images/pixel-cards/diamond.png',
+                cardColor: new THREE.Vector3(3, 1, 8) // violet
+                
+    
+            },
+            {
+                cardName: 'Projects',
+                frontSideURL: './images/pixel-cards/joker.png',
+                cardColor: new THREE.Vector3(0, 3, 10) // blue
+                
+            },
+            {
+                cardName: 'Experience',
+                frontSideURL: './images/pixel-cards/heart.png',
+                cardColor: new THREE.Vector3(0, 3, 2) // green
+            },
+            {
+                cardName: 'Resume',
+                frontSideURL: './images/pixel-cards/spade.png',
+                cardColor: new THREE.Vector3(4.5, 1, 0) // amber
+            }
+        )
+        
+        const aspectRatio = size.width / size.height
+        const minAspectRatio = 1.33
+        const maxAspectRatio = 2.32
+    
+        // Remap gap depending on how much horizontal space is available
+        const minGap = 2
+        const maxGap = 3.2
+        const gap = THREE.MathUtils.mapLinear(aspectRatio, minAspectRatio, maxAspectRatio, minGap, maxGap)
+    
+        const offset = gap * 2
+        for (let i = 0; i < 5; i++)
+        {
+            cardsArray.push({
+                position: [ (i * gap) - offset, 0, 0 ], // (i * gap) - offset is how we center the cards
+                cardName: cardsInfo[i].cardName,
+                cardColor: cardsInfo[i].cardColor,
+                frontSideURL: cardsInfo[i].frontSideURL,
+            })
+        }
     }
+    
 
     return <>
 
@@ -100,7 +107,7 @@ export default function Experience()
         {/* Camera Animations and Parallax */}
         <Camera />
 
-        {/* Postprocess */}
+        {/* Postprocessing */}
 
         <EffectComposer 
             multisampling={ 4 }
@@ -137,8 +144,8 @@ export default function Experience()
         {/* Lighting */}
         <ambientLight intensity={ 5 } />
 
-        {/* Fog */}
-        <Smoke/>
+        {/* Smoke */}
+        <Smoke />
 
         {/* Particles */}
         <CustomSparkles
@@ -152,14 +159,25 @@ export default function Experience()
         <Sun />
 
         {/* Main Cards */}
-        <group ref={ cardsGroup }>
-            {cardsArray.map((value, index) => (
-                <group key={ index } position={ value.position }  >
-                    <Card cardName={ value.cardName } position={ value.position } cardColor={ value.cardColor } frontSideURL={ value.frontSideURL }  cardsGroup={ cardsGroup } />
-                </group>
-            ))}
-        </group>
+        {isMobile ?
+        
+            // If we're on mobile, render a singular non interactable card
+            (
+                <MobileCard />
+            ) :
 
+            // Other wise, render all main cards
+            (
+                <group ref={ cardsGroup }>
+                    {cardsArray.map((value, index) => (
+                        <group key={ index } position={ value.position }  >
+                            <Card cardName={ value.cardName } position={ value.position } cardColor={ value.cardColor } frontSideURL={ value.frontSideURL }  cardsGroup={ cardsGroup } />
+                        </group>
+                    ))}
+                </group>
+            )
+        }
+        
         <Sea />
 
     </>

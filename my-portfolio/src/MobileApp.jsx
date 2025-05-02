@@ -10,10 +10,16 @@ import LoadingScreen from './components/ui/LoadingScreen'
 export default function MobileApp()
 {
     return <>
-        <Canvas gl={{ antialias: true}} dpr={[1, 2]}>
-            <MobileExperience />
-        </Canvas>
+
+        <div className="canvas-container">
+            <Canvas gl={{ antialias: true}} dpr={[1, 2]}>
+                <MobileExperience />
+            </Canvas>
+        </div>
+
         <Leva collapsed={true} hidden />
+        {/* <LoadingScreen /> */}
         <MobileInterface />
+
     </>
 }
