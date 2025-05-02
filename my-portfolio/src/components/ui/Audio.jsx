@@ -99,9 +99,13 @@ export default function Audio({ audioState, setAudioState })
         }
         
         document.addEventListener('visibilitychange', handleVisibilityChange)
+        window.addEventListener('pagehide', fadeOutAudio)
+        window.addEventListener('pageshow', fadeInAudio)
         
         return () => {
             document.removeEventListener('visibilitychange', handleVisibilityChange)
+            window.removeEventListener('pagehide', fadeOutAudio)
+            window.removeEventListener('pageshow', fadeInAudio)
         }
     }, [])
 
