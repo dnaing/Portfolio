@@ -3,7 +3,7 @@ import { useThree, useFrame } from '@react-three/fiber'
 import gsap from 'gsap'
 import useCard from '../../stores/useCard'
 
-export default function Camera()
+export default function Camera({ isMobile })
 {
 
     const [ isParallaxEnabled, setIsParallaxEnabled ] = useState(true)
@@ -83,7 +83,7 @@ export default function Camera()
     {
 
         // // Initialize Camera Position
-        // camera.position.set(0, 0, 5)
+        camera.position.set(0, 0.7, 5)
         
         // Subscribe to the card store
         const unsubscribeCameraPosition = useCard.subscribe(
@@ -127,7 +127,7 @@ export default function Camera()
     // Parallax Effect
     useFrame((state, delta) => {
 
-        if (isParallaxEnabled)
+        if (isParallaxEnabled && !isMobile)
         {
 
             // Clamp delta to a max of 0.1

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import gsap from 'gsap'
 
 import Header from './components/ui/Header'
@@ -13,6 +13,8 @@ import useCard from './stores/useCard'
 
 export default function Interface()
 {
+
+    const [audioState, setAudioState] = useState(true)
 
     const fadeInContent = (activeCard) =>
     {
@@ -78,7 +80,7 @@ export default function Interface()
     return <div className="interface">
 
         {/* Header */}
-        <Header />
+        <Header audioState={ audioState } />
 
         {/* About */}
         <About />
@@ -87,20 +89,19 @@ export default function Interface()
         <Skills />
 
         {/* Projects */}
-        <Projects />
+        <Projects audioState={ audioState } />
 
         {/* Experience */}
         <Experience />
 
         {/* Resume */}
-        <Resume />
+        <Resume audioState={ audioState } />
 
         {/* Contacts */}
-        <Contacts />
+        <Contacts audioState={ audioState } />
 
         {/* Music Toggle */}
-        <Audio />
-
+        <Audio audioState={ audioState } setAudioState={ setAudioState }/>
 
     </div>
 }

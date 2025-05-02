@@ -23,7 +23,7 @@ const CustomSparklesMaterial = shaderMaterial(
 )
 extend({ CustomSparklesMaterial })
 
-export default function CustomSparkles({ count = 100, size = 100, opacity = 1, emissiveIntensity = 1, speed = 1 })
+export default function CustomSparkles({ count = 100, size = 100, opacity = 1, emissiveIntensity = 1, speed = 1, isMobile })
 {
 
     const customSparklesMaterial = useRef()
@@ -41,6 +41,9 @@ export default function CustomSparkles({ count = 100, size = 100, opacity = 1, e
     const sparklesCount = count
     const positionArray = new Float32Array(sparklesCount * 3)
     const scaleArray = new Float32Array(sparklesCount)
+
+    // const xRange = isMobile ? 20 : 40
+    // const yRange = isMobile ? 
 
     for (let i = 0; i < sparklesCount; i++)
     {

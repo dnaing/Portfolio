@@ -105,7 +105,7 @@ export default function Experience({ isMobile })
         {/* <OrbitControls /> */}
 
         {/* Camera Animations and Parallax */}
-        <Camera />
+        <Camera isMobile={ isMobile }/>
 
         {/* Postprocessing */}
 
@@ -115,19 +115,21 @@ export default function Experience({ isMobile })
         >
             <FXAA />
 
-            <Fluid
-                // {...config}
-                // fluidColor="#78fffa"
-                fluidColor='#ffffff'
-                radius={ 0.03 }
-                intensity={ 8 }
-                force={ 2 }
-                curl={ 3 }
-                swirl={ 4 }
-                blend={ 15 }
-                densityDissipation={0.92}
-                velocityDissipation={ 1 }
-            />
+            { !isMobile &&
+                <Fluid
+                    // {...config}
+                    // fluidColor="#78fffa"
+                    fluidColor='#ffffff'
+                    radius={ 0.03 }
+                    intensity={ 8 }
+                    force={ 2 }
+                    curl={ 3 }
+                    swirl={ 4 }
+                    blend={ 15 }
+                    densityDissipation={0.92}
+                    velocityDissipation={ 1 }
+                />
+            }
 
             <Bloom
                 mipmapBlur
@@ -149,6 +151,7 @@ export default function Experience({ isMobile })
 
         {/* Particles */}
         <CustomSparkles
+            isMobile={ isMobile }
             count={ 50 }
             size={ 400 } 
             opacity={ 1 }

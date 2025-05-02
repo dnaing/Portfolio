@@ -1,13 +1,13 @@
 import { useRef } from "react"
 
-export default function Projects()
+export default function Projects({ audioState })
 {
 
     const audio = useRef()
 
     const playClick = () =>
     {
-        if (audio.current)
+        if (audio.current && audioState === true)
         {
             audio.current.volume = 0.1
             audio.current.currentTime = 0

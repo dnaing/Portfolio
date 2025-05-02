@@ -47,7 +47,7 @@ export default function MobileCard() {
             <mesh
                 geometry={nodes.Front.geometry}
                 rotation={ [ Math.PI / 2, Math.PI / 2, 0 ] }
-                position={ [ 0, -0.35, 0 ] }
+                position={ [ 0, -0.25, 0 ] }
                 scale={[cardWidth * 1.4, 1, cardWidth]} // height is always width * 1.4
             >
                 <CustomShaderMaterial

@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import useCard from '../../stores/useCard'
 
 
-export default function Header()
+export default function Header({ audioState })
 {
 
     const activeCard = useCard((state) => state.activeCard)
@@ -54,7 +54,7 @@ export default function Header()
     
     const playClick = () =>
     {
-        if (audio.current)
+        if (audio.current && audioState === true)
         {
             audio.current.volume = 0.1
             audio.current.currentTime = 0

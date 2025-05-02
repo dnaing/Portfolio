@@ -4,14 +4,14 @@ import { FaLinkedin } from 'react-icons/fa'
 import { FaSquareGithub } from 'react-icons/fa6';
 import { FaSquareEnvelope } from 'react-icons/fa6';
 
-export default function Contacts()
+export default function Contacts({ audioState })
 {
 
     const audio = useRef()
 
     const playClick = () =>
     {
-        if (audio.current)
+        if (audio.current && audioState === true)
         {
             audio.current.volume = 0.1
             audio.current.currentTime = 0
