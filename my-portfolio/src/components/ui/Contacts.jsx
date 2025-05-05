@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import { FaLinkedin } from 'react-icons/fa'
 import { FaSquareGithub } from 'react-icons/fa6';
@@ -8,6 +8,10 @@ export default function Contacts({ audioState })
 {
 
     const audio = useRef()
+    const contactModal = useRef()
+
+    const [ isContactVisible, setIsContactVisible ] = useState(false)
+    const [ result, setResult ] = useState('')
 
     const playClick = () =>
     {
@@ -19,10 +23,59 @@ export default function Contacts({ audioState })
         }
     }
 
+    const toggleContactModal = () =>
+    {
+        setIsContactVisible(prev => !prev)
+    }
+
+    const onSubmit = async (event) => {
+        event.preventDefault()
+        setResult('Sending....')
+        const formData = new FormData(event.target)
+    
+        formData.append('access_key', '89b1f892-e719-40f0-873e-8491a6b9109c');
+    
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        });
+    
+        const data = await response.json()
+    
+        if (data.success) {
+          setResult('Form Submitted Successfully')
+          event.target.reset()
+        } else {
+          console.log('Error', data)
+          setResult(data.message)
+        }
+    }
 
     return <>
 
         <audio ref={ audio } className="click-audio" src="./audio/click.wav" preload="auto"></audio>
+
+        {/* Contact Modal */}
+        <div ref={ contactModal } className='contact-modal-container' style={{ visibility: isContactVisible ? 'visible' : 'hidden' }}>
+            <div className='contact-modal'>
+                
+                {/* Contact Form */}
+                <form onSubmit={onSubmit}>
+
+                    <div className="name-and-email">
+                        <input type="text" name="name" placeholder="Name" required/>
+                        <input type="email" name="email" placeholder="Email" required/>
+                    </div>
+                    
+                    <textarea name="message" placeholder="Message" rows={9} required></textarea>
+
+                    <button className="neon-effect" type="submit"><h1>Submit</h1></button>
+
+                </form>
+                {/* <span>{result}</span> */}
+
+            </div>
+        </div>
 
         {/* Contacts Bar */}
         <div className="contacts-bar">
@@ -42,10 +95,10 @@ export default function Contacts({ audioState })
                 
             </div>
             <div className="contact">
-                <a className="text" href="mailto:dereknaing01@gmail.com" target="_blank" rel="noopener noreferrer" onPointerEnter={playClick}>
-                    <span>EMAIL</span>
+                <div className="text" onPointerEnter={playClick} onClick={toggleContactModal}>
+                    <span>CONTACT</span>
                     <FaSquareEnvelope className="icon" />
-                </a>   
+                </div>   
             </div>
 
         </div>

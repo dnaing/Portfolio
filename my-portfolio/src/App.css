@@ -109,6 +109,91 @@ body,
 
 /* Contacts */
 
+.contact-modal-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100vw;
+    height: 95vh;
+    z-index: 999;
+}
+
+.contact-modal
+{
+    height: 21.5rem;
+    width: 32rem;
+    border: white 2px solid;
+    border-radius: 0.5em;
+    background: #000000f0;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 25px;
+    padding-bottom: 50px;
+}
+
+.contact-modal form
+{
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.contact-modal .name-and-email
+{
+    display: grid;
+    column-gap: 1.25rem;
+    grid-template-columns: auto auto;
+}
+
+.contact-modal input
+{
+    padding: 10px;
+    color: white;
+    background-color: #000000f0;
+    font-size: large;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.contact-modal input::placeholder 
+{
+    color: #a1a1a1;
+}
+
+.contact-modal textarea
+{
+    /* resize: vertical; */
+    resize: none;
+    padding: 15px;
+    color: white;
+    line-height: 1.5rem;
+    background-color: #000000f0;
+    font-size: large;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.contact-modal textarea::placeholder
+{
+    color: #a1a1a1;
+}
+
+.contact-modal button
+{
+    width: 12rem;
+    padding: 15px;
+    align-self: center;
+    border-radius: 0.5em;
+    font-size:xx-small;
+}
+
+.contact-modal button h1
+{
+    margin: 0;
+}
+
 .contacts-bar
 {
     display: flex;
@@ -187,6 +272,11 @@ body,
     width: 100%;
     left: 0;
     background: #ffffff;
+}
+
+.contact .text
+{
+    cursor: pointer;
 }
 
 /* Header */
