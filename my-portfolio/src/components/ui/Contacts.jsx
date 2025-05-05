@@ -37,7 +37,7 @@ export default function Contacts({ audioState })
         const formData = new FormData(event.target)
     
         formData.append('access_key', '89b1f892-e719-40f0-873e-8491a6b9109c');
-    
+        formData.append('subject', event.target[0].value + ' has sent you a message')
         const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           body: formData
@@ -65,7 +65,7 @@ export default function Contacts({ audioState })
         <div ref={ contactModal } className={`contact-modal-container ${isContactVisible ? 'visible' : 'hidden'}`} >
             <div className='contact-modal'>
 
-                <IoClose className='icon' onClick={toggleContactModal} />   
+                <IoClose className='icon' onClick={toggleContactModal} onPointerEnter={playClick} />   
 
                 {/* Contact Form */}
                 <form onSubmit={onSubmit}>
@@ -77,7 +77,7 @@ export default function Contacts({ audioState })
                     
                     <textarea name="message" placeholder="Message" rows={9} required></textarea>
 
-                    <button className="neon-effect" type="submit"><h1>Send</h1></button>
+                    <button className="neon-effect" type="submit" onPointerEnter={playClick}><h1>Send</h1></button>
 
                 </form>
                 {/* <span>{result}</span> */}
