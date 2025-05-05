@@ -49,7 +49,7 @@ export default function Projects({ audioState })
 
                     <div className="right-card">
                         <video
-                            src="/videos/portfolio.mp4"
+                            src="/videos/finalportfolio.mp4"
                             muted
                             onPointerEnter={(e) => e.currentTarget.play() }
                             onPointerLeave={(e) =>

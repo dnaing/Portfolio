@@ -498,9 +498,22 @@ body,
     margin-top: 30px;
 }
 
-.about-item > h1
+/* .about-item .icon
 {
-    text-align: center;
+    color: white;
+} */
+
+.about-item .section-title
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.about-item .section-title .icon
+{
+    font-size: 1.8rem;
 }
 
 .about-item > hr
@@ -569,7 +582,7 @@ body,
 .skills-item
 {
     text-align: center;
-    background-color: rgb(0, 0, 0);
+    background-color: #1f1f1ff0;
     border-radius: 0.5em;
     border-color:white;
     border-width: 3px;

@@ -1,3 +1,7 @@
+import { GiDragonSpiral } from 'react-icons/gi'
+import { GiFlamedLeaf } from "react-icons/gi";
+import { GiAncientSword } from "react-icons/gi";
+
 export default function About()
 {
     return <>
@@ -16,7 +20,10 @@ export default function About()
                     {/* <hr /> */}
                     
                     <div className="about-item">
-                        <h1>Origins</h1>
+                        <div className="section-title">
+                            <h1>Origins</h1>
+                            <GiDragonSpiral className="icon" />
+                        </div>
                         <hr/>
                         <p>
                             Hello, My name is Derek Naing and my love for technology started as a kid.
@@ -32,7 +39,10 @@ export default function About()
                     </div>
 
                     <div className="about-item">
-                        <h1>Pursuits</h1>
+                        <div className="section-title">
+                            <h1>Pursuits</h1>
+                            <GiFlamedLeaf className="icon" />
+                        </div>
                         <hr/>
                         <p>
                         There are so many exciting pathways in the world of software, and I wanted to explore them all.
@@ -50,7 +60,10 @@ export default function About()
                     </div>
 
                     <div className="about-item">
-                        <h1>Curiosities</h1>
+                        <div className="section-title">
+                            <h1>Curiosities</h1>
+                            <GiAncientSword className="icon" />
+                        </div>
                         <hr/>
                         <p>
                             Outside of coding and software, I have a wide range of interests that keep me inspired and balanced. I'm an avid gamer,
