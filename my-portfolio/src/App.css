@@ -109,19 +109,41 @@ body,
 
 /* Contacts */
 
-.contact-modal-container
-{
+.contact-modal-container {
+    pointer-events: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     width: 100vw;
     height: 95vh;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 500ms ease;
     z-index: 999;
+}
+
+.contact-modal-container.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.contact-modal-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+    cursor: default;
+    transition: opacity 500ms ease, visibility 0s 500ms; /* delay hiding */
+}
+
+.contact-modal-container.hidden .icon {
+    cursor: default;
+    pointer-events: none;
+    user-select: none;
 }
 
 .contact-modal
 {
+    position: relative;
     height: 21.5rem;
     width: 32rem;
     border: white 2px solid;
@@ -132,6 +154,29 @@ body,
     padding-right: 50px;
     padding-top: 25px;
     padding-bottom: 50px;
+}
+
+
+.contact-modal .icon
+{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: clamp(1.6rem, 2vw, 1.8rem);
+    cursor: pointer;
+    color: white;
+    border: white 2px solid;
+    border-radius: 50%;
+    background-color: #000000f0;
+    transition: background-color 100ms linear;
+    transition: transform 100ms linear;
+}
+
+.contact-modal .icon:hover
+{
+    color: #000000f0;
+    background-color: rgb(255, 255, 255);
+    transform: scale(1.1);
 }
 
 .contact-modal form
@@ -182,7 +227,7 @@ body,
 
 .contact-modal button
 {
-    width: 12rem;
+    width: 8rem;
     padding: 15px;
     align-self: center;
     border-radius: 0.5em;

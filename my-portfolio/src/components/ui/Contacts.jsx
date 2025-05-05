@@ -1,8 +1,11 @@
 import { useRef, useState } from 'react';
 
+import { ToastContainer, toast, Flip } from 'react-toastify'
+
 import { FaLinkedin } from 'react-icons/fa'
-import { FaSquareGithub } from 'react-icons/fa6';
-import { FaSquareEnvelope } from 'react-icons/fa6';
+import { FaSquareGithub } from 'react-icons/fa6'
+import { FaSquareEnvelope } from 'react-icons/fa6'
+import { IoClose } from "react-icons/io5";
 
 export default function Contacts({ audioState })
 {
@@ -30,7 +33,7 @@ export default function Contacts({ audioState })
 
     const onSubmit = async (event) => {
         event.preventDefault()
-        setResult('Sending....')
+        // setResult('Sending....')
         const formData = new FormData(event.target)
     
         formData.append('access_key', '89b1f892-e719-40f0-873e-8491a6b9109c');
@@ -43,22 +46,27 @@ export default function Contacts({ audioState })
         const data = await response.json()
     
         if (data.success) {
-          setResult('Form Submitted Successfully')
+        //   setResult('Form Submitted Successfully')
+          toast('Message sent')
           event.target.reset()
         } else {
           console.log('Error', data)
-          setResult(data.message)
+        //   setResult(data.message)
         }
     }
 
     return <>
 
+        <ToastContainer position="top-center" theme="dark" autoClose={ 1500 } pauseOnHover={ false } transition={Flip} />
+
         <audio ref={ audio } className="click-audio" src="./audio/click.wav" preload="auto"></audio>
 
         {/* Contact Modal */}
-        <div ref={ contactModal } className='contact-modal-container' style={{ visibility: isContactVisible ? 'visible' : 'hidden' }}>
+        <div ref={ contactModal } className={`contact-modal-container ${isContactVisible ? 'visible' : 'hidden'}`} >
             <div className='contact-modal'>
-                
+
+                <IoClose className='icon' onClick={toggleContactModal} />   
+
                 {/* Contact Form */}
                 <form onSubmit={onSubmit}>
 
@@ -69,7 +77,7 @@ export default function Contacts({ audioState })
                     
                     <textarea name="message" placeholder="Message" rows={9} required></textarea>
 
-                    <button className="neon-effect" type="submit"><h1>Submit</h1></button>
+                    <button className="neon-effect" type="submit"><h1>Send</h1></button>
 
                 </form>
                 {/* <span>{result}</span> */}
