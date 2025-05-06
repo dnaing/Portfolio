@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import { useEffect } from 'react'
 
 import App from './App.jsx'
-import MobileApp from './MobileApp.jsx'
 import useCheckMobileScreen from './stores/useCheckMobileScreen.js'
 
 // Inject the correct stylesheet ASAP
@@ -25,7 +24,7 @@ const Root = () =>
         }
     }, [isMobile])
 
-    // const isMobile = false
+    // const isMobile = true
 
     return <>
         {/* { isMobile ? <MobileApp/> : <App/> } */}

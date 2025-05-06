@@ -22,16 +22,19 @@ import { SiBlender } from "react-icons/si";
 
 
 
-export default function Skills()
+export default function Skills({ isMobile })
 {
     return <>
 
         <div className="skills">
 
             <div className="skills-section">
+
+                { isMobile && <h1 className="skills-title">SKILLS</h1> }
                 
                 <div className="skills-category">
                     <h1>LANGUAGES</h1>
+                    <hr />
 
                     <div className="skills-list">
 
@@ -79,6 +82,7 @@ export default function Skills()
 
                 <div className="skills-category">
                     <h1>FRAMEWORKS</h1>
+                    <hr />
 
                     <div className="skills-list">
 
@@ -110,6 +114,7 @@ export default function Skills()
 
                 <div className="skills-category">
                     <h1>DATABASES</h1>
+                    <hr />
 
                     <div className="skills-list">
 
@@ -128,6 +133,7 @@ export default function Skills()
 
                 <div className="skills-category">
                     <h1>TOOLS</h1>
+                    <hr />
 
                     <div className="skills-list">
 
@@ -149,6 +155,7 @@ export default function Skills()
 
                 <div className="skills-category">
                     <h1>3D GRAPHICS</h1>
+                    <hr />
 
                     <div className="skills-list">
 

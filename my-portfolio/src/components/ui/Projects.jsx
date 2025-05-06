@@ -1,6 +1,6 @@
 import { useRef } from "react"
 
-export default function Projects({ audioState })
+export default function Projects({ isMobile, audioState })
 {
 
     const audio = useRef()
@@ -17,10 +17,12 @@ export default function Projects({ audioState })
 
     return <>
 
-        <audio ref={ audio } className="click-audio" src="./audio/click.wav" preload="auto"></audio>
+        {/* <audio ref={ audio } className="click-audio" src="./audio/click.wav" preload="auto"></audio> */}
 
         <div className="projects">
 
+            { isMobile && <h1 className="project-title">PROJECTS</h1> }
+            
             <div className="projects-section">
 
                 <div className="project-card">
@@ -86,17 +88,20 @@ export default function Projects({ audioState })
                     </div>
 
                     <div className="right-card">
-                        <video
-                            src="/videos/nighttimer.mp4"
-                            width={200}
-                            muted
-                            onPointerEnter={(e) => e.currentTarget.play() }
-                            onPointerLeave={(e) =>
-                            {
-                                e.currentTarget.pause()
-                                e.currentTarget.currentTime = 0
-                            }}
-                        />
+                        <div className="nighttimer-container">
+                            <video
+                                className="nighttimer"
+                                src="/videos/nighttimer.mp4"
+                                width={200}
+                                muted
+                                onPointerEnter={(e) => e.currentTarget.play() }
+                                onPointerLeave={(e) =>
+                                {
+                                    e.currentTarget.pause()
+                                    e.currentTarget.currentTime = 0
+                                }}
+                            />
+                        </div>
                     </div>
 
                 </div>
@@ -181,7 +186,6 @@ export default function Projects({ audioState })
                     </div>
 
                 </div>
-
 
                 <div className="project-card">
 

@@ -132,7 +132,7 @@ body,
     opacity: 0;
     pointer-events: none;
     cursor: default;
-    /* transition: opacity 500ms ease, visibility 0s 500ms;  */
+    /* transition: opacity 500ms ease, visibility 0s 500ms; */
 }
 
 .contact-modal-container.hidden .icon {

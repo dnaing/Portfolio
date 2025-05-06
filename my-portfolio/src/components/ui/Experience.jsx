@@ -1,17 +1,19 @@
-export default function Experience()
+export default function Experience({ isMobile })
 {
     return <>
 
         <div className="experience">
 
             <div className="experience-section">
+
+                { isMobile && <h1 className="experience-title">EXPERIENCE</h1> }
                 
                 <div className="experience-card">
 
                     <div className="experience-card-header">
-                        <h1>DataAnnotation -</h1> 
-                        <h2>AI Trainer</h2>
-                        <h3>Dec 2023 - Apr 2025</h3>
+                        <h1>DataAnnotation - AI Trainer</h1> 
+                        {/* <h2>AI Trainer</h2> */}
+                        <h2>Dec 2023 - Apr 2025</h2>
                     </div>
 
                     <hr />
