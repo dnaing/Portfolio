@@ -483,14 +483,6 @@ video
     text-align: center;
 }
 
-.experience-card
-{
-    /* height: auto; */
-    /* width: 95%; */
-    /* border: white 2px solid;
-    border-radius: 0.5em; */
-}
-
 .experience-card-header
 {
     display: flex;
