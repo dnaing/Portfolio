@@ -23,7 +23,7 @@ export default function Resume({ isMobile, audioState })
 
             <div className="resume-section">
 
-                { isMobile && <h1>RESUME</h1> }
+                { isMobile && <h1 className="resume-title">RESUME</h1> }
 
                 <div className="resume-item">
                     <img
@@ -32,10 +32,12 @@ export default function Resume({ isMobile, audioState })
                     />
                 </div>
 
-                <div className="resume-download">
-                    <a className="neon-effect" href="/images/resume/resume.pdf" download="derek-resume" onPointerEnter={playClick}>Download</a>
-                </div>
-            
+                { !isMobile && 
+                    <div className="resume-download">
+                        <a className="neon-effect" href="/images/resume/resume.pdf" download="derek-resume" onPointerEnter={playClick}>Download</a>
+                    </div>
+                }
+                
             </div>
             
         </div>

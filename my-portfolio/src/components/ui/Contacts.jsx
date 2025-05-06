@@ -7,7 +7,7 @@ import { FaSquareGithub } from 'react-icons/fa6'
 import { FaSquareEnvelope } from 'react-icons/fa6'
 import { IoClose } from "react-icons/io5";
 
-export default function Contacts({ audioState })
+export default function Contacts({ isMobile, audioState })
 {
 
     const audio = useRef()
@@ -67,16 +67,19 @@ export default function Contacts({ audioState })
         <audio ref={ audio } className="click-audio" src="./audio/click.wav" preload="auto"></audio>
 
         {/* Contact Modal */}
-        <div ref={ contactModal } className={`contact-modal-container ${isContactVisible ? 'visible' : 'hidden'}`} >
-            <div className='contact-modal'>
+        <div ref={ contactModal } className={`contact-modal-container ${(isContactVisible || isMobile) ? 'visible' : 'hidden'}`} >
+            
+            { isMobile && <h1 className="contact-title">CONTACT</h1> }
+            
+            <div className="contact-modal">
 
-                <IoClose className='icon' onClick={closeContactModal} onPointerEnter={playClick} />   
-
+                { !isMobile && <IoClose className='icon' onClick={closeContactModal} onPointerEnter={playClick} /> }
+                   
                 {/* Contact Form */}
                 <form onSubmit={onSubmit}>
 
                     <div className="name-and-email">
-                        <input type="text" name="name" placeholder="Name" required/>
+                        <input type="text" name="name" placeholder="Name" required />
                         <input type="email" name="email" placeholder="Email" required/>
                     </div>
                     
