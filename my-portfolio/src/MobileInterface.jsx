@@ -4,6 +4,7 @@ import About from './components/ui/About'
 import Skills from './components/ui/Skills'
 import Projects from './components/ui/Projects'
 import Experience from './components/ui/Experience'
+import Resume from './components/ui/Resume'
 
 export default function MobileInterface()
 {
@@ -23,7 +24,7 @@ export default function MobileInterface()
         <Experience isMobile={ true } />
 
         {/* Resume */}
-        {/* <Resume audioState={ audioState } /> */}
+        <Resume isMobile={ true } audioState={ false } />
 
         {/* Contacts */}
         {/* <Contacts audioState={ audioState } /> */}

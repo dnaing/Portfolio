@@ -1,6 +1,6 @@
 import { useRef } from "react"
 
-export default function Resume({ audioState })
+export default function Resume({ isMobile, audioState })
 {
 
     const audio = useRef()
@@ -22,6 +22,8 @@ export default function Resume({ audioState })
         <div className="resume">
 
             <div className="resume-section">
+
+                { isMobile && <h1>RESUME</h1> }
 
                 <div className="resume-item">
                     <img
