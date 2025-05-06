@@ -1,4 +1,5 @@
-import './App.css'
+// import './App.css'
+// import './MobileApp.css'
 
 import { Canvas } from '@react-three/fiber'
 import { Leva } from 'leva'
@@ -9,9 +10,10 @@ import Interface from './Interface'
 import MobileInterface from './MobileInterface'
 import LoadingScreen from './components/ui/LoadingScreen'
 
-export default function App() {
 
-    const isMobile = useCheckMobileScreen()
+export default function App({ isMobile }) {
+
+    // const isMobile = useCheckMobileScreen()
     
     return <>
         <div className="canvas-container">

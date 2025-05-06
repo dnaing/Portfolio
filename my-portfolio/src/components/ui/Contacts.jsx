@@ -31,6 +31,11 @@ export default function Contacts({ audioState })
         setIsContactVisible(prev => !prev)
     }
 
+    const closeContactModal = () =>
+    {
+        setIsContactVisible(false)
+    }
+
     const onSubmit = async (event) => {
         event.preventDefault()
         // setResult('Sending....')
@@ -65,7 +70,7 @@ export default function Contacts({ audioState })
         <div ref={ contactModal } className={`contact-modal-container ${isContactVisible ? 'visible' : 'hidden'}`} >
             <div className='contact-modal'>
 
-                <IoClose className='icon' onClick={toggleContactModal} onPointerEnter={playClick} />   
+                <IoClose className='icon' onClick={closeContactModal} onPointerEnter={playClick} />   
 
                 {/* Contact Form */}
                 <form onSubmit={onSubmit}>

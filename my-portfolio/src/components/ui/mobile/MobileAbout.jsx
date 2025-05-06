@@ -2,7 +2,7 @@ import { GiDragonSpiral } from 'react-icons/gi'
 import { GiFlamedLeaf } from "react-icons/gi";
 import { GiAncientSword } from "react-icons/gi";
 
-export default function About({ isMobile })
+export default function MobileAbout()
 {
     return <>
 
@@ -10,11 +10,9 @@ export default function About({ isMobile })
 
             <div className="about-section">
 
-                { isMobile && <h1 className="about-title">ABOUT</h1> }
-
                 <div className="about-description">
 
-                    
+
                     <div className="about-profile">
                         <img className="about-profile" src="./images/me.jpg" alt="Picture of Derek" />
                     </div>
@@ -47,13 +45,17 @@ export default function About({ isMobile })
                         </div>
                         <hr/>
                         <p>
-                        There are so many exciting paths in software, and I’ve explored several. I started with a fascination for AI, 
-                        then moved into game development, building small projects in Unity. Eventually, I was drawn to web development — 
-                        the idea of creating something accessible to anyone online really resonated with me. I began with the basics: 
-                        JavaScript, HTML, and CSS, then moved into full-stack development with React, Node.js or Python Flask, and SQL or 
-                        MongoDB. Recently, I rediscovered my love for 3D through Three.js, which reminded me of Unity. Bruno Simon’s 
-                        "Three.js Journey" sparked a new passion for blending web and 3D. Now, I’m focused on crafting immersive, playful 
-                        web experiences.
+                        There are so many exciting pathways in the world of software, and I wanted to explore them all.
+                        For a while, I was captivated by artificial intelligence. Later, I got into game development and created a
+                        few small projects using the Unity engine. Eventually, I found myself drawn to web development.
+                        The idea that you could build something helpful or entertaining — something anyone with an internet connection
+                        could access — really resonated with me. I started by learning the fundamentals: classic JavaScript, HTML, and CSS.
+                        From there, I dove deeper into the stack, focusing on React for the frontend, Node.js or Python Flask for the backend,
+                        and SQL or MongoDB for the database. More recently, I discovered 3D rendering on the web through a library called
+                        Three.js. It instantly reminded me of my time with Unity, and I was fascinated by the fusion of 3D graphics and web technology.
+                        Following along with Bruno Simon's "Three.js Journey" opened up a whole new world of creative possibilities. Now,
+                        I'm excited to keep pushing the boundaries of what's possible on the web — and to bring playful,
+                        immersive experiences to every project I build.
                         </p>
                     </div>
 
