@@ -34,6 +34,7 @@ export default function Skills({ isMobile })
                 
                 <div className="skills-category">
                     <h1>LANGUAGES</h1>
+                    
                     <hr />
 
                     <div className="skills-list">

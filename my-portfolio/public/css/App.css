@@ -567,6 +567,7 @@ body,
 
 .skills-list
 {
+    margin-top: 15px;
     display: grid;
     grid-template-columns: repeat(4, 70px);
     column-gap: 1rem;
@@ -696,10 +697,8 @@ body,
     margin: 0;
     background-color: #1f1f1ff0;
     border-radius: 0.5em;
-    border-color: white;
-    border-width: 2px;
-    border-style: solid;
-
+    border: white 2px solid;
+    text-align: center;
 }
 
 .project-links
@@ -867,8 +866,7 @@ video
 
 .experience-card-header
 {
-    display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     font-size: clamp(0.7rem, 2vw, 1rem);
 }
@@ -880,16 +878,16 @@ video
 
 .experience-card-header > h2
 {
-    padding-left: 8px;
-    padding-top: 6px;
+    padding-left: 15px;
+    /* padding-top: 6px; */
 }
 
-.experience-card-header > h3
+/* .experience-card-header > h3
 {
     position: absolute;
     right: 8%;
     padding-top: 8px;
-}
+} */
 
 .experience-card-body
 {
