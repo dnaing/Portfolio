@@ -6,23 +6,23 @@ import App from './App.jsx'
 import useCheckMobileScreen from './stores/useCheckMobileScreen.js'
 
 // Inject the correct stylesheet ASAP
-const initialIsMobile = window.innerWidth < 1024
-const link = document.createElement('link')
-link.rel = 'stylesheet'
-link.href = initialIsMobile ? '/css/MobileApp.css' : '/css/App.css'
-link.id = 'dynamic-css'
-document.head.appendChild(link)
+// const initialIsMobile = window.innerWidth < 1024
+// const link = document.createElement('link')
+// link.rel = 'stylesheet'
+// link.href = initialIsMobile ? '/css/MobileApp.css' : '/css/App.css'
+// link.id = 'dynamic-css'
+// document.head.appendChild(link)
 
 const Root = () =>
 {
     const isMobile = useCheckMobileScreen()
-    useEffect(() => {
-        const existingLink = document.getElementById('dynamic-css')
+    // useEffect(() => {
+    //     const existingLink = document.getElementById('dynamic-css')
 
-        if (existingLink) {
-            existingLink.href = isMobile ? '/css/MobileApp.css' : '/css/App.css'
-        }
-    }, [isMobile])
+    //     if (existingLink) {
+    //         existingLink.href = isMobile ? '/css/MobileApp.css' : '/css/App.css'
+    //     }
+    // }, [isMobile])
 
     // const isMobile = true
 

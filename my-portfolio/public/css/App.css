@@ -126,6 +126,7 @@ body,
 .contact-modal-container.visible {
     opacity: 1;
     visibility: visible;
+    /* transition: opacity 500ms ease, visibility 0s 500ms; */
 }
 
 .contact-modal-container.hidden {

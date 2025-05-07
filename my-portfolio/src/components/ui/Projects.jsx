@@ -94,6 +94,8 @@ export default function Projects({ isMobile, audioState })
                                 src="/videos/nighttimer.mp4"
                                 width={200}
                                 muted
+                                preload="none"
+                                loading="lazy"
                                 onPointerEnter={(e) => e.currentTarget.play() }
                                 onPointerLeave={(e) =>
                                 {

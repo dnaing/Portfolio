@@ -1,4 +1,4 @@
-// import './App.css'
+import './App.css'
 // import './MobileApp.css'
 
 import { Canvas } from '@react-three/fiber'

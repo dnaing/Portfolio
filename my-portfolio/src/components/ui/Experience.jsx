@@ -12,7 +12,6 @@ export default function Experience({ isMobile })
 
                     <div className="experience-card-header">
                         <h1>DataAnnotation - AI Trainer</h1> 
-                        {/* <h2>AI Trainer</h2> */}
                         <h2>Dec 2023 - Apr 2025</h2>
                     </div>
 
