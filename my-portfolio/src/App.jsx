@@ -11,11 +11,9 @@ import Interface from './Interface'
 import MobileInterface from './MobileInterface'
 import LoadingScreen from './components/ui/LoadingScreen'
 
-
 export default function App({ isMobile }) {
 
     // Check if the canvas is in view
-    
     const [ isVisible, setIsVisible ] = useState(true)
 
     const canvas = useRef()
@@ -25,9 +23,12 @@ export default function App({ isMobile }) {
         setIsVisible(true)
         return
     }
+    setIsVisible(false)
     }, {
     root: null,
-    threshold: 0.1, // set offset 0.1 means trigger if atleast 10% of element in viewport
+    threshold: 0.05, // set offset 0.1 means trigger if atleast 10% of element in viewport
+                    // set offset 0.6 means trigger if atleast 60% of element in viewport
+                    // set offset 0.05 means trigger if at least 5% of element in viewport
     })
 
     if (canvas.current)
