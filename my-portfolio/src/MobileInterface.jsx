@@ -19,7 +19,7 @@ export default function MobileInterface()
         <Skills isMobile={ true }/>
 
         {/* Projects */}
-        {/* <Projects isMobile={ true } audioState={ false }/> */}
+        <Projects isMobile={ true } audioState={ false }/>
 
         {/* Experience */}
         <Experience isMobile={ true } />
