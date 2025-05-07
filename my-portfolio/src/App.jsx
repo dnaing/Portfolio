@@ -16,11 +16,11 @@ export default function App({ isMobile }) {
     // const isMobile = useCheckMobileScreen()
     
     return <>
-        <div className="canvas-container">
+        {/* <div className="canvas-container">
             <Canvas gl={{ antialias: true}} dpr={[1, 2]}>
                 <Experience isMobile={ isMobile } />
             </Canvas>
-        </div>
+        </div> */}
         <Leva collapsed={true} hidden />
         <LoadingScreen isMobile={ isMobile } />
         { isMobile ? <MobileInterface /> : <Interface /> }
