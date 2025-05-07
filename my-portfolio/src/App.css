@@ -1760,5 +1760,37 @@ video
     {
         cursor: pointer;
     }
+
+
+    /* Header */
+
+    .name-section
+    {
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding-top: 1.2rem;
+        padding-bottom: 1.2rem;
+        width: 100%;
+        background: #00000000;
+        padding-left: 1rem;
+        font-size: clamp(0.8rem, 2vw, 1.0rem);
+        transition: background 400ms ease;
+        z-index: 999;
+    }
+
+    .name-section > h1
+    {
+        margin: 0;
+        font-weight: bolder;
+
+    }
+
+    .name-section > h3
+    {
+        margin: 0;
+        padding-top: 10px;
+        
+    }
 }
 

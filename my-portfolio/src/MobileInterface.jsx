@@ -1,5 +1,4 @@
-// import MobileAbout from './components/ui/mobile/MobileAbout'
-
+import Header from './components/ui/Header'
 import About from './components/ui/About'
 import Skills from './components/ui/Skills'
 import Projects from './components/ui/Projects'
@@ -10,8 +9,10 @@ import Contacts from './components/ui/Contacts'
 export default function MobileInterface()
 {
 
-    
     return <>
+
+        {/* Header */}
+        <Header isMobile={ true } audioState={ false } />
 
         <About isMobile={ true } />
 

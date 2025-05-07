@@ -1,9 +1,8 @@
 import gsap from 'gsap'
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import useCard from '../../stores/useCard'
 
-
-export default function Header({ audioState })
+export default function Header({ isMobile, audioState })
 {
 
     const activeCard = useCard((state) => state.activeCard)
@@ -11,6 +10,7 @@ export default function Header({ audioState })
     const setCameraPosition = useCard((state) => state.setCameraPosition)
 
     const audio = useRef()
+    const nameSection = useRef()
 
     const fadeOutContent = () =>
     {
@@ -50,8 +50,6 @@ export default function Header({ audioState })
         
     }
 
-    
-    
     const playClick = () =>
     {
         if (audio.current && audioState === true)
@@ -62,25 +60,53 @@ export default function Header({ audioState })
         }
     }
 
+    const handleScroll = () =>
+    {
+        if (isMobile && nameSection.current)
+        {
+            nameSection.current.style.background = window.scrollY === 0 ? "#00000000" : "#131313FF"
+        }
+        
+    }
+
+    useEffect(() => 
+    {
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+
+    }, [])
+
     return <>
 
         <audio ref={ audio } className="click-audio" src="./audio/click.wav" preload="auto"></audio>
 
-        <div className="name-section">
+        <div ref={ nameSection } className="name-section">
             <h1>Derek Naing</h1>
             <h3>Fullstack Web Developer</h3>
         </div>
         
-        <div className="header">
 
-            <div className="title-section">
-                <h1 className="title"></h1>
-            </div>
+        { isMobile ? 
+            (
+                // Hamburger menu
+                <div>hi</div>
+            )
+            :
+            (
+                <div className="header">
 
-            <button className="exit-button neon-effect" onClick={ fadeOutContent }>
-                <h1 onPointerEnter={playClick}>EXIT</h1>
-            </button>
+                    <div className="title-section">
+                        <h1 className="title"></h1>
+                    </div>
 
-        </div>
+                    <button className="exit-button neon-effect" onClick={ fadeOutContent }>
+                        <h1 onPointerEnter={playClick}>EXIT</h1>
+                    </button>
+
+                </div>
+            ) 
+        }
+        
+
     </>
 }
