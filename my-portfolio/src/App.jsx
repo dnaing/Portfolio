@@ -3,6 +3,7 @@ import './App.css'
 
 import { Canvas } from '@react-three/fiber'
 import { Leva } from 'leva'
+import { useRef, useState } from 'react'
 
 import useCheckMobileScreen from './stores/useCheckMobileScreen'
 import Experience from './Experience'
@@ -13,11 +14,30 @@ import LoadingScreen from './components/ui/LoadingScreen'
 
 export default function App({ isMobile }) {
 
-    // const isMobile = useCheckMobileScreen()
+    // Check if the canvas is in view
+    
+    const [ isVisible, setIsVisible ] = useState(true)
+
+    const canvas = useRef()
+
+    const observer = new window.IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+        setIsVisible(true)
+        return
+    }
+    }, {
+    root: null,
+    threshold: 0.1, // set offset 0.1 means trigger if atleast 10% of element in viewport
+    })
+
+    if (canvas.current)
+    {
+        observer.observe(canvas.current)
+    }
     
     return <>
-        <div className="canvas-container">
-            <Canvas gl={{ antialias: true}} dpr={[1, 2]} frameloop="never">
+        <div ref={ canvas } className="canvas-container">
+            <Canvas gl={{ antialias: true}} dpr={[1, 2]} frameloop={ isVisible ? "always" : "never" }>
                 <Experience isMobile={ isMobile } />
             </Canvas>
         </div>
