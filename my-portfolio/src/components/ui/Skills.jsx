@@ -40,11 +40,11 @@ export default function Skills({ isMobile })
                     <div className="skills-list">
 
                         <div className="skills-item">
-                        <FaHtml5 />
+                            <FaHtml5 />
                             <h4>HTML</h4>
                         </div>
                         <div className="skills-item">
-                        <FaCss3Alt />
+                            <FaCss3Alt />
                             <h4>CSS</h4>
                         </div>
                         <div className="skills-item">

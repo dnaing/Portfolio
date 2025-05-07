@@ -88,7 +88,6 @@ export default function Contacts({ isMobile, audioState })
                     <button className="neon-effect" type="submit" onPointerEnter={playClick}><h1>Send</h1></button>
 
                 </form>
-                {/* <span>{result}</span> */}
 
             </div>
         </div>
@@ -110,12 +109,16 @@ export default function Contacts({ isMobile, audioState })
                 </a> 
                 
             </div>
+
+            { !isMobile &&
             <div className="contact">
                 <div className="text" onPointerEnter={playClick} onClick={toggleContactModal}>
                     <span>CONTACT</span>
                     <FaSquareEnvelope className="icon" />
                 </div>   
             </div>
+            }
+            
 
         </div>
     
