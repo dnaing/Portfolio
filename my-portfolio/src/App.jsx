@@ -22,7 +22,7 @@ export default function App({ isMobile }) {
             </Canvas>
         </div> */}
         <Leva collapsed={true} hidden />
-        <LoadingScreen isMobile={ isMobile } />
+        {/* <LoadingScreen isMobile={ isMobile } /> */}
         { isMobile ? <MobileInterface /> : <Interface /> }
     </>
 }
