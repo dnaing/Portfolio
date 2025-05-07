@@ -53,6 +53,8 @@ export default function Projects({ isMobile, audioState })
                         <video
                             src="/videos/finalportfolio.mp4"
                             muted
+                            preload="none"
+                            poster="/images/flame1.jpg"
                             onPointerEnter={(e) => e.currentTarget.play() }
                             onPointerLeave={(e) =>
                             {
@@ -95,7 +97,7 @@ export default function Projects({ isMobile, audioState })
                                 width={200}
                                 muted
                                 preload="none"
-                                loading="lazy"
+                                poster="/images/flame1.jpg"
                                 onPointerEnter={(e) => e.currentTarget.play() }
                                 onPointerLeave={(e) =>
                                 {
@@ -139,6 +141,8 @@ export default function Projects({ isMobile, audioState })
                         <video
                             src="/videos/starwars.mp4"
                             muted
+                            preload="none"
+                            poster="/images/flame1.jpg"
                             onPointerEnter={(e) => e.currentTarget.play() }
                             onPointerLeave={(e) =>
                             {
@@ -178,6 +182,8 @@ export default function Projects({ isMobile, audioState })
                         <video
                             src="/videos/searchengine.mp4"
                             muted
+                            preload="none"
+                            poster="/images/flame1.jpg"
                             onPointerEnter={(e) => e.currentTarget.play() }
                             onPointerLeave={(e) =>
                             {
@@ -217,6 +223,8 @@ export default function Projects({ isMobile, audioState })
                         <video
                             src="/videos/myrecipes.mp4"
                             muted
+                            preload="none"
+                            poster="/images/flame1.jpg"
                             onPointerEnter={(e) => e.currentTarget.play() }
                             onPointerLeave={(e) =>
                             {
