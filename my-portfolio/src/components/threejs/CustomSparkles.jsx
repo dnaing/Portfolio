@@ -1,5 +1,5 @@
 import { useControls, folder } from 'leva'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import * as THREE from 'three'
 import { useFrame, extend } from '@react-three/fiber'
 import { shaderMaterial } from '@react-three/drei'
@@ -39,21 +39,29 @@ export default function CustomSparkles({ count = 100, size = 100, opacity = 1, e
     )
 
     const sparklesCount = count
-    const positionArray = new Float32Array(sparklesCount * 3)
-    const scaleArray = new Float32Array(sparklesCount)
 
-    // const xRange = isMobile ? 20 : 40
-    // const yRange = isMobile ? 
-
-    for (let i = 0; i < sparklesCount; i++)
+    const { positionArray, scaleArray } = useMemo(() =>
     {
-        const i3 = i * 3
-        positionArray[i3 + 0] = (Math.random() - 0.5) * 40
-        positionArray[i3 + 1] = (Math.random() - 0.5) * 20
-        positionArray[i3 + 2] = (Math.random() - 0.5) * 10 - 7
 
-        scaleArray[i] = Math.random() + 0.25
-    }
+        const positionArray = new Float32Array(sparklesCount * 3)
+        const scaleArray = new Float32Array(sparklesCount)
+
+        // const xRange = isMobile ? 20 : 40
+        // const yRange = isMobile ? 
+
+        for (let i = 0; i < sparklesCount; i++)
+        {
+            const i3 = i * 3
+            positionArray[i3 + 0] = (Math.random() - 0.5) * 40
+            positionArray[i3 + 1] = (Math.random() - 0.5) * 20
+            positionArray[i3 + 2] = (Math.random() - 0.5) * 10 - 7
+
+            scaleArray[i] = Math.random() + 0.25
+        }
+
+        return { positionArray, scaleArray }
+
+    }, [sparklesCount])
 
     window.addEventListener('resize', () =>
     {

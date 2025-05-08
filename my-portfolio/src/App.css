@@ -1064,7 +1064,7 @@ video
         align-items: center;
         justify-content: center;
         transition: opacity 0.5s ease-in-out;
-        z-index: 1;
+        z-index: 999;
         overflow: hidden;
     }
     
@@ -1769,14 +1769,14 @@ video
         position: fixed;
         left: 0;
         top: 0;
-        padding-top: 1.2rem;
+        padding-top: 0.6rem;
         padding-bottom: 1.2rem;
         width: 100%;
         background: #00000000;
         padding-left: 1rem;
         font-size: clamp(0.8rem, 2vw, 1.0rem);
         transition: background 400ms ease;
-        z-index: 999;
+        z-index: 1;
     }
 
     .name-section > h1
