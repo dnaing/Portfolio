@@ -11,6 +11,7 @@ export default function Audio({ audioState, setAudioState })
     const audio = useRef()
     const audioStateRef = useRef(audioState)
     const fadeIntervalRef = useRef(null)
+    const userInteractedRef = useRef(null)
 
 
     const toggleAudio = () =>
@@ -28,8 +29,6 @@ export default function Audio({ audioState, setAudioState })
         setAudioState(!audioState)
     }
 
-    
-
     const clearFadeInterval = () => {
         if (fadeIntervalRef.current) {
             clearInterval(fadeIntervalRef.current)
@@ -42,7 +41,7 @@ export default function Audio({ audioState, setAudioState })
 
         clearFadeInterval()
 
-        if (audioStateRef.current === true && userInteracted)
+        if (audioStateRef.current === true && userInteractedRef.current)
         {
             // only play if the user has interacted with the document
             audio.current.play()
@@ -85,11 +84,17 @@ export default function Audio({ audioState, setAudioState })
         audioStateRef.current = audioState
     }, [audioState])
 
+    useEffect(() =>
+    {
+        userInteractedRef.current = userInteracted
+    }, [userInteracted])
+
 
     useEffect(() => {
 
         const markInteracted = () =>
         {
+            console.log('interacting')
             setUserInteracted(true)
             window.removeEventListener('click', markInteracted)
             window.removeEventListener('keydown', markInteracted)
