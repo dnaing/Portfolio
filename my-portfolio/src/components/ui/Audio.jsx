@@ -1,11 +1,12 @@
-import { useRef } from 'react'
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react'
 
-import { IoVolumeHighOutline } from 'react-icons/io5';
-import { IoVolumeMuteOutline } from 'react-icons/io5';
+import { IoVolumeHighOutline } from 'react-icons/io5'
+import { IoVolumeMuteOutline } from 'react-icons/io5'
 
 export default function Audio({ audioState, setAudioState })
 {
+
+    const [ userInteracted, setUserInteracted ] = useState(false)
 
     const audio = useRef()
     const audioStateRef = useRef(audioState)
@@ -41,8 +42,9 @@ export default function Audio({ audioState, setAudioState })
 
         clearFadeInterval()
 
-        if (audioStateRef.current === true)
+        if (audioStateRef.current === true && userInteracted)
         {
+            // only play if the user has interacted with the document
             audio.current.play()
             fadeIntervalRef.current = setInterval(() => {
                 if (audio.current.volume < 0.1) {
@@ -85,6 +87,14 @@ export default function Audio({ audioState, setAudioState })
 
 
     useEffect(() => {
+
+        const markInteracted = () =>
+        {
+            setUserInteracted(true)
+            window.removeEventListener('click', markInteracted)
+            window.removeEventListener('keydown', markInteracted)
+        }
+        
         const handleVisibilityChange = () => {
 
             if (document.visibilityState === 'hidden') 
@@ -97,15 +107,23 @@ export default function Audio({ audioState, setAudioState })
                 fadeInAudio()
             }
         }
+
+        // Used to check if the user has interacted with the page
+        window.addEventListener('click', markInteracted)
+        window.addEventListener('keydown', markInteracted)
         
+        // Used to check if the user navigates to or away from the page
         document.addEventListener('visibilitychange', handleVisibilityChange)
         window.addEventListener('pagehide', fadeOutAudio)
         window.addEventListener('pageshow', fadeInAudio)
         
         return () => {
+            window.removeEventListener('click', markInteracted)
+            window.removeEventListener('keydown', markInteracted)
             document.removeEventListener('visibilitychange', handleVisibilityChange)
             window.removeEventListener('pagehide', fadeOutAudio)
             window.removeEventListener('pageshow', fadeInAudio)
+            
         }
     }, [])
 

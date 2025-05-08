@@ -45,9 +45,14 @@ export default function LoadingScreen({ isMobile })
                 className="loading-screen-button neon-effect" 
                 onClick={() => { 
                     setStart(true) 
-                    const audio = document.querySelector(".audio-background")
-                    audio.volume = 0.1
-                    audio.play()
+                    
+                    if (!isMobile)
+                    {
+                        const audio = document.querySelector(".audio-background")
+                        audio.volume = 0.1
+                        audio.play()
+                    }
+                    
                 }}
                 disabled={ disable }
             > 
