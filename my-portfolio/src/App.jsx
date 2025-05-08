@@ -39,7 +39,7 @@ export default function App({ isMobile }) {
 
     return <>
         <div ref={ canvas } className="canvas-container">
-            <Canvas gl={{ antialias: true}} dpr={[1, 2]} frameloop={ isVisible ? "always" : "never" }>
+            <Canvas className="r3f" gl={{ antialias: true}} dpr={[1, 2]} frameloop={ isVisible ? "always" : "never" }>
                 <Experience isMobile={ isMobile } />
             </Canvas>
         </div>
