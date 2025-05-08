@@ -1,9 +1,11 @@
-import { useRef } from "react"
+import { useRef, useEffect } from 'react'
 
 export default function Projects({ isMobile, audioState })
 {
 
     const audio = useRef()
+
+    const currentPlayingVideo = useRef(null)
 
     const playClick = () =>
     {
@@ -14,6 +16,33 @@ export default function Projects({ isMobile, audioState })
             audio.current.play()
         }
     }
+
+    useEffect(() =>
+    {
+
+        const resetVideo = (e) =>
+        {
+
+            const clickedOnVideo = currentPlayingVideo.current && currentPlayingVideo.current.contains(e.target)
+
+            // If the user had clicked outside of the video that was playing, it would reset that video
+            if (!clickedOnVideo && currentPlayingVideo.current)
+            {
+                currentPlayingVideo.current.pause()
+                currentPlayingVideo.current.currentTime = 0
+                currentPlayingVideo.current = null
+            }
+        }
+
+        window.addEventListener('click', resetVideo)
+
+
+        return () =>
+        {
+            window.removeEventListener('click', resetVideo)
+        }
+
+    }, [])
 
     return <>
 
@@ -61,6 +90,16 @@ export default function Projects({ isMobile, audioState })
                                 e.currentTarget.pause()
                                 e.currentTarget.currentTime = 0
                             }}
+                            onClick={(e) => 
+                            { 
+                                if (currentPlayingVideo.current && currentPlayingVideo.current != e.currentTarget)
+                                {
+                                    currentPlayingVideo.current.pause()
+                                    currentPlayingVideo.current.currentTime = 0
+                                }
+                                currentPlayingVideo.current = e.currentTarget
+                                e.currentTarget.play() 
+                            }}
                         />
                     </div>
 
@@ -103,6 +142,16 @@ export default function Projects({ isMobile, audioState })
                                 {
                                     e.currentTarget.pause()
                                     e.currentTarget.currentTime = 0
+                                }}
+                                onClick={(e) => 
+                                { 
+                                    if (currentPlayingVideo.current && currentPlayingVideo.current != e.currentTarget)
+                                    {
+                                        currentPlayingVideo.current.pause()
+                                        currentPlayingVideo.current.currentTime = 0
+                                    }
+                                    currentPlayingVideo.current = e.currentTarget
+                                    e.currentTarget.play() 
                                 }}
                             />
                         </div>
@@ -149,6 +198,16 @@ export default function Projects({ isMobile, audioState })
                                 e.currentTarget.pause()
                                 e.currentTarget.currentTime = 0
                             }}
+                            onClick={(e) => 
+                            { 
+                                if (currentPlayingVideo.current && currentPlayingVideo.current != e.currentTarget)
+                                {
+                                    currentPlayingVideo.current.pause()
+                                    currentPlayingVideo.current.currentTime = 0
+                                }
+                                currentPlayingVideo.current = e.currentTarget
+                                e.currentTarget.play() 
+                            }}
                         />
                     </div>
 
@@ -190,6 +249,16 @@ export default function Projects({ isMobile, audioState })
                                 e.currentTarget.pause()
                                 e.currentTarget.currentTime = 0
                             }}
+                            onClick={(e) => 
+                            { 
+                                if (currentPlayingVideo.current && currentPlayingVideo.current != e.currentTarget)
+                                {
+                                    currentPlayingVideo.current.pause()
+                                    currentPlayingVideo.current.currentTime = 0
+                                }
+                                currentPlayingVideo.current = e.currentTarget
+                                e.currentTarget.play() 
+                            }}
                         />
                     </div>
 
@@ -230,6 +299,16 @@ export default function Projects({ isMobile, audioState })
                             {
                                 e.currentTarget.pause()
                                 e.currentTarget.currentTime = 0
+                            }}
+                            onClick={(e) => 
+                            { 
+                                if (currentPlayingVideo.current && currentPlayingVideo.current != e.currentTarget)
+                                {
+                                    currentPlayingVideo.current.pause()
+                                    currentPlayingVideo.current.currentTime = 0
+                                }
+                                currentPlayingVideo.current = e.currentTarget
+                                e.currentTarget.play() 
                             }}
                         />
                     </div>
