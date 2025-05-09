@@ -26,7 +26,7 @@ export default function Skills({ isMobile })
 {
     return <>
 
-        <div className="skills">
+        <div id="skills" className="skills">
 
             <div className="skills-section">
 

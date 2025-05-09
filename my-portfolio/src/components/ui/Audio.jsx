@@ -94,7 +94,6 @@ export default function Audio({ audioState, setAudioState })
 
         const markInteracted = () =>
         {
-            console.log('interacting')
             setUserInteracted(true)
             window.removeEventListener('click', markInteracted)
             window.removeEventListener('keydown', markInteracted)

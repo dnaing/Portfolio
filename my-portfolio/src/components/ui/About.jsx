@@ -6,7 +6,7 @@ export default function About({ isMobile })
 {
     return <>
 
-        <div className="about">
+        <div id="about" className="about">
 
             <div className="about-section">
 

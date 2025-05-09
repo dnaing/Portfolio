@@ -48,7 +48,7 @@ export default function Projects({ isMobile, audioState })
 
         {/* <audio ref={ audio } className="click-audio" src="./audio/click.wav" preload="auto"></audio> */}
 
-        <div className="projects">
+        <div id="projects" className="projects">
 
             { isMobile && <h1 className="project-title">PROJECTS</h1> }
             

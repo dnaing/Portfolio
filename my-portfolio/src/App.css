@@ -980,6 +980,8 @@ video
         background: #000000f0;
         overflow-y: scroll;
         overflow-x: hidden;
+        scroll-behavior: smooth;
+        scroll-padding-top: 4rem;
     }
 
     .r3f
@@ -1760,13 +1762,13 @@ video
 
     /* Header */
 
-    .name-section
+    /* .name-section
     {
         position: fixed;
         left: 0;
         top: 0;
         padding-top: 0.6rem;
-        padding-bottom: 1.2rem;
+        padding-bottom: 0.8rem;
         width: 100%;
         background: #00000000;
         padding-left: 1rem;
@@ -1775,18 +1777,121 @@ video
         z-index: 1;
     }
 
-    .name-section > h1
+    */
+
+    .navbar-header
     {
-        margin: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #00000000;
+        transition: background 400ms ease;
+        z-index: 1;
+    }
+
+    .navbar
+    {
+        min-height: 4.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+    }
+    
+    .nav-branding
+    {
+        user-select: none;
+        font-size: clamp(0.8rem, 2vw, 1.0rem);
+        color: white;
+        text-decoration: none;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif  
+    }
+
+    .nav-branding > h1
+    {
         font-weight: bolder;
-
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
     }
 
-    .name-section > h3
+    .nav-branding > h3
     {
-        margin: 0;
-        padding-top: 10px;
-        
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
     }
+
+    .nav-menu
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        margin: 0;
+
+        position: fixed;
+        left: -100%;
+        top: 4rem;
+        gap: 0;
+        flex-direction: column;
+        background-color: #131313FF;
+        width: 100%;
+        text-align: center;
+        padding: 0;
+        transition: 0.3s;
+    }
+
+    .nav-menu.active
+    {
+        left: 0;
+    }
+
+    .nav-item
+    {
+        margin: 16px 0;
+    }
+
+    .nav-link
+    {
+        color: white;
+        text-decoration: none;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif  
+    }
+
+    .hamburger
+    {
+        display: block;
+        cursor: pointer;
+    }
+
+    .hamburger.active .bar:nth-child(2)
+    {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1)
+    {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3)
+    {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .bar
+    {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        background-color: white;
+    }
+
+
+
+
 }
 

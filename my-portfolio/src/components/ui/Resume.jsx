@@ -19,7 +19,7 @@ export default function Resume({ isMobile, audioState })
 
         <audio ref={ audio } className="click-audio" src="./audio/click.wav" preload="auto"></audio>
 
-        <div className="resume">
+        <div id="resume" className="resume">
 
             <div className="resume-section">
 

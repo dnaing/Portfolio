@@ -67,7 +67,7 @@ export default function Contacts({ isMobile, audioState })
         <audio ref={ audio } className="click-audio" src="./audio/click.wav" preload="auto"></audio>
 
         {/* Contact Modal */}
-        <div ref={ contactModal } className={`contact-modal-container ${(isContactVisible || isMobile) ? 'visible' : 'hidden'}`} >
+        <div id="contact" ref={ contactModal } className={`contact-modal-container ${(isContactVisible || isMobile) ? 'visible' : 'hidden'}`} >
             
             { isMobile && <h1 className="contact-title">CONTACT</h1> }
             

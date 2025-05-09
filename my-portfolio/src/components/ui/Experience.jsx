@@ -2,7 +2,7 @@ export default function Experience({ isMobile })
 {
     return <>
 
-        <div className="experience">
+        <div id="experience" className="experience">
 
             <div className="experience-section">
 
