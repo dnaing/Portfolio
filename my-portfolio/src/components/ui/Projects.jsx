@@ -73,7 +73,7 @@ export default function Projects({ isMobile, audioState })
                             <p>Blender</p>
                         </div>
                         <div className="project-links">
-                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/Portfolio" onPointerEnter={playClick}>Github</a>
+                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/Portfolio" target="_blank" rel="noopener noreferrer" onPointerEnter={playClick}>Github</a>
                         </div>
                     </div>
                     
@@ -124,7 +124,7 @@ export default function Projects({ isMobile, audioState })
                             <p>Kotlin</p>
                         </div>
                         <div className="project-links">
-                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/Night-Timer" onPointerEnter={playClick}>Github</a>
+                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/Night-Timer" target="_blank" rel="noopener noreferrer" onPointerEnter={playClick}>Github</a>
                         </div>
                     </div>
 
@@ -180,8 +180,8 @@ export default function Projects({ isMobile, audioState })
                             <p>GCP</p>
                         </div>
                         <div className="project-links">
-                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/Star-Wars" onPointerEnter={playClick}>Github</a>
-                            <a className="project-link-button neon-effect" href="https://www.thestarwarscodex.com/" onPointerEnter={playClick}>Live</a>
+                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/Star-Wars" target="_blank" rel="noopener noreferrer" onPointerEnter={playClick}>Github</a>
+                            <a className="project-link-button neon-effect" href="https://www.thestarwarscodex.com/" target="_blank" rel="noopener noreferrer" onPointerEnter={playClick}>Live</a>
                         </div>
                     </div>
                     
@@ -232,7 +232,7 @@ export default function Projects({ isMobile, audioState })
                             <p>Flask</p>
                         </div>
                         <div className="project-links">
-                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/SearchEngine" onPointerEnter={playClick}>Github</a>
+                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/SearchEngine" target="_blank" rel="noopener noreferrer" onPointerEnter={playClick}>Github</a>
                         </div>
                     </div>
                     
@@ -283,7 +283,7 @@ export default function Projects({ isMobile, audioState })
                             <p>Flask</p>
                         </div>
                         <div className="project-links">
-                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/MyRecipes" onPointerEnter={playClick}>Github</a>
+                            <a className="project-link-button neon-effect" href="https://github.com/dnaing/MyRecipes" target="_blank" rel="noopener noreferrer" onPointerEnter={playClick}>Github</a>
                         </div>
                     </div>
                     
@@ -292,8 +292,6 @@ export default function Projects({ isMobile, audioState })
                         <video
                             src="/videos/myrecipes.mp4"
                             muted
-                            // preload="none"
-                            // poster="/images/flame1.jpg"
                             onPointerEnter={(e) => e.currentTarget.play() }
                             onPointerLeave={(e) =>
                             {
